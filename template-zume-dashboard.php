@@ -105,7 +105,7 @@ $zume_get_userLink = bp_core_get_userlink($zume_current_user, false, true);
                                                             <!--<span class="activity"><?php /*echo 'warning'; */?></span><br>-->
 
                                                             <span class="text-gray text-small"><?php bp_group_type() ?> <br> <?php bp_group_member_count() ?><br>
-                                                            <?php echo 'active ' . bp_get_group_last_active() ?></span>
+                                                            <?php /*echo 'active ' . bp_get_group_last_active() */?></span>
 
                                                         </div>
                                                         <div class="medium-5 large-5 columns gutter-medium center">
