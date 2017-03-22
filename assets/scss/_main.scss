@@ -1,0 +1,873 @@
+/************************************************
+
+Stylesheet: Main Stylesheet
+
+*************************************************/
+
+/*********************
+GENERAL STYLES
+*********************/
+
+/*********************
+LINK STYLES
+*********************/
+a, a:visited {
+
+	// Mobile tap color
+	&:link {
+		//Highlight links on iOS, Similar to :hover for mobile devices.
+		-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+	}
+}
+
+/*********************
+H1, H2, H3, H4, H5 P STYLES
+*********************/
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+
+	// Removing text decoration from all headline links
+	a {
+		text-decoration: none;
+	}
+}
+
+h1, .h1 {
+
+}
+
+h2, .h2 {
+	color: $primary-color;
+
+}
+
+h3, .h3 {
+	color: $primary-color;
+
+}
+
+h4, .h4 {
+	
+}
+
+h5, .h5 {
+
+}
+
+/*********************
+HEADER STYLES
+*********************/
+.header {
+	ul.off-canvas-list li {
+		list-style: none;
+	}
+}
+    
+/*********************
+NAVIGATION STYLES
+*********************/
+.top-bar {
+	background-color: $white;
+    border-bottom: 1px solid $light-gray;
+
+	ul {
+		background-color: $white;
+	}
+
+	.title-area {
+		z-index: 1;
+	}
+
+  .top-bar-left {
+      width: 20%;
+  }
+
+  .top-bar-right {
+    width: 60%;
+
+  }
+}
+.menu {
+
+  .submenu {
+
+  }
+
+}
+
+
+
+.off-canvas-list {
+	ul {
+		margin-left: 0;
+		li {
+			a {
+				border-bottom: 0px;
+			}
+		}
+		.dropdown {
+			margin-left: 20px;
+		}
+	}
+}
+
+/*********************
+POSTS & CONTENT STYLES
+*********************/
+#content {
+	#inner-content {
+		padding: 1rem 0rem;
+	}
+}
+
+.single-title,
+.page-title {
+	
+}
+
+.single-title {
+	
+}
+
+.page-title {
+	
+	// Remove Foundation vcard styling from author page titles
+	.vcard {
+		border: 0px;
+		padding: 0px;
+	}
+}
+
+.archive-title {
+
+}
+
+// Post meta  
+.byline {
+	color: #999;
+	time {}
+}
+
+// Entry content  
+.entry-content {
+	
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.alignleft, img.alignleft { 
+		margin-right: 1.5em; 
+		display: inline; 
+		float: left; 
+	}
+	.alignright, img.alignright { 
+		margin-left: 1.5em; 
+		display: inline; 
+		float: right; 
+	}
+	.aligncenter, img.aligncenter { 
+		margin-right: auto; 
+		margin-left: auto; 
+		display: block; 
+		clear: both; 
+	}
+			
+	video, object {
+		max-width: 100%;
+		height: auto;
+		}
+
+	pre {
+		background: #eee;
+		border: 1px solid #cecece;
+		padding: 10px;
+		}
+
+}
+
+
+
+.wp-caption {
+	max-width: 100%;
+	background: #eee;
+	padding: 5px;
+
+	// Images inside wp-caption  
+	img {
+		max-width: 100%;
+		margin-bottom: 0;
+		width: 100%;
+	}
+
+	p.wp-caption-text {
+		font-size: 0.85em;
+		margin: 4px 0 7px;
+		text-align: center;
+	}
+} 
+
+// Add Foundation styling to password protect button
+.post-password-form input[type="submit"] {
+	@include button;
+}
+
+.button {
+  border: $primary-color solid 1px;
+
+    &:hover {
+      background: $primary-color;
+      color: white;
+    }
+}
+
+
+
+#buddypress {
+  .generic-button a, input[type=submit], input[type=reset], input[type=button] {
+    background: $white;
+    border: 0;
+    color: $primary-color;
+    font-size: medium;
+    cursor: pointer;
+    outline: $primary-color solid 1px;
+    padding: $global-button-padding;
+    text-align: center;
+    text-decoration: none;
+    -webkit-border-radius: $global-radius;
+    -moz-border-radius: $global-radius;
+    border-radius: $global-radius;
+    margin: 2px;
+
+    &:hover {
+      background: $primary-color;
+      border: 0;
+      color: $white;
+      font-size: medium;
+      cursor: pointer;
+      outline: $primary-color solid 1px;
+      padding: $global-button-padding;
+      text-align: center;
+      text-decoration: none;
+      -webkit-border-radius: $global-radius;
+      -moz-border-radius: $global-radius;
+      border-radius: $global-radius;
+      margin: 2px;
+    }
+  }
+}
+
+
+
+
+
+
+/*********************
+IMAGE GALLERY STYLES
+*********************/
+	.gallery {
+
+		dl {
+
+			a {}
+
+			img {}
+
+		}
+
+		dt {}
+
+		dd {}
+
+} 
+
+// Gallery caption styles
+.gallery-caption {}
+.size-full {}
+.size-large {}
+.size-medium {}
+.size-thumbnail {}
+
+/*********************
+PAGE NAVI STYLES
+*********************/
+.page-navigation {
+	margin-top: 1rem;
+}
+
+/*********************
+COMMENT STYLES
+*********************/
+#comments {
+	.commentlist {
+		margin-left: 0px;
+	}
+}
+
+#respond {
+	ul {
+		margin-left: 0px;
+	}
+}
+
+.commentlist {
+	li {
+		position: relative;
+		clear: both;
+		overflow: hidden;
+		list-style-type: none;
+		margin-bottom: 1.5em;
+		padding: 0.7335em 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		ul.children {
+			margin: 0;
+
+			li {}
+
+			.comment {}
+			.alt {}
+			.odd {}
+			.even {}
+			.depth-1 {}           // Change number for different depth  
+			.byuser {}
+			.bypostauthor {}
+			.comment-author-admin {}
+
+		}
+	}
+
+	li[class*=depth-] {
+		margin-top: 1.1em;
+	}
+
+	li.depth-1 {
+		margin-left: 0;
+		margin-top: 0;
+	}
+
+	li:not(.depth-1) {
+		margin-left: 10px;
+		margin-top: 0;
+		padding-bottom: 0;
+	}
+
+	li.depth-2 {}
+	li.depth-3 {
+	}
+	li.depth-4 {}
+	li.depth-5 {}
+
+	// General comment classes  
+	.alt {}
+	.odd {
+	}
+	.even {
+	}
+	.parent {}
+	.comment {}
+	.children {}
+	.pingback {}
+	.bypostauthor {}
+	.comment-author {}
+	.comment-author-admin {}
+	.thread-alt {}
+	.thread-odd {}
+	.thread-even {}
+
+	// vcard  
+	.vcard {
+		margin-left: 50px;
+
+		cite.fn {
+			font-weight: 700;
+			font-style: normal;
+
+			a.url {}
+
+		}
+
+		time {
+			float: right;
+
+			a {
+				color: #999;
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
+
+			}
+
+		}
+
+		img.photo {}
+
+		img.avatar {
+			position: absolute;
+			left: 10px;
+			padding: 2px;
+			border: 1px solid #cecece;
+			background: #fff;
+		}
+
+	} // end .commentlist .vcard  
+
+
+	// comment meta  
+	.comment-meta {
+
+		a {}
+
+	}
+
+	.commentmetadata {
+
+		a {}
+
+	}
+
+	// comment content  
+	.comment_content {
+
+		p {
+			margin: 0.7335em 0 1.5em;
+			font-size: 1em;
+			line-height: 1.5em;
+		}
+
+	} // end .commentlist .comment_content  
+
+	// comment reply link  
+	.comment-reply-link {
+		float: right;
+
+		&:hover,
+		&:focus {
+		
+		}
+
+	} // end .commentlist .comment-reply-link  
+
+} // end .commentlist  
+
+/*********************
+COMMENT FORM STYLES
+*********************/
+.respond-form {
+	margin: 1.5em 10px;
+	padding-bottom: 2.2em;
+
+	form {
+		margin: 0.75em 0;
+
+		li {
+			list-style-type: none;
+			clear: both;
+			margin-bottom: 0.7335em;
+
+			label,
+			small {
+				display: none;
+			}
+		}
+
+		input[type=text],
+		input[type=email],
+		input[type=url],
+		textarea {
+			padding: 3px 6px;
+			background: #efefef;
+			border: 2px solid #cecece;
+			line-height: 1.5em;
+
+			&:focus {
+				background: #fff;
+			}
+
+			// form validation  
+			&:invalid {
+				outline: none;
+				border-color: #fbc2c4;
+				background-color: #f6e7eb;
+				-webkit-box-shadow: none;
+				   -moz-box-shadow: none;
+				    -ms-box-shadow: none;
+						box-shadow: none;
+			}
+		}
+
+		input[type=text],
+		input[type=email],
+		input[type=url] {
+			max-width: 400px;
+			min-width: 250px;
+		}
+
+		textarea {
+			resize: none;
+			width: 97.3%;
+			height: 150px;
+		}
+
+	}
+}
+
+// comment submit button  
+#submit {}
+
+// comment form title  
+#comment-form-title {
+	margin: 0 0 1.1em;
+}
+
+// cancel comment reply link  
+#cancel-comment-reply {
+	a {}
+}
+
+// logged in comments  
+.comments-logged-in-as {}
+
+// allowed tags  
+#allowed_tags {
+	margin: 1.5em 10px 0.7335em 0;
+}
+
+// No comments  
+.nocomments {
+	margin: 0 20px 1.1em;
+}
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+.sidebar {
+}
+
+#searchsubmit {
+}
+
+.widgettitle {
+}
+
+.widget {
+	ul {
+		margin: 0;
+
+		li {
+			list-style: none;
+
+			&:first-child {}
+
+			&:last-child {}
+
+			a {}
+
+			// deep nesting  
+			ul {}
+
+		}
+	}
+}
+/*********************
+FOOTER STYLES
+*********************/
+.footer {
+	clear: both;
+	margin-top: 1em;
+}
+	
+/*********************
+FOUNDATION STYLES
+*********************/
+
+/*********************
+PLUGIN STYLES
+*********************/
+// Makes Gravity Forms play nice with Foundation Form styles
+.gform_body ul {
+    list-style: none outside none;
+    margin: 0;
+}
+
+/*********************
+BUDDYPRESS STYLES
+*********************/
+#item-actions {
+  h2 {
+    font-size: 1.3rem;
+  }
+}
+
+
+#subnav {
+
+  border-top: 1px solid $light-gray;
+
+    li#groups-order-select {
+        display: none !important;
+    }
+
+    .feed {
+      display: none !important;
+    }
+
+    li {
+      #activity-filter-select {
+        display: none !important;
+      }
+
+      #groups-members-search {
+        display: none !important;
+      }
+
+      .last.filter {
+        display: none !important;
+      }
+    }
+
+    .last {
+      display: none !important;
+    }
+
+}
+
+.text-gray {
+  color: $dark-gray;
+
+}
+
+.text-small {
+  font-size: small;
+}
+
+
+
+/*********************
+JQUERY STEPS WIZARD
+*********************/
+
+/* Jquery Steps Wizard css */
+
+
+.wizard {
+
+}
+
+.wizard, .tabcontrol {
+  display: block;
+  width: 100%;
+  overflow: hidden
+}
+
+.wizard a, .tabcontrol a {
+  outline: 0
+}
+
+.wizard ul, .tabcontrol ul {
+  list-style: none !important;
+  padding: 0;
+  margin: 0
+}
+
+.wizard ul > li, .tabcontrol ul > li {
+  display: block;
+  padding: 0
+}
+
+.wizard > .steps .current-info, .tabcontrol > .steps .current-info {
+  position: absolute;
+  left: -999em
+}
+
+.wizard > .content > .title, .tabcontrol > .content > .title {
+  position: absolute;
+  left: -999em
+}
+
+.wizard > .steps {
+  position: relative;
+  display: block;
+  width: 100%
+}
+
+.wizard.vertical > .steps {
+  display: inline;
+  float: left;
+  width: 30%
+}
+
+.wizard > .steps .number {
+  font-size: 1.429em
+}
+
+.wizard > .steps > ul > li {
+  /*width: 25%;*/
+  /*width: 20%;*/
+  width: 10%;
+  text-align: center;
+}
+
+.wizard > .steps > ul > li, .wizard > .actions > ul > li {
+  float: left
+}
+
+.wizard.vertical > .steps > ul > li {
+  float: none;
+  width: 100%
+}
+
+.wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
+  display: block;
+  width: auto;
+  margin: 0 .5em .5em;
+  padding: 1em 1em;
+  text-decoration: none;
+  -webkit-border-radius: $global-radius;
+  -moz-border-radius: $global-radius;
+  border-radius: $global-radius;
+}
+
+.wizard > .steps .disabled a, .wizard > .steps .disabled a:hover, .wizard > .steps .disabled a:active {
+  background: $white;
+  color: $primary-color;
+  border: $primary-color solid 1px;
+  cursor: default
+}
+
+.wizard > .steps .current a, .wizard > .steps .current a:hover, .wizard > .steps .current a:active {
+  background: $secondary-color;
+  color: $white;
+  cursor: default
+}
+
+.wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
+  background: $primary-color;
+  color: $white;
+}
+
+.wizard > .steps .error a, .wizard > .steps .error a:hover, .wizard > .steps .error a:active {
+  background: #7CA821;
+  color: $white;
+}
+
+.wizard > .content {
+  /*background: #eee;*/
+  display: block;
+  margin: .5em;
+  /*min-height: 35em;*/
+  overflow: hidden;
+  position: relative;
+  width: auto;
+  -webkit-border-radius: $global-radius;
+  -moz-border-radius: $global-radius;
+  border-radius: $global-radius;
+}
+
+.wizard.vertical > .content {
+  display: inline;
+  float: left;
+  margin: 0 2.5% .5em 2.5%;
+  width: 65%
+}
+
+.wizard > .content > .body {
+  float: left;
+  /*position: absolute;*/
+  width: 100%;
+  height: 95%;
+  padding: 2.5%
+}
+
+.wizard > .content > .body ul {
+  list-style: disc !important
+}
+
+.wizard > .content > .body ul > li {
+  display: list-item
+}
+
+.wizard > .content > .body > iframe {
+  border: 0 none;
+  width: 100%;
+  height: 100%
+}
+
+.wizard > .content > .body input {
+  display: block;
+  border: 1px solid #ccc
+}
+
+.wizard > .content > .body input[type="checkbox"] {
+  display: inline-block
+}
+
+.wizard > .content > .body input.error {
+  background: #fbe3e4;
+  border: 1px solid #fbc2c4;
+  color: #8a1f11
+}
+
+.wizard > .content > .body label {
+  display: inline-block;
+  margin-bottom: .5em
+}
+
+.wizard > .content > .body label.error {
+  color: #8a1f11;
+  display: inline-block;
+  margin-left: 1.5em
+}
+
+.wizard > .actions {
+  position: relative;
+  display: block;
+  text-align: center;
+  width: 100%
+}
+
+.wizard.vertical > .actions {
+  display: inline;
+  float: right;
+  margin: 0 2.5%;
+  width: 95%
+}
+
+.wizard > .actions > ul {
+  display: inline-block;
+  text-align: right
+}
+
+.wizard > .actions > ul > li {
+  margin: 0 .5em
+}
+
+.wizard.vertical > .actions > ul > li {
+  margin: 0 0 0 1em
+}
+
+.wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions a:active {
+  background: #00aeff;
+  color: $white;
+  display: block;
+  padding: 1em 5em;
+  text-decoration: none;
+  -webkit-border-radius: $global-radius;
+  -moz-border-radius: $global-radius;
+  border-radius: $global-radius;
+}
+
+.wizard > .actions .disabled a, .wizard > .actions .disabled a:hover,
+.wizard > .actions .disabled a:active {
+  background: #eee;
+  color: #aaa
+}
+
+.wizard > .loading {}
+
+.wizard > .loading .spinner {}
+

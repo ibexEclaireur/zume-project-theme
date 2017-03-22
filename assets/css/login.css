@@ -1,0 +1,85 @@
+/******************************************************************
+
+Stylesheet: Login Stylesheet
+
+This stylesheet is loaded is only on the login page. This way you can style
+the login page. It won't affect any other page, admin or front-end.
+
+Make sure functions/admin.php is activated in your functions.php file.
+
+This stylesheet is turned off by default.
+
+For more info, check out the codex:
+http://codex.wordpress.org/Creating_Admin_Themes
+
+******************************************************************/
+body.login {
+  background: none; }
+
+#login {
+  width: 550px;
+  max-width: 90%; }
+  #login form {
+    border: 1px solid #323A68; }
+
+.login h1 a {
+  background: url(../images/zume-logo-white.png) no-repeat top center;
+  width: 326px;
+  height: 67px;
+  text-indent: -9999px;
+  overflow: hidden;
+  padding-bottom: 15px;
+  display: block; }
+
+.login #nav a {
+  background: #fefefe;
+  border: 0;
+  color: #323A68;
+  font-size: medium;
+  cursor: pointer;
+  outline: #323A68 solid 1px;
+  padding: 0.85em 1em;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0px;
+  margin: 2px; }
+  .login #nav a:hover {
+    background: #323A68;
+    border: 0;
+    color: #fefefe;
+    font-size: medium;
+    cursor: pointer;
+    outline: #323A68 solid 1px;
+    padding: 0.85em 1em;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
+    margin: 2px; }
+
+#wp-submit {
+  background: #fefefe;
+  border: 0;
+  color: #323A68;
+  font-size: medium;
+  cursor: pointer;
+  outline: #323A68 solid 1px;
+  padding: 0.85em 1em;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0px;
+  margin: 2px;
+  height: inherit;
+  text-shadow: none; }
+  #wp-submit:hover {
+    background: #323A68;
+    border: 0;
+    color: #fefefe;
+    font-size: medium;
+    cursor: pointer;
+    outline: #323A68 solid 1px;
+    padding: 0.85em 1em;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
+    margin: 2px;
+    height: inherit; }
