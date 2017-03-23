@@ -1,6 +1,5 @@
 <?php
 
-define( 'GITHUB_UPDATER_EXTENDED_NAMING', true );
 
 // Theme support options
 require_once(get_template_directory().'/assets/functions/theme-support.php'); 
