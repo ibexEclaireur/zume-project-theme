@@ -6,7 +6,7 @@
 	    					</nav>
 	    				</div>
 						<div class="large-12 medium-12 columns">
-							<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>.</p>
+							<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. <?php if( user_can( get_current_user_id(), 'manage_options')) { echo '<a href="/wp-admin" > | Admin Panel</a>'; } ?></p>
 						</div>
 					</div> <!-- end #inner-footer -->
 				</footer> <!-- end .footer -->

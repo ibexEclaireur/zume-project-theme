@@ -1,3 +1,5 @@
+<?php zume_force_login(); // requires no spaces above or else it will throw a headers already send error. ?>
+
 <!doctype html>
 
   <html class="no-js"  <?php language_attributes(); ?>>

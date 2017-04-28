@@ -2,11 +2,10 @@
 /*
 Template Name: Zume Complete
 */
-zume_force_login();
+
+get_header();
 
 ?>
-
-<?php get_header(); ?>
 
     <div id="content">
 

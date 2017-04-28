@@ -2,15 +2,14 @@
 /*
 Template Name: Zume Dashboard
 */
-zume_force_login();
 
 $zume_dashboard = Zume_Dashboard::instance();
 $zume_current_user = get_current_user_id();
 $zume_get_userLink = bp_core_get_userlink($zume_current_user, false, true);
 
-?>
+get_header();
 
-<?php get_header(); ?>
+?>
 
     <div id="content">
 
@@ -35,9 +34,9 @@ $zume_get_userLink = bp_core_get_userlink($zume_current_user, false, true);
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Start a Group</h2>
                                     <p class="center">
-                                        <a href="/groups/create/step/group-details/" class="button">New Group</a><br>
-                                        <a href="/groups/create/step/group-details/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/training.jpg"  /></a><br><br>
 
+                                        <a href="/groups/create/step/group-details/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/training.jpg"  /></a><br><br>
+                                        <a href="/groups/create/step/group-details/" class="button">New Group</a>
                                     </p>
                                 </div>
                             </div>
@@ -46,8 +45,9 @@ $zume_get_userLink = bp_core_get_userlink($zume_current_user, false, true);
                                     <a href="<?php echo $zume_get_userLink . '/invite-anyone/'; ?>">
                                     <h2 class="center">Connect</h2>
                                     <p class="center">
-                                        <a href="<?php echo $zume_get_userLink . '/invite-anyone/';?>" class="button">Send Invites</a><br>
-                                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/invite.jpg"  class="center" />
+
+                                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/invite.jpg"  class="center" /><br>
+                                        <a href="<?php echo $zume_get_userLink . '/invite-anyone/';?>" class="button">Send Invites</a>
                                     </p>
                                     </a>
                                 </div>
