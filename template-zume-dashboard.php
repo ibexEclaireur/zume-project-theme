@@ -33,20 +33,21 @@ get_header();
                             <div class="medium-4 columns">
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Start a Group</h2>
-                                    <p class="center">
-
+                                    <p class="center " style="height:175px;">
                                         <a href="/groups/create/step/group-details/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/training.jpg"  /></a><br><br>
-                                        <a href="/groups/create/step/group-details/" class="button">New Group</a>
                                     </p>
+                                    <p class="center"><a href="/groups/create/step/group-details/" class="button">New Group</a></p>
+
                                 </div>
                             </div>
                             <div class="medium-4 columns">
                                 <div class="callout" data-equalizer-watch>
                                     <a href="<?php echo $zume_get_userLink . '/invite-anyone/'; ?>">
                                     <h2 class="center">Connect</h2>
-                                    <p class="center">
-
+                                    <p class="center" style="height:175px;">
                                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/invite.jpg"  class="center" /><br>
+                                    </p>
+                                    <p class="center" >
                                         <a href="<?php echo $zume_get_userLink . '/invite-anyone/';?>" class="button">Send Invites</a>
                                     </p>
                                     </a>
@@ -56,7 +57,12 @@ get_header();
                                 <div class="callout" data-equalizer-watch>
                                     <a href="<?php echo $zume_get_userLink; ?>">
                                     <h2 class="center">Profile</h2>
-                                    <p class="center"><?php echo bp_core_fetch_avatar( array( 'item_id' => $zume_current_user, 'type' => 'full', 'css_id' => 'dashboard-avatar' ) ); ?><br><?php echo bp_core_get_userlink($zume_current_user) ; ?></p>
+                                        <p class="center" style="height:175px;">
+                                            <?php echo bp_core_fetch_avatar( array( 'item_id' => $zume_current_user, 'type' => 'full', 'css_id' => 'dashboard-avatar' ) ); ?>
+                                        </p>
+                                    <p class="center" >
+                                       <a href="<?php echo bp_core_get_userlink($zume_current_user, false, true) ; ?>" class="button">View Profile</a>
+                                    </p>
                                     </a>
                                 </div>
                             </div>
