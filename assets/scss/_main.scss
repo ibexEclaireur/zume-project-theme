@@ -20,6 +20,15 @@ a, a:visited {
 	}
 }
 
+.white {
+	color: $white;
+}
+
+.vertical-padding {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 /*********************
 H1, H2, H3, H4, H5 P STYLES
 *********************/
@@ -647,6 +656,8 @@ BUDDYPRESS STYLES
 
 
 
+
+
 /*********************
 JQUERY STEPS WIZARD
 *********************/
@@ -870,4 +881,26 @@ JQUERY STEPS WIZARD
 .wizard > .loading {}
 
 .wizard > .loading .spinner {}
+
+ul.orbit-container {
+	padding-right: 1rem;
+	padding-left: 1rem;
+	height: inherit;
+}
+
+.zume-slider-text {
+	width: 90%;
+	font-weight: 700;
+	font-size: 1.2rem;
+	color: white;
+}
+
+
+/**************************************/
+// Additional Css classes
+/**************************************/
+
+.wistia_embed {
+	margin: 0 auto;
+}
 

@@ -22,7 +22,8 @@ body.login {
   #login form {
     border: 1px solid #323A68; }
 
-
+p #nav {
+  padding: 0 !important; }
 
 .login h1 a {
   background: url(../images/zume-logo-white.png) no-repeat top center;
@@ -40,9 +41,11 @@ body.login {
   font-size: medium;
   cursor: pointer;
   outline: #323A68 solid 1px;
-  padding: 0.85em 1em;
+  padding: 0 !important;
   text-align: center;
   text-decoration: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
   border-radius: 0px;
   margin: 2px; }
   .login #nav a:hover {
@@ -52,9 +55,11 @@ body.login {
     font-size: medium;
     cursor: pointer;
     outline: #323A68 solid 1px;
-    padding: 0.85em 1em;
+    padding: 0 !important;
     text-align: center;
     text-decoration: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
     border-radius: 0px;
     margin: 2px; }
 
@@ -68,6 +73,8 @@ body.login {
   padding: 0.85em 1em;
   text-align: center;
   text-decoration: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
   border-radius: 0px;
   margin: 2px;
   height: inherit;
@@ -82,10 +89,11 @@ body.login {
     padding: 0.85em 1em;
     text-align: center;
     text-decoration: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
     border-radius: 0px;
     margin: 2px;
     height: inherit; }
 
 .login #nav {
-  padding: 0 !important;
-}
+  padding: 0 !important; }

@@ -18,90 +18,128 @@ Template Name: Full Width Home
                 </div>
                 <div class="row">
                     <div class="large-12 columns center">
-                        <h1 style="text-align: center;">WANT TO START THE TRAINING?
-                            GET STARTED BELOW:</h1>
-                        <img id="rule" class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>rule.png" alt="" />
+                        <h1 style="text-align: center;">
+                            WANT TO START THE TRAINING?<br>
+                            GET STARTED BELOW:
+                        </h1>
                     </div>
                 </div>
-                &nbsp;
-                <div class="row">
-                    <div class="large-4 columns small-centered center">
-                        <h4>IT'S AS EASY AS 1-2-3</h4>
-                    </div>
-                </div>
-                &nbsp;
-                <div class="row">
-                    <div class="large-12 columns">
 
-                        <hr style="width: 75%;" size="1px" />
-
-                    </div>
-                </div>
-                &nbsp;
                 <div class="row ">
-                    <div class="small-10 small-centered columns">
+
+                    <div class="small-8 medium-3 small-centered columns center vertical-padding">
+                        <br>
+                        <a href="/register" alt="Register" class="button large center ">GET STARTED</a>
+                        <br>
+                    </div>
+
+                </div>
+
+                &nbsp;
+                <div class="row expanded">
+                    <div class="large-12 columns">
+                        <hr style="border-color: #323A68;" size="3px" width="100%" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-8 medium-4 columns small-centered center">
+                        <br>
+                        <h3>IT'S AS EASY AS 1-2-3</h3>
+                    </div>
+                </div>
+                &nbsp;
+                <div class="row padding-bottom">
+                    <div class="medium-10 small-centered columns">
                         <div class="row">
-                            <div class="small-4 columns center">
-                                <h4 class="center"><span class="img-circle circle">1</span> SIGN UP</h4>
+                            <div class="medium-4 columns center">
+                                <h4 class="center"><span style="font-size:2.4rem;">&#10102</span>  SIGN UP</h4>
                                 <img class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>signup.jpg" alt="" width="100" height="100" />
 
                             </div>
-                            <div class="small-4 columns center">
-                                <h4 class="center"><span class="img-circle circle">2</span> INVITE SOME FRIENDS</h4>
+                            <div class="medium-4 columns center">
+                                <h4 class="center"><span style="font-size:2.4rem;">&#10103</span> INVITE SOME FRIENDS</h4>
                                 <img class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>invite.jpg" alt="" width="100" height="100" />
 
                             </div>
-                            <div class="small-4 columns center">
-                                <h4 class="center"><span class="img-circle circle">3</span> HOST A TRAINING</h4>
+                            <div class="medium-4 columns center">
+                                <h4 class="center"><span style="font-size:2.4rem;">&#10104</span> HOST A TRAINING</h4>
                                 <img class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>training.jpg" alt="" width="100" height="100" />
 
                             </div>
                         </div>
                     </div>
                 </div>
+
+
                 &nbsp;
                 <div class="row expanded" style="background: #323A68;">
 
-                    <div class="small-5 small-centered columns">
-
+                    <div class="small-10 medium-8 small-centered columns">
 
                         <div style="color: white; text-align: center; padding: 20px;">
 
-
-                            <h4>WHAT OTHERS ARE SAYING</h4>
+                            <h4 class="padding-bottom">WHAT OTHERS ARE SAYING</h4>
 
                             <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
-                                <ul class="orbit-container">
-                                    <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                                    <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+                                <ul class="orbit-container white">
+<!--                                    <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>-->
+<!--                                    <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>-->
+
+                                    <li class="orbit-slide">
+                                        <div>
+                                            <h4 class="text-center zume-slider-text"><strong>There is a great harvest readied in North America not being reached by the status quo. Zúme is a biblical wake-up call and tool to empower the everyday believer to begin walking in the Lords will to multiply disciples.</strong></h4>
+                                            <h4 class="zume-slider-name">JAKE DUKE — INDIANA</h4>
+                                        </div>
+                                    </li>
+                                    <li class="orbit-slide">
+                                        <div>
+                                            <h4 class="text-center zume-slider-text"><strong>Do you want to make a difference in your workplace, neighborhood, or circle of friends? The Zúme Project essentially will give you practical rails to run on that follow the example of the Church as seen in the New Testament.</strong></h4>
+                                            <h4 class="zume-slider-name">GAVIN DUERSON — KENTUCKY</h4>
+                                        </div>
+                                    </li>
+                                    <li class="orbit-slide">
+                                        <div>
+                                            <h4 class="text-center zume-slider-text"><strong>I am so excited to use this Zúme tool to help in training all the soldiers to make and multiply disciples in our neighborhood. Jesus can make it a neighborhood again.</strong></h4>
+                                            <h4 class="zume-slider-name">CHAD REHNBERG</h4>
+                                        </div>
+                                    </li>
+                                    <li class="orbit-slide">
+                                        <div>
+                                            <h4 class="text-center zume-slider-text"><strong>I believe Zúme can be used by the Lord to reach a huge number of people in our society who would never darken the door of a church building.</strong></h4>
+                                            <h4 class="zume-slider-name">CURTIS SERGEANT — ALABAMA</h4>
+                                        </div>
+                                    </li>
+                                    <li class="orbit-slide">
+                                        <div>
+                                            <h4 class="text-center zume-slider-text"><strong>This simple and powerful disciple-making tool - for all laborers - has real potential to accelerate and spark healthy multiplication in every community for every nation.</strong></h4>
+                                            <h4 class="zume-slider-name">ZACH DUKE — INDIANA</h4>
+                                        </div>
+                                    </li>
                                     <li class="is-active orbit-slide">
                                         <div>
-                                            <p class="text-center">The potential for ZÚME to catalyze a movement of multiplying disciplemakers is unprecedented in our lifetime.</p>
+                                            <h4 class="text-center "><strong>The potential for ZÚME to catalyze a movement of multiplying disciple-makers is unprecedented in our lifetime.</strong></h4>
+                                            <h4 class="zume-slider-name">FORREST HEAD - GEORGIA</h4>
                                         </div>
 
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
+                                            <h4 class="text-center zume-slider-text"><strong> In the West, Zúme is at the forefront of reclaiming a foundational biblical witness, the Church that meets from house to house.</strong></h4>
+                                            <h4 class="zume-slider-name">NEAL KARSTEN — MICHIGAN</h4>
+                                        </div>
+                                    </li>
 
-                                            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde harum rem, beatae ipsa consectetur quisquam. Rerum ratione, delectus atque tempore sed, suscipit ullam, beatae distinctio cupiditate ipsam eligendi tempora expedita.</p>
-                                        </div>
-                                    </li>
-                                    <li class="orbit-slide">
-                                        <div>
-                                            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde harum rem, beatae ipsa consectetur quisquam. Rerum ratione, delectus atque tempore sed, suscipit ullam, beatae distinctio cupiditate ipsam eligendi tempora expedita.</p>
-                                        </div>
-                                    </li>
-                                    <li class="orbit-slide">
-                                        <div>
-                                            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde harum rem, beatae ipsa consectetur quisquam. Rerum ratione, delectus atque tempore sed, suscipit ullam, beatae distinctio cupiditate ipsam eligendi tempora expedita.</p>
-                                        </div>
-                                    </li>
                                 </ul>
                                 <nav class="orbit-bullets">
                                     <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
                                     <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
                                     <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
                                     <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+                                    <button data-slide="4"><span class="show-for-sr">Fifth slide details.</span></button>
+                                    <button data-slide="5"><span class="show-for-sr">Sixth slide details.</span></button>
+                                    <button data-slide="6"><span class="show-for-sr">Seventh slide details.</span></button>
+                                    <button data-slide="7"><span class="show-for-sr">Eigth slide details.</span></button>
                                 </nav>
                             </div>
                         </div>
