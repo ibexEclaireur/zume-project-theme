@@ -1,6 +1,7 @@
 <?php
 
 
+//@todo set default to prvita
 function bp_remove_group_step_settings($array) {
 
 	$array = array(
@@ -45,57 +46,18 @@ if ( bp_is_active( 'groups' ) ) :
 			parent::init( $args );
 		}
 
-		/**
-		 * display() contains the markup that will be displayed on the main
-		 * plugin tab
-		 */
-//		function display( $group_id = NULL ) {
-//			$group_id = bp_get_group_id();
-//			echo 'What a cool plugin!';
-//		}
 
-		/**
-		 * settings_screen() is the catch-all method for displaying the content
-		 * of the edit, create, and Dashboard admin panels
-		 */
-		function settings_screen( $group_id = NULL ) {
-//			$setting = groups_get_groupmeta( $group_id, 'group_extension_example_1_setting' );
 
-			?>
-<!--          Save your plugin setting here: <input type="text" name="group_extension_example_1_setting" value="--><?php //echo esc_attr( $setting ) ?><!--" />-->
-			<?php
-		}
 
-		/**
-		 * settings_sceren_save() contains the catch-all logic for saving
-		 * settings from the edit, create, and Dashboard admin panels
-		 */
-		function settings_screen_save( $group_id = NULL ) {
-		  print_r($_POST);
-		  echo "est";
-		  echo "<p> TEST </p>";
-		  update_option("Test1", $_POST);
-
-//      return new WP_Error("test", "test");
-
-//			$setting = '';
-
-//			if ( isset( $_POST['group_extension_example_1_setting'] ) ) {
-//				$setting = $_POST['group_extension_example_1_setting'];
-//			}
-//
-      bp_core_add_message( __( 'Sorry, there was a problem sending your invitations. Please try again1.', 'invite-anyone' ), 'error' );
-			groups_update_groupmeta( $group_id, 'group_extension_example_1_setting', $_POST );
-		}
     function create_screen_save($group_id = NULL){
-		  print_r($_POST);
-		  echo "est";
-		  echo "<p> TEST </p>";
-		  update_option("Test2", $_POST);
-		  groups_update_groupmeta( $group_id, 'group_extension_example_1_setting', $_POST );
-		  invite_anyone_process_invitations($_POST);
-		  bp_core_add_message( __( 'Sorry, there was a problem sending your invitations. Please try again2.', 'invite-anyone' ), 'error' );
+
+		  update_option("testgroup", $group_id);
+	    if ( ! invite_anyone_process_invitations( stripslashes_deep( $_POST ) ) ) {
+		    bp_core_add_message( __( 'Sorry, there was a problem sending your invitations. Please try again.', 'invite-anyone' ), 'error' );
+	    }
     }
+
+
 
     function create_screen($group_id = NULL){
       global $bp;
@@ -218,10 +180,6 @@ if ( bp_is_active( 'groups' ) ) :
 			      <?php if( invite_anyone_allowed_domains() ) : ?> <?php _e( 'You can only invite people whose email addresses end in one of the following domains:', 'invite-anyone' ) ?> <?php echo esc_html( invite_anyone_allowed_domains() ); ?><?php endif; ?>
               </p>
 
-			    <?php if ( false !== $max_no_invites = invite_anyone_max_invites() ) : ?>
-              <?php echo $max_invites ?>
-                  <p class="description"><?php printf( __( 'You can invite a maximum of %s people at a time.', 'invite-anyone' ), $max_no_invites ) ?></p>
-			    <?php endif ?>
 			    <?php invite_anyone_email_fields( $returned_data['error_emails'] ) ?>
             </div>
 
@@ -231,6 +189,8 @@ if ( bp_is_active( 'groups' ) ) :
           </li>
 
           <li>
+<!--          --><?php //echo "test"?>
+<!--          --><?php //print_r($iaoptions)?>
 		      <?php if ( $iaoptions['subject_is_customizable'] == 'yes' ) : ?>
                 <label for="invite-anyone-custom-subject"><?php _e( '(optional) Customize the subject line of the invitation email.', 'invite-anyone' ) ?></label>
                 <textarea name="invite_anyone_custom_subject" id="invite-anyone-custom-subject" rows="15" cols="10" ><?php echo esc_textarea( invite_anyone_invitation_subject( $returned_subject ) ) ?></textarea>
@@ -255,42 +215,19 @@ if ( bp_is_active( 'groups' ) ) :
 
           </li>
 
-		    <?php if ( invite_anyone_are_groups_running() ) : ?>
-			    <?php if ( $iaoptions['can_send_group_invites_email'] == 'yes' && bp_has_groups( "per_page=10000&type=alphabetical&user_id=" . bp_loggedin_user_id() ) ) : ?>
-                <li>
-                  <p><?php _e( '(optional) Select some groups. Invitees will receive invitations to these groups when they join the site.', 'invite-anyone' ) ?></p>
-                  <ul id="invite-anyone-group-list">
-				      <?php while ( bp_groups() ) : bp_the_group(); ?>
-					      <?php
+          <p>Invitees will receive invitations to this group when they join Zume.</p>
 
-					      // Enforce per-group invitation settings
-					      if ( ! bp_groups_user_can_send_invites( bp_get_group_id() ) || 'anyone' !== invite_anyone_group_invite_access_test( bp_get_group_id() ) ) {
-						      continue;
-					      }
+          <input type="hidden" name="invite_anyone_groups[]" id="invite_anyone_groups-<?php echo esc_attr( $group_id ) ?>" value="<?php echo esc_attr( $group_id ) ?>" checked />
 
-					      ?>
-                        <li>
-                          <input type="checkbox" name="invite_anyone_groups[]" id="invite_anyone_groups-<?php echo esc_attr( bp_get_group_id() ) ?>" value="<?php echo esc_attr( bp_get_group_id() ) ?>" <?php if ( $from_group == bp_get_group_id() || array_search( bp_get_group_id(), $returned_groups) ) : ?>checked<?php endif; ?> />
-
-                          <label for="invite_anyone_groups-<?php echo esc_attr( bp_get_group_id() ) ?>" class="invite-anyone-group-name"><?php bp_group_avatar_mini() ?> <span><?php bp_group_name() ?></span></label>
-
-                        </li>
-				      <?php endwhile; ?>
-
-                  </ul>
-                </li>
-			    <?php endif; ?>
-
-		    <?php endif; ?>
 
 		    <?php wp_nonce_field( 'invite_anyone_send_by_email', 'ia-send-by-email-nonce' ); ?>
 		    <?php do_action( 'invite_anyone_addl_fields' ) ?>
 
         </ol>
 
-        <div class="submit">
-          <input type="submit" name="invite-anyone-submit" id="invite-anyone-submit" value="<?php _e( 'Send Invites', 'invite-anyone' ) ?> " />
-        </div>
+<!--        <div class="submit">-->
+<!--          <input type="submit" name="invite-anyone-submit" id="invite-anyone-submit" value="--><?php //_e( 'Send Invites', 'invite-anyone' ) ?><!-- " />-->
+<!--        </div>-->
 
 
       </form>
