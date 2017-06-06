@@ -2099,10 +2099,6 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   color: #cacaca; }
 
-input::-moz-placeholder,
-textarea::-moz-placeholder {
-  color: #cacaca; }
-
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
   color: #cacaca; }
@@ -2283,8 +2279,6 @@ select {
   border-color: #cc4b37;
   background-color: #f9ecea; }
   .is-invalid-input:not(:focus)::-webkit-input-placeholder {
-    color: #cc4b37; }
-  .is-invalid-input:not(:focus)::-moz-placeholder {
     color: #cc4b37; }
   .is-invalid-input:not(:focus):-ms-input-placeholder {
     color: #cc4b37; }
@@ -4387,6 +4381,13 @@ LINK STYLES
 a:link, a:visited:link {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3); }
 
+.white {
+  color: #fefefe; }
+
+.vertical-padding {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
 /*********************
 H1, H2, H3, H4, H5 P STYLES
 *********************/
@@ -4882,6 +4883,25 @@ JQUERY STEPS WIZARD
 .wizard > .actions .disabled a:active {
   background: #eee;
   color: #aaa; }
+
+ul.orbit-container {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  height: inherit; }
+
+.zume-slider-text {
+  width: 90%;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: white; }
+
+/**************************************/
+/**************************************/
+.wistia_embed {
+  margin: 0 auto; }
+
+.hero-blocks {
+  height: 300px; }
 
 /******************************************************************
 
