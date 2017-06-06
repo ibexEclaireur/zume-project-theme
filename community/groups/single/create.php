@@ -1,315 +1,239 @@
 <?php
 
+
+//@todo set default to prvita
+function bp_remove_group_step_settings($array) {
+
+	$array = array(
+		'group-details'  => array(
+			'name'       => _x( 'Details', 'Group screen nav', 'buddypress' ),
+			'position'   => 0
+		)
+	);
+
+	return $array;
+}
+add_filter ('groups_create_group_steps', 'bp_remove_group_step_settings', 10, 1);
+
 /**
- * BuddyPress - Create Group
- *
- * @package BuddyPress
- * @subpackage bp-default
+ * The bp_is_active( 'groups' ) check is recommended, to prevent problems
+ * during upgrade or when the Groups component is disabled
  */
+if ( bp_is_active( 'groups' ) ) :
+
+	class Invite_By_Email extends BP_Group_Extension {
+		/**
+		 * Your __construct() method will contain configuration options for
+		 * your extension, and will pass them to parent::init()
+		 */
+		function __construct() {
+			$args = array(
+				'slug' => 'group_invite_by_email',
+				'name' => 'Group Invite By Email',
+        'screens' => array(
+	        'create' => array(
+		        'position' => 100,
+	        ),
+          'edit' => array(
+            'enabled' => false,
+          ),
+          'admin' => array(
+            'enabled' => false,
+          )
+        ),
+        'show_tab' => 'noone'
+			);
+			parent::init( $args );
+		}
 
-get_header( 'buddypress' ); ?>
 
-	<div id="content">
-		<div class="padder">
-		
-		<?php do_action( 'bp_before_create_group_content_template' ); ?>
 
-		<form action="<?php bp_group_creation_form_action(); ?>" method="post" id="create-group-form" class="standard-form" enctype="multipart/form-data">
-			<h3><?php _e( 'Create a Group', 'buddypress' ); ?> &nbsp;<a class="button" href="<?php echo trailingslashit( bp_get_root_domain() . '/' . bp_get_groups_root_slug() ); ?>"><?php _e( 'Groups Directory', 'buddypress' ); ?></a></h3>
+
+    function create_screen_save($group_id = NULL){
 
-			<?php do_action( 'bp_before_create_group' ); ?>
+		  update_option("testgroup", $group_id);
+	    if ( ! invite_anyone_process_invitations( stripslashes_deep( $_POST ) ) ) {
+		    bp_core_add_message( __( 'Sorry, there was a problem sending your invitations. Please try again.', 'invite-anyone' ), 'error' );
+	    }
+    }
 
-			<div class="item-list-tabs no-ajax" id="group-create-tabs" role="navigation">
-				<ul>
 
-					<?php bp_group_creation_tabs(); ?>
 
-				</ul>
-			</div>
+    function create_screen($group_id = NULL){
+      global $bp;
 
-			<?php do_action( 'template_notices' ); ?>
+	    $iaoptions = invite_anyone_options();
 
-			<div class="item-body" id="group-create-body">
+	    // Hack - catch already=accepted
+	    if ( ! empty( $_GET['already'] ) && 'accepted' === $_GET['already'] && bp_is_my_profile() ) {
+		    _e( 'It looks like you&#8217;ve already accepted your invitation to join the site.', 'invite-anyone' );
+		    return;
+	    }
 
-				<?php /* Group creation step 1: Basic group details */ ?>
-				<?php if ( bp_is_group_creation_step( 'group-details' ) ) : ?>
+	    // If the user has maxed out his invites, no need to go on
+	    if ( !empty( $iaoptions['email_limit_invites_toggle'] ) && $iaoptions['email_limit_invites_toggle'] == 'yes' && !current_user_can( 'delete_others_pages' ) ) {
+		    $sent_invites       = invite_anyone_get_invitations_by_inviter_id( bp_displayed_user_id() );
+		    $sent_invites_count  = $sent_invites->post_count;
+		    if ( $sent_invites_count >= $iaoptions['limit_invites_per_user'] ) : ?>
 
-					<?php do_action( 'bp_before_group_details_creation_step' ); ?>
+              <h4><?php _e( 'Invite New Members', 'invite-anyone' ); ?></h4>
 
-					<label for="group-name"><?php _e( 'Group Name (required)', 'buddypress' ); ?></label>
-					<input type="text" name="group-name" id="group-name" aria-required="true" value="<?php bp_new_group_name(); ?>" />
+              <p id="welcome-message"><?php _e( 'You have sent the maximum allowed number of invitations.', 'invite-anyone' ); ?></em></p>
 
-					<label for="group-desc"><?php _e( 'Group Description, Meeting Time, or Location (required)', 'buddypress' ); ?></label>
-					<textarea name="group-desc" id="group-desc" aria-required="true"><?php bp_new_group_description(); ?></textarea>
+			    <?php return;
+		    endif;
+	    }
 
-					<?php
-					do_action( 'bp_after_group_details_creation_step' );
-					do_action( 'groups_custom_group_fields_editable' ); // @Deprecated
+	    if ( !$max_invites = $iaoptions['max_invites'] )
+		    $max_invites = 5;
 
-					wp_nonce_field( 'groups_create_save_group-details' ); ?>
+	    $from_group = false;
+	    if ( !empty( $bp->action_variables ) ) {
+		    if ( 'group-invites' == $bp->action_variables[0] )
+			    $from_group = $bp->action_variables[1];
+	    }
 
-				<?php endif; ?>
+	    $returned_data = !empty( $bp->invite_anyone->returned_data ) ? $bp->invite_anyone->returned_data : false;
 
-				<?php /* Group creation step 2: Group settings */ ?>
-				<?php if ( bp_is_group_creation_step( 'group-settings' ) ) : ?>
+	    /* If the user is coming from the widget, $returned_emails is populated with those email addresses */
+	    if ( isset( $_POST['invite_anyone_widget'] ) ) {
+		    check_admin_referer( 'invite-anyone-widget_' . $bp->loggedin_user->id );
 
-					<?php do_action( 'bp_before_group_settings_creation_step' ); ?>
+		    if ( !empty( $_POST['invite_anyone_email_addresses'] ) ) {
+			    $returned_data['error_emails'] = invite_anyone_parse_addresses( $_POST['invite_anyone_email_addresses'] );
+		    }
 
-					<h4><?php _e( 'Privacy Options', 'buddypress' ); ?></h4>
+		    /* If the widget appeared on a group page, the group ID should come along with it too */
+		    if ( isset( $_POST['invite_anyone_widget_group'] ) )
+			    $returned_data['groups'] = $_POST['invite_anyone_widget_group'];
 
-					<div class="radio">
-						<label><input type="radio" name="group-status" value="public"<?php if ( 'public' == bp_get_new_group_status() || !bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> />
-							<strong><?php _e( 'This is a public group', 'buddypress' ); ?></strong>
-							<ul>
-								<li><?php _e( 'Any site member can join this group.', 'buddypress' ); ?></li>
-								<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
-								<li><?php _e( 'Group content and activity will be visible to any site member.', 'buddypress' ); ?></li>
-							</ul>
-						</label>
+	    }
+
+	    // $returned_groups is padded so that array_search (below) returns true for first group */
 
-						<label><input type="radio" name="group-status" value="private"<?php if ( 'private' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> />
-							<strong><?php _e( 'This is a private group', 'buddypress' ); ?></strong>
-							<ul>
-								<li><?php _e( 'Only users who request membership and are accepted can join the group.', 'buddypress' ); ?></li>
-								<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
-								<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
-							</ul>
-						</label>
+	    $counter = 0;
+	    $returned_groups = array( 0 );
+	    if ( ! empty( $returned_data['groups'] ) ) {
+		    foreach( $returned_data['groups'] as $group_id ) {
+			    $returned_groups[] = $group_id;
+		    }
+	    }
 
-						<label><input type="radio" name="group-status" value="hidden"<?php if ( 'hidden' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> />
-							<strong><?php _e('This is a hidden group', 'buddypress'); ?></strong>
-							<ul>
-								<li><?php _e( 'Only users who are invited can join the group.', 'buddypress' ); ?></li>
-								<li><?php _e( 'This group will not be listed in the groups directory or search results.', 'buddypress' ); ?></li>
-								<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
-							</ul>
-						</label>
-					</div>
+	    // Get the returned email subject, if there is one
+	    $returned_subject = ! empty( $returned_data['subject'] ) ? stripslashes( $returned_data['subject'] ) : false;
 
-					<h4><?php _e( 'Group Invitations', 'buddypress' ); ?></h4>
+	    // Get the returned email message, if there is one
+	    $returned_message = ! empty( $returned_data['message'] ) ? stripslashes( $returned_data['message'] ) : false;
 
-					<p><?php _e( 'Which members of this group are allowed to invite others?', 'buddypress' ); ?></p>
+	    if ( ! empty( $returned_data['error_message'] ) ) {
+		    ?>
+          <div class="invite-anyone-error error">
+            <p><?php _e( "Some of your invitations were not sent. Please see the errors below and resubmit the failed invitations.", 'invite-anyone' ) ?></p>
+          </div>
+		    <?php
+	    }
 
-					<div class="radio">
-						<label>
-							<input type="radio" name="group-invite-status" value="members"<?php bp_group_show_invite_status_setting( 'members' ); ?> />
-							<strong><?php _e( 'All group members', 'buddypress' ); ?></strong>
-						</label>
+	    $blogname = get_bloginfo('name');
+	    $welcome_message = sprintf( __( 'Invite friends to join %s by following these steps:', 'invite-anyone' ), $blogname );
 
-						<label>
-							<input type="radio" name="group-invite-status" value="mods"<?php bp_group_show_invite_status_setting( 'mods' ); ?> />
-							<strong><?php _e( 'Group admins and mods only', 'buddypress' ); ?></strong>
-						</label>
+		  ?>
+      <form id="invite-anyone-by-email" action="<?php echo $bp->displayed_user->domain . $bp->invite_anyone->slug . '/sent-invites/send/' ?>" method="post">
 
-						<label>
-							<input type="radio" name="group-invite-status" value="admins"<?php bp_group_show_invite_status_setting( 'admins' ); ?> />
-							<strong><?php _e( 'Group admins only', 'buddypress' ); ?></strong>
-						</label>
-					</div>
+        <h4><?php _e( 'Invite New Members', 'invite-anyone' ); ?></h4>
 
-					<?php if ( bp_is_active( 'forums' ) ) : ?>
+		    <?php
 
-						<h4><?php _e( 'Group Forums', 'buddypress' ); ?></h4>
+		    if ( isset( $iaoptions['email_limit_invites_toggle'] ) && $iaoptions['email_limit_invites_toggle'] == 'yes' && !current_user_can( 'delete_others_pages' ) ) {
+			    if ( !isset( $sent_invites ) ) {
+				    $sent_invites = invite_anyone_get_invitations_by_inviter_id( bp_loggedin_user_id() );
+				    $sent_invites_count = $sent_invites->post_count;
+			    }
 
-						<?php if ( bp_forums_is_installed_correctly() ) : ?>
+			    $limit_invite_count = (int) $iaoptions['limit_invites_per_user'] - (int) $sent_invites_count;
 
-							<p><?php _e( 'Should this group have a forum?', 'buddypress' ); ?></p>
+			    if ( $limit_invite_count < 0 ) {
+				    $limit_invite_count = 0;
+			    }
 
-							<div class="checkbox">
-								<label><input type="checkbox" name="group-show-forum" id="group-show-forum" value="1"<?php checked( bp_get_new_group_enable_forum(), true, true ); ?> /> <?php _e( 'Enable discussion forum', 'buddypress' ); ?></label>
-							</div>
-						<?php elseif ( is_super_admin() ) : ?>
+			    ?>
 
-							<p><?php printf( __( '<strong>Attention Site Admin:</strong> Group forums require the <a href="%s">correct setup and configuration</a> of a bbPress installation.', 'buddypress' ), bp_core_do_network_admin() ? network_admin_url( 'settings.php?page=bb-forums-setup' ) :  admin_url( 'admin.php?page=bb-forums-setup' ) ); ?></p>
+              <p class="description"><?php printf( __( 'The site administrator has limited each user to %1$d invitations. You have %2$d invitations remaining.', 'invite-anyone' ), (int) $iaoptions['limit_invites_per_user'], (int) $limit_invite_count ) ?></p>
 
-						<?php endif; ?>
+			    <?php
+		    }
+		    ?>
 
-					<?php endif; ?>
+        <p id="welcome-message"><?php echo esc_html( $welcome_message ) ?></p>
 
-					<?php do_action( 'bp_after_group_settings_creation_step' ); ?>
+        <ol id="invite-anyone-steps">
 
-					<?php wp_nonce_field( 'groups_create_save_group-settings' ); ?>
+          <li>
+		      <?php if ( ! empty( $returned_data['error_message'] ) ) : ?>
+                <div class="invite-anyone-error error">
+                  <p><?php echo $returned_data['error_message'] ?></p>
+                </div>
+		      <?php endif ?>
 
-				<?php endif; ?>
+            <div class="manual-email">
+              <p>
+			      <?php _e( 'Enter email addresses below, one per line.', 'invite-anyone' ) ?>
+			      <?php if( invite_anyone_allowed_domains() ) : ?> <?php _e( 'You can only invite people whose email addresses end in one of the following domains:', 'invite-anyone' ) ?> <?php echo esc_html( invite_anyone_allowed_domains() ); ?><?php endif; ?>
+              </p>
 
-				<?php /* Group creation step 3: Avatar Uploads */ ?>
-				<?php if ( bp_is_group_creation_step( 'group-avatar' ) ) : ?>
+			    <?php invite_anyone_email_fields( $returned_data['error_emails'] ) ?>
+            </div>
 
-					<?php do_action( 'bp_before_group_avatar_creation_step' ); ?>
+		      <?php /* invite_anyone_after_addresses gets $iaoptions so that Cloudsponge etc can tell whether certain components are activated, without an additional lookup */ ?>
+		      <?php do_action( 'invite_anyone_after_addresses', $iaoptions ) ?>
 
-					<?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
+          </li>
 
-						<div class="left-menu">
+          <li>
+<!--          --><?php //echo "test"?>
+<!--          --><?php //print_r($iaoptions)?>
+		      <?php if ( $iaoptions['subject_is_customizable'] == 'yes' ) : ?>
+                <label for="invite-anyone-custom-subject"><?php _e( '(optional) Customize the subject line of the invitation email.', 'invite-anyone' ) ?></label>
+                <textarea name="invite_anyone_custom_subject" id="invite-anyone-custom-subject" rows="15" cols="10" ><?php echo esc_textarea( invite_anyone_invitation_subject( $returned_subject ) ) ?></textarea>
+		      <?php else : ?>
+                <strong><?php _e( 'Subject:', 'invite-anyone' ) ?></strong> <?php echo esc_html( invite_anyone_invitation_subject( $returned_subject ) ) ?>
 
-							<?php bp_new_group_avatar(); ?>
+                <input type="hidden" id="invite-anyone-customised-subject" name="invite_anyone_custom_subject" value="<?php echo esc_attr( invite_anyone_invitation_subject() ) ?>" />
+		      <?php endif; ?>
+          </li>
 
-						</div><!-- .left-menu -->
+          <li>
+		      <?php if ( $iaoptions['message_is_customizable'] == 'yes' ) : ?>
+                <label for="invite-anyone-custom-message"><?php _e( '(optional) Customize the text of the invitation.', 'invite-anyone' ) ?></label>
+                <p class="description"><?php _e( 'The message will also contain a custom footer containing links to accept the invitation or opt out of further email invitations from this site.', 'invite-anyone' ) ?></p>
+                <textarea name="invite_anyone_custom_message" id="invite-anyone-custom-message" cols="40" rows="10"><?php echo esc_textarea( invite_anyone_invitation_message( $returned_message ) ) ?></textarea>
+		      <?php else : ?>
+                <label for="invite-anyone-custom-message"><?php _e( 'Message:', 'invite-anyone' ) ?></label>
+                <textarea name="invite_anyone_custom_message" id="invite-anyone-custom-message" disabled="disabled"><?php echo esc_textarea( invite_anyone_invitation_message( $returned_message ) ) ?></textarea>
 
-						<div class="main-column">
-							<p><?php _e( "Upload an image to use as an avatar for this group. The image will be shown on the main group page, and in search results.", 'buddypress' ); ?></p>
+                <input type="hidden" name="invite_anyone_custom_message" value="<?php echo esc_attr( invite_anyone_invitation_message() ) ?>" />
+		      <?php endif; ?>
 
-							<p>
-								<input type="file" name="file" id="file" />
-								<input type="submit" name="upload" id="upload" value="<?php esc_attr_e( 'Upload Image', 'buddypress' ); ?>" />
-								<input type="hidden" name="action" id="action" value="bp_avatar_upload" />
-							</p>
+          </li>
 
-							<p><?php _e( 'To skip the avatar upload process, hit the "Next Step" button.', 'buddypress' ); ?></p>
-						</div><!-- .main-column -->
+          <p>Invitees will receive invitations to this group when they join Zume.</p>
 
-					<?php endif; ?>
+          <input type="hidden" name="invite_anyone_groups[]" id="invite_anyone_groups-<?php echo esc_attr( $group_id ) ?>" value="<?php echo esc_attr( $group_id ) ?>" checked />
 
-					<?php if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 
-						<h3><?php _e( 'Crop Group Avatar', 'buddypress' ); ?></h3>
+		    <?php wp_nonce_field( 'invite_anyone_send_by_email', 'ia-send-by-email-nonce' ); ?>
+		    <?php do_action( 'invite_anyone_addl_fields' ) ?>
 
-						<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-to-crop" class="avatar" alt="<?php esc_attr_e( 'Avatar to crop', 'buddypress' ); ?>" />
+        </ol>
 
-						<div id="avatar-crop-pane">
-							<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-crop-preview" class="avatar" alt="<?php esc_attr_e( 'Avatar preview', 'buddypress' ); ?>" />
-						</div>
+<!--        <div class="submit">-->
+<!--          <input type="submit" name="invite-anyone-submit" id="invite-anyone-submit" value="--><?php //_e( 'Send Invites', 'invite-anyone' ) ?><!-- " />-->
+<!--        </div>-->
 
-						<input type="submit" name="avatar-crop-submit" id="avatar-crop-submit" value="<?php esc_attr_e( 'Crop Image', 'buddypress' ); ?>" />
 
-						<input type="hidden" name="image_src" id="image_src" value="<?php bp_avatar_to_crop_src(); ?>" />
-						<input type="hidden" name="upload" id="upload" />
-						<input type="hidden" id="x" name="x" />
-						<input type="hidden" id="y" name="y" />
-						<input type="hidden" id="w" name="w" />
-						<input type="hidden" id="h" name="h" />
+      </form>
+      <?php
+    }
+	}
+	bp_register_group_extension( 'Invite_By_Email' );
 
-					<?php endif; ?>
-
-					<?php do_action( 'bp_after_group_avatar_creation_step' ); ?>
-
-					<?php wp_nonce_field( 'groups_create_save_group-avatar' ); ?>
-
-				<?php endif; ?>
-
-				<?php /* Group creation step 4: Invite friends to group */ ?>
-				<?php if ( bp_is_group_creation_step( 'group-invites' ) ) : ?>
-
-					<?php do_action( 'bp_before_group_invites_creation_step' ); ?>
-
-					<?php if ( bp_is_active( 'friends' ) && bp_get_total_friend_count( bp_loggedin_user_id() ) ) : ?>
-
-						<div class="left-menu">
-
-							<div id="invite-list">
-								<ul>
-									<?php bp_new_group_invite_friend_list(); ?>
-								</ul>
-
-								<?php wp_nonce_field( 'groups_invite_uninvite_user', '_wpnonce_invite_uninvite_user' ); ?>
-							</div>
-
-						</div><!-- .left-menu -->
-
-						<div class="main-column">
-
-							<div id="message" class="info">
-								<p><?php _e('Select people to invite from your friends list.', 'buddypress'); ?></p>
-							</div>
-
-							<?php /* The ID 'friend-list' is important for AJAX support. */ ?>
-							<ul id="friend-list" class="item-list" role="main">
-
-							<?php if ( bp_group_has_invites() ) : ?>
-
-								<?php while ( bp_group_invites() ) : bp_group_the_invite(); ?>
-
-									<li id="<?php bp_group_invite_item_id(); ?>">
-
-										<?php bp_group_invite_user_avatar(); ?>
-
-										<h4><?php bp_group_invite_user_link(); ?></h4>
-										<span class="activity"><?php bp_group_invite_user_last_active(); ?></span>
-
-										<div class="action">
-											<a class="remove" href="<?php bp_group_invite_user_remove_invite_url(); ?>" id="<?php bp_group_invite_item_id(); ?>"><?php _e( 'Remove Invite', 'buddypress' ); ?></a>
-										</div>
-									</li>
-
-								<?php endwhile; ?>
-
-								<?php wp_nonce_field( 'groups_send_invites', '_wpnonce_send_invites' ); ?>
-
-							<?php endif; ?>
-
-							</ul>
-
-						</div><!-- .main-column -->
-
-					<?php else : ?>
-
-						<div id="message" class="info">
-							<p><?php _e( 'Once you have built up friend connections you will be able to invite others to your group.', 'buddypress' ); ?></p>
-						</div>
-
-					<?php endif; ?>
-
-					<?php wp_nonce_field( 'groups_create_save_group-invites' ); ?>
-
-					<?php do_action( 'bp_after_group_invites_creation_step' ); ?>
-
-				<?php endif; ?>
-
-				<?php do_action( 'groups_custom_create_steps' ); // Allow plugins to add custom group creation steps ?>
-
-				<?php do_action( 'bp_before_group_creation_step_buttons' ); ?>
-
-				<?php if ( 'crop-image' != bp_get_avatar_admin_step() ) : ?>
-
-					<div class="submit" id="previous-next">
-
-						<?php /* Previous Button */ ?>
-						<?php if ( !bp_is_first_group_creation_step() ) : ?>
-
-							<input type="button" value="<?php esc_attr_e( 'Back to Previous Step', 'buddypress' ); ?>" id="group-creation-previous" name="previous" onclick="location.href='<?php bp_group_creation_previous_link(); ?>'" />
-
-						<?php endif; ?>
-
-						<?php /* Next Button */ ?>
-						<?php if ( !bp_is_last_group_creation_step() && !bp_is_first_group_creation_step() ) : ?>
-
-							<input type="submit" value="<?php esc_attr_e( 'Next Step', 'buddypress' ); ?>" id="group-creation-next" name="save" />
-
-						<?php endif;?>
-
-						<?php /* Create Button */ ?>
-						<?php if ( bp_is_first_group_creation_step() ) : ?>
-
-							<input type="submit" value="<?php esc_attr_e( 'Create Group and Continue', 'buddypress' ); ?>" id="group-creation-create" name="save" />
-
-						<?php endif; ?>
-
-						<?php /* Finish Button */ ?>
-						<?php if ( bp_is_last_group_creation_step() ) : ?>
-
-							<input type="submit" value="<?php esc_attr_e( 'Finish', 'buddypress' ); ?>" id="group-creation-finish" name="save" />
-
-						<?php endif; ?>
-					</div>
-
-				<?php endif;?>
-
-				<?php do_action( 'bp_after_group_creation_step_buttons' ); ?>
-
-				<?php /* Don't leave out this hidden field */ ?>
-				<input type="hidden" name="group_id" id="group_id" value="<?php bp_new_group_id(); ?>" />
-
-				<?php do_action( 'bp_directory_groups_content' ); ?>
-
-			</div><!-- .item-body -->
-
-			<?php do_action( 'bp_after_create_group' ); ?>
-
-		</form>
-		
-		<?php do_action( 'bp_after_create_group_content_template' ); ?>
-
-		</div><!-- .padder -->
-	</div><!-- #content -->
-
-<?php get_sidebar( 'buddypress' ); ?>
-<?php get_footer( 'buddypress' ); ?>
+endif; // if ( bp_is_active( 'groups' ) )
