@@ -712,7 +712,8 @@ JQUERY STEPS WIZARD
 }
 
 .wizard > .steps .number {
-  font-size: 1.429em
+  font-size: 1.429em;
+	color: $primary-color;
 }
 
 .wizard > .steps > ul > li {
@@ -734,7 +735,6 @@ JQUERY STEPS WIZARD
 .wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
   display: block;
   width: auto;
-  margin: 0 .5em .5em;
   padding: 1em 1em;
   text-decoration: none;
   -webkit-border-radius: $global-radius;
@@ -907,4 +907,5 @@ ul.orbit-container {
 .hero-blocks {
 	height: 300px;
 }
+
 

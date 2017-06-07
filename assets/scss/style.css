@@ -4720,7 +4720,8 @@ JQUERY STEPS WIZARD
   width: 30%; }
 
 .wizard > .steps .number {
-  font-size: 1.429em; }
+  font-size: 1.429em;
+  color: #323A68; }
 
 .wizard > .steps > ul > li {
   /*width: 25%;*/
@@ -4738,7 +4739,6 @@ JQUERY STEPS WIZARD
 .wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
   display: block;
   width: auto;
-  margin: 0 .5em .5em;
   padding: 1em 1em;
   text-decoration: none;
   -webkit-border-radius: 0px;
