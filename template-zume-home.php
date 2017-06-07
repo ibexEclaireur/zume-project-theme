@@ -30,7 +30,7 @@ Template Name: Full Width Home
                     }
 
                     .laptop__screen {
-                        background-color: #22336B;
+                        /* background-color: #22336B; */
                         position: absolute;
                         <?php /* These values match the laptop screen bezel in the image of the parent */ ?>
                         top: <?php echo (56 * 100 / 606) ?>%;
