@@ -11,11 +11,64 @@ Template Name: Full Width Home
 
             <main id="main" role="main">
 
-                <div class="row">
-                    <div class="large-12 columns center">
-                        <img class="alignnone size-full wp-image-31" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>zume-laptop-1024x620.png" alt="" width="1024" height="620" />
-                    </div>
+                <style>
+                    .max-width-1024-wrapper {
+                        max-width: 1024px;
+                        margin: 0 auto;
+                    }
+
+                    .laptop {
+                        text-align: center;
+                        position: relative;
+                        margin: 0 auto;
+                        background-image: url('<?php _e(get_stylesheet_directory_uri() . '/assets/images/zume-laptop-1024x606.jpg') ?>');
+                        background-size: 100%;
+
+                        <?php /* This matches the laptop aspect ratio, while being responsive */ ?>
+                        width: 100%;
+                        padding-bottom: 59%;
+                    }
+
+                    .laptop__screen {
+                        background-color: #22336B;
+                        position: absolute;
+                        <?php /* These values match the laptop screen bezel in the image of the parent */ ?>
+                        top: <?php echo (56 * 100 / 606) ?>%;
+                        bottom: <?php echo (56 * 100 / 606) ?>%;
+                        left: <?php echo (135 * 100 / 1024) ?>%;
+                        right: <?php echo (135 * 100 / 1024) ?>%;
+                    }
+                    .laptop__video-wrapper {
+                        <?php /* This matches the video aspect ratio, while being responsive */ ?>
+                        position: relative;
+                        padding-bottom: 56.25%;
+                        height: 0;
+                    }
+                    .laptop__iframe {
+                        <?php /* The little top value centers the video vertically in the laptop screen */ ?>
+                        position: absolute;
+                        top: 8%;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                    }
+                </style>
+
+
+                <div class="max-width-1024-wrapper">
+                    <div class="laptop"><div class="laptop__screen"><div class="laptop__video-wrapper">
+                        <iframe
+                            class="laptop__iframe"
+                            width="640"
+                            height="360"
+                            frameborder="0"
+                            allowfullscreen
+                            src="https://www.youtube-nocookie.com/embed/qIs-PiCowlw?rel=0&amp;showinfo=0"
+
+                            ></iframe>
+                    </div></div></div>
                 </div>
+
                 <div class="row">
                     <div class="large-12 columns center">
                         <h1 style="text-align: center;">
