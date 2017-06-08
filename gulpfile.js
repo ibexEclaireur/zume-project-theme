@@ -111,6 +111,7 @@ gulp.task('browsersync', function() {
     var files = [
     	'./assets/css/*.css',
     	'./assets/js/*.js',
+    	'./assets/scss/*.scss',
     	'**/*.php',
     	'assets/images/**/*.{png,jpg,gif,svg,webp}',
     ];
