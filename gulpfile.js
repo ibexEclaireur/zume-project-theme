@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Grab our gulp packages
 var gulp  = require('gulp'),
     gutil = require('gulp-util'),
@@ -115,7 +117,7 @@ gulp.task('browsersync', function() {
 
     browserSync.init(files, {
 	    // Replace with URL of your local site
-	    proxy: "http://zume:8888/",
+	    proxy: process.env.BROWSERSYNC_PROXIED_SITE || "http://zume:8888/",
     });
 
     gulp.watch('./assets/scss/**/*.scss', ['styles']);
