@@ -72,8 +72,24 @@ Template Name: Full Width Home
 
                 <div class="row">
                     <div class="large-12 columns center">
-                        <h1 style="text-align: center; text-transform: uppercase;">
-                            Want to start the training?<br>
+                        <br><br>
+                        <style>
+                        .front-page-header {
+                            text-align: center;
+                            text-transform: uppercase;
+                            font-size: 32px;
+                            font-weight: 600;
+                        }
+                        @media only screen and (max-width: 1199px) {
+                            .front-page-header {
+                                font-size: 20px;
+                            }
+                        }
+                        </style>
+                        <h1 class="front-page-header">
+                            Want to start the training?
+                        </h1>
+                        <h1 class="front-page-header">
                             Get started below:
                         </h1>
                     </div>
