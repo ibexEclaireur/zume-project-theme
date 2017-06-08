@@ -1,11 +1,11 @@
 @charset "UTF-8";
 /******************************************************************
-	
+
 Stylesheet: Main Stylesheet
 
 Here's where the magic happens. Here is where you import
 all of your Sass files so they can compile into one
-CSS file. 
+CSS file.
 
 ******************************************************************/
 /******************************************************************
@@ -4913,9 +4913,9 @@ place.
 
 ******************************************************************/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-  /* 
+  /*
 
-EXAMPLE 
+EXAMPLE
 Let's say you have an image and you need to make sure it looks ok
 on retina screens. Let's say we have an icon which dimension are
 24px x 24px. In your regular stylesheets, it would look something
@@ -4936,10 +4936,10 @@ dimensions, this is what we would put in our retina stylesheet:
 	background-size: 24px 24px;
 }
 
-So, you would create the same icon, but at double the resolution, meaning 
+So, you would create the same icon, but at double the resolution, meaning
 it would be 48px x 48px. You'd name it the same, but with a @2x at the end
 (this is pretty standard practice). Set the background image so it matches
-the original dimensions and you are good to go. 
+the original dimensions and you are good to go.
 
 */ }
 
@@ -4948,10 +4948,10 @@ the original dimensions and you are good to go.
 Stylesheet: Print Stylesheet
 
 This is the print stylesheet. There's probably not a lot
-of reasons to edit this stylesheet. 
+of reasons to edit this stylesheet.
 
-Remember to add things that won't make sense to print at 
-the bottom. Things like nav, ads, and forms shouldbe set 
+Remember to add things that won't make sense to print at
+the bottom. Things like nav, ads, and forms shouldbe set
 to display none.
 ******************************************************************/
 @media print {
