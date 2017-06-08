@@ -32,10 +32,10 @@ this._plugins[attrName]=this[className]=_plugin;},/**
    * Also fires the destroyed event for the plugin, consolidating repetitive code.
    * @param {Object} plugin - an instance of a plugin, usually `this` in context.
    * @fires Plugin#destroyed
-   */unregisterPlugin:function unregisterPlugin(plugin){var pluginName=hyphenate(functionName(plugin.$element.data('zfPlugin').constructor));this._uuids.splice(this._uuids.indexOf(plugin.uuid),1);plugin.$element.removeAttr('data-'+pluginName).removeData('zfPlugin')/**
+   */unregisterPlugin:function unregisterPlugin(plugin){var pluginName=hyphenate(functionName(plugin.$element.data('zfPlugin').constructor));this._uuids.splice(this._uuids.indexOf(plugin.uuid),1);plugin.$element.removeAttr('data-'+pluginName).removeData('zfPlugin'/**
            * Fires when the plugin has been destroyed.
            * @event Plugin#destroyed
-           */.trigger('destroyed.zf.'+pluginName);for(var prop in plugin){plugin[prop]=null;//clean up script to prep for garbage collection.
+           */).trigger('destroyed.zf.'+pluginName);for(var prop in plugin){plugin[prop]=null;//clean up script to prep for garbage collection.
 }return;},/**
    * @function
    * Causes one or more active plugins to re-initialize, resetting event listeners, recalculating positions, etc.
@@ -89,7 +89,7 @@ fNOP.prototype=this.prototype;}fBound.prototype=new fNOP();return fBound;};}// P
 function functionName(fn){if(Function.prototype.name===undefined){var funcNameRegex=/function\s([^(]{1,})\(/;var results=funcNameRegex.exec(fn.toString());return results&&results.length>1?results[1].trim():"";}else if(fn.prototype===undefined){return fn.constructor.name;}else{return fn.prototype.constructor.name;}}function parseValue(str){if('true'===str)return true;else if('false'===str)return false;else if(!isNaN(str*1))return parseFloat(str);return str;}// Convert PascalCase to kebab-case
 // Thank you: http://stackoverflow.com/a/8955580
 function hyphenate(str){return str.replace(/([a-z])([A-Z])/g,'$1-$2').toLowerCase();}}(jQuery);
-'use strict';!function($){Foundation.Box={ImNotTouchingYou:ImNotTouchingYou,GetDimensions:GetDimensions,GetOffsets:GetOffsets};/**
+'use strict';!function($){Foundation.Box={ImNotTouchingYou:ImNotTouchingYou,GetDimensions:GetDimensions,GetOffsets:GetOffsets/**
  * Compares the dimensions of an element to a container and determines collision events with container.
  * @function
  * @param {jQuery} element - jQuery object to test for collisions.
@@ -98,7 +98,7 @@ function hyphenate(str){return str.replace(/([a-z])([A-Z])/g,'$1-$2').toLowerCas
  * @param {Boolean} tbOnly - set to true to check top and bottom values only.
  * @default if no parent object passed, detects collisions with `window`.
  * @returns {Boolean} - true if collision free, false if a collision in any direction.
- */function ImNotTouchingYou(element,parent,lrOnly,tbOnly){var eleDims=GetDimensions(element),top,bottom,left,right;if(parent){var parDims=GetDimensions(parent);bottom=eleDims.offset.top+eleDims.height<=parDims.height+parDims.offset.top;top=eleDims.offset.top>=parDims.offset.top;left=eleDims.offset.left>=parDims.offset.left;right=eleDims.offset.left+eleDims.width<=parDims.width+parDims.offset.left;}else{bottom=eleDims.offset.top+eleDims.height<=eleDims.windowDims.height+eleDims.windowDims.offset.top;top=eleDims.offset.top>=eleDims.windowDims.offset.top;left=eleDims.offset.left>=eleDims.windowDims.offset.left;right=eleDims.offset.left+eleDims.width<=eleDims.windowDims.width;}var allDirs=[bottom,top,left,right];if(lrOnly){return left===right===true;}if(tbOnly){return top===bottom===true;}return allDirs.indexOf(false)===-1;};/**
+ */};function ImNotTouchingYou(element,parent,lrOnly,tbOnly){var eleDims=GetDimensions(element),top,bottom,left,right;if(parent){var parDims=GetDimensions(parent);bottom=eleDims.offset.top+eleDims.height<=parDims.height+parDims.offset.top;top=eleDims.offset.top>=parDims.offset.top;left=eleDims.offset.left>=parDims.offset.left;right=eleDims.offset.left+eleDims.width<=parDims.width+parDims.offset.left;}else{bottom=eleDims.offset.top+eleDims.height<=eleDims.windowDims.height+eleDims.windowDims.offset.top;top=eleDims.offset.top>=eleDims.windowDims.offset.top;left=eleDims.offset.left>=eleDims.windowDims.offset.left;right=eleDims.offset.left+eleDims.width<=eleDims.windowDims.width;}var allDirs=[bottom,top,left,right];if(lrOnly){return left===right===true;}if(tbOnly){return top===bottom===true;}return allDirs.indexOf(false)===-1;};/**
  * Uses native methods to return an object of dimension values.
  * @function
  * @param {jQuery || HTML} element - jQuery object or DOM element for which to get the dimensions. Can be any element other that document or window.
@@ -617,9 +617,9 @@ if($el[0].type=='radio'){return this.removeRadioErrorClasses($el.attr('name'));}
    * @fires Abide#valid
    * @param {Object} element - jQuery object to validate, should be an HTML input
    * @returns {Boolean} goodToGo - If the input is valid or not.
-   */},{key:'validateInput',value:function validateInput($el){var _this4=this;var clearRequire=this.requiredCheck($el),validated=false,customValidator=true,validator=$el.attr('data-validator'),equalTo=true;// don't validate ignored inputs or hidden inputs
+   */},{key:'validateInput',value:function validateInput($el){var clearRequire=this.requiredCheck($el),validated=false,customValidator=true,validator=$el.attr('data-validator'),equalTo=true;// don't validate ignored inputs or hidden inputs
 if($el.is('[data-abide-ignore]')||$el.is('[type="hidden"]')){return true;}switch($el[0].type){case'radio':validated=this.validateRadio($el.attr('name'));break;case'checkbox':validated=clearRequire;break;case'select':case'select-one':case'select-multiple':validated=clearRequire;break;default:validated=this.validateText($el);}if(validator){customValidator=this.matchValidation($el,validator,$el.attr('required'));}if($el.attr('data-equalto')){equalTo=this.options.validators.equalTo($el);}var goodToGo=[clearRequire,validated,customValidator,equalTo].indexOf(false)===-1;var message=(goodToGo?'valid':'invalid')+'.zf.abide';if(goodToGo){// Re-validate inputs that depend on this one with equalto
-var dependentElements=this.$element.find('[data-equalto="'+$el.attr('id')+'"]');if(dependentElements.length){(function(){var _this=_this4;dependentElements.each(function(){if($(this).val()){_this.validateInput($(this));}});})();}}this[goodToGo?'removeErrorClasses':'addErrorClasses']($el);/**
+var dependentElements=this.$element.find('[data-equalto="'+$el.attr('id')+'"]');if(dependentElements.length){var _this=this;dependentElements.each(function(){if($(this).val()){_this.validateInput($(this));}});}}this[goodToGo?'removeErrorClasses':'addErrorClasses']($el);/**
      * Fires when the input is done checking for validation. Event trigger is either `valid.zf.abide` or `invalid.zf.abide`
      * Trigger includes the DOM element of the input.
      * @event Abide#valid
@@ -657,7 +657,7 @@ $group.each(function(i,e){if($(e).prop('checked')){valid=true;}});};return valid
    * @param {String} validators - a string of function names matching functions in the Abide.options.validators object.
    * @param {Boolean} required - self explanatory?
    * @returns {Boolean} - true if validations passed.
-   */},{key:'matchValidation',value:function matchValidation($el,validators,required){var _this5=this;required=required?true:false;var clear=validators.split(' ').map(function(v){return _this5.options.validators[v]($el,required,$el.parent());});return clear.indexOf(false)===-1;}/**
+   */},{key:'matchValidation',value:function matchValidation($el,validators,required){var _this4=this;required=required?true:false;var clear=validators.split(' ').map(function(v){return _this4.options.validators[v]($el,required,$el.parent());});return clear.indexOf(false)===-1;}/**
    * Resets form inputs and styles
    * @fires Abide#formreset
    */},{key:'resetForm',value:function resetForm(){var $form=this.$element,opts=this.options;$('.'+opts.labelErrorClass,$form).not('small').removeClass(opts.labelErrorClass);$('.'+opts.inputErrorClass,$form).not('small').removeClass(opts.inputErrorClass);$(opts.formErrorSelector+'.'+opts.formErrorClass).removeClass(opts.formErrorClass);$form.find('[data-abide-error]').css('display','none');$(':input',$form).not(':button, :submit, :reset, :hidden, :radio, :checkbox, [data-abide-ignore]').val('').removeAttr('data-invalid');$(':input:radio',$form).not('[data-abide-ignore]').prop('checked',false).removeAttr('data-invalid');$(':input:checkbox',$form).not('[data-abide-ignore]').prop('checked',false).removeAttr('data-invalid');/**
@@ -712,8 +712,8 @@ color:/^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/},/**
    * required : Boolean value of the required attribute be present or not.
    * parent : The direct parent of the input.
    * @option
-   */validators:{equalTo:function equalTo(el,required,parent){return $('#'+el.attr('data-equalto')).val()===el.val();}}};// Window exports
-Foundation.plugin(Abide,'Abide');}(jQuery);
+   */validators:{equalTo:function equalTo(el,required,parent){return $('#'+el.attr('data-equalto')).val()===el.val();}}// Window exports
+};Foundation.plugin(Abide,'Abide');}(jQuery);
 'use strict';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}!function($){/**
  * Accordion module.
  * @module foundation.accordion
@@ -1040,7 +1040,7 @@ this._setPosition();this.$element.addClass('is-open').attr({'aria-hidden':false}
    * Closes the open dropdown pane.
    * @function
    * @fires Dropdown#hide
-   */},{key:'close',value:function close(){if(!this.$element.hasClass('is-open')){return false;}this.$element.removeClass('is-open').attr({'aria-hidden':true});this.$anchor.removeClass('hover').attr('aria-expanded',false);if(this.classChanged){var curPositionClass=this.getPositionClass();if(curPositionClass){this.$element.removeClass(curPositionClass);}this.$element.addClass(this.options.positionClass)/*.hide()*/.css({height:'',width:''});this.classChanged=false;this.counter=4;this.usedPositions.length=0;}this.$element.trigger('hide.zf.dropdown',[this.$element]);if(this.options.trapFocus){Foundation.Keyboard.releaseFocus(this.$element);}}/**
+   */},{key:'close',value:function close(){if(!this.$element.hasClass('is-open')){return false;}this.$element.removeClass('is-open').attr({'aria-hidden':true});this.$anchor.removeClass('hover').attr('aria-expanded',false);if(this.classChanged){var curPositionClass=this.getPositionClass();if(curPositionClass){this.$element.removeClass(curPositionClass);}this.$element.addClass(this.options.positionClass/*.hide()*/).css({height:'',width:''});this.classChanged=false;this.counter=4;this.usedPositions.length=0;}this.$element.trigger('hide.zf.dropdown',[this.$element]);if(this.options.trapFocus){Foundation.Keyboard.releaseFocus(this.$element);}}/**
    * Toggles the dropdown pane's visibility.
    * @function
    */},{key:'toggle',value:function toggle(){if(this.$element.hasClass('is-open')){if(this.$anchor.data('hover'))return;this.close();}else{this.open();}}/**
@@ -1086,8 +1086,8 @@ this._setPosition();this.$element.addClass('is-open').attr({'aria-hidden':false}
    * Allows a click on the body to close the dropdown.
    * @option
    * @example false
-   */closeOnClick:false};// Window exports
-Foundation.plugin(Dropdown,'Dropdown');}(jQuery);
+   */closeOnClick:false// Window exports
+};Foundation.plugin(Dropdown,'Dropdown');}(jQuery);
 'use strict';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}!function($){/**
  * DropdownMenu module.
  * @module foundation.dropdown-menu
@@ -1411,8 +1411,8 @@ if(!$(loc).length){return false;}this._inTransition=true;var _this=this,scrollPo
    * Number of pixels to offset the scroll of the page on item click if using a sticky nav bar.
    * @option
    * @example 25
-   */barOffset:0};// Window exports
-Foundation.plugin(Magellan,'Magellan');}(jQuery);
+   */barOffset:0// Window exports
+};Foundation.plugin(Magellan,'Magellan');}(jQuery);
 'use strict';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}!function($){/**
  * OffCanvas module.
  * @module foundation.offcanvas
@@ -1460,10 +1460,10 @@ if(this.options.contentScroll===false){$('body').addClass('is-off-canvas-open').
    * @function
    * @param {Function} cb - optional cb to fire after closure.
    * @fires OffCanvas#closed
-   */},{key:'close',value:function close(cb){if(!this.$element.hasClass('is-open')||this.isRevealed){return;}var _this=this;_this.$element.removeClass('is-open');this.$element.attr('aria-hidden','true')/**
+   */},{key:'close',value:function close(cb){if(!this.$element.hasClass('is-open')||this.isRevealed){return;}var _this=this;_this.$element.removeClass('is-open');this.$element.attr('aria-hidden','true'/**
        * Fires when the off-canvas menu opens.
        * @event OffCanvas#closed
-       */.trigger('closed.zf.offcanvas');// If `contentScroll` is set to false, remove class and re-enable scrolling on touch devices.
+       */).trigger('closed.zf.offcanvas');// If `contentScroll` is set to false, remove class and re-enable scrolling on touch devices.
 if(this.options.contentScroll===false){$('body').removeClass('is-off-canvas-open').off('touchmove',this._stopScrolling);}if(this.options.contentOverlay===true){this.$overlay.removeClass('is-visible');}if(this.options.closeOnClick===true&&this.options.contentOverlay===true){this.$overlay.removeClass('is-closable');}this.$triggers.attr('aria-expanded','false');if(this.options.trapFocus===true){this.$element.siblings('[data-off-canvas-content]').removeAttr('tabindex');Foundation.Keyboard.releaseFocus(this.$element);}}/**
    * Toggles the off-canvas menu open or closed.
    * @function
@@ -1521,8 +1521,8 @@ if(this.options.contentScroll===false){$('body').removeClass('is-off-canvas-open
    * Triggers optional focus trapping when opening an offcanvas. Sets tabindex of [data-off-canvas-content] to -1 for accessibility purposes.
    * @option
    * @example true
-   */trapFocus:false};// Window exports
-Foundation.plugin(OffCanvas,'OffCanvas');}(jQuery);
+   */trapFocus:false// Window exports
+};Foundation.plugin(OffCanvas,'OffCanvas');}(jQuery);
 'use strict';var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}!function($){/**
  * Orbit module.
  * @module foundation.orbit
@@ -1576,16 +1576,16 @@ if(cb){cb(max);}//fire callback with max height dimension.
 //***************************************
 //
 this.$element.off('.resizeme.zf.trigger').on({'resizeme.zf.trigger':this._prepareForOrbit.bind(this)});if(this.$slides.length>1){if(this.options.swipe){this.$slides.off('swipeleft.zf.orbit swiperight.zf.orbit').on('swipeleft.zf.orbit',function(e){e.preventDefault();_this.changeSlide(true);}).on('swiperight.zf.orbit',function(e){e.preventDefault();_this.changeSlide(false);});}//***************************************
-if(this.options.autoPlay){this.$slides.on('click.zf.orbit',function(){_this.$element.data('clickedOn',_this.$element.data('clickedOn')?false:true);_this.timer[_this.$element.data('clickedOn')?'pause':'start']();});if(this.options.pauseOnHover){this.$element.on('mouseenter.zf.orbit',function(){_this.timer.pause();}).on('mouseleave.zf.orbit',function(){if(!_this.$element.data('clickedOn')){_this.timer.start();}});}}if(this.options.navButtons){var $controls=this.$element.find('.'+this.options.nextClass+', .'+this.options.prevClass);$controls.attr('tabindex',0)//also need to handle enter/return and spacebar key presses
-.on('click.zf.orbit touchend.zf.orbit',function(e){e.preventDefault();_this.changeSlide($(this).hasClass(_this.options.nextClass));});}if(this.options.bullets){this.$bullets.on('click.zf.orbit touchend.zf.orbit',function(){if(/is-active/g.test(this.className)){return false;}//if this is active, kick out of function.
+if(this.options.autoPlay){this.$slides.on('click.zf.orbit',function(){_this.$element.data('clickedOn',_this.$element.data('clickedOn')?false:true);_this.timer[_this.$element.data('clickedOn')?'pause':'start']();});if(this.options.pauseOnHover){this.$element.on('mouseenter.zf.orbit',function(){_this.timer.pause();}).on('mouseleave.zf.orbit',function(){if(!_this.$element.data('clickedOn')){_this.timer.start();}});}}if(this.options.navButtons){var $controls=this.$element.find('.'+this.options.nextClass+', .'+this.options.prevClass);$controls.attr('tabindex',0//also need to handle enter/return and spacebar key presses
+).on('click.zf.orbit touchend.zf.orbit',function(e){e.preventDefault();_this.changeSlide($(this).hasClass(_this.options.nextClass));});}if(this.options.bullets){this.$bullets.on('click.zf.orbit touchend.zf.orbit',function(){if(/is-active/g.test(this.className)){return false;}//if this is active, kick out of function.
 var idx=$(this).data('slide'),ltr=idx>_this.$slides.filter('.is-active').data('slide'),$slide=_this.$slides.eq(idx);_this.changeSlide(ltr,$slide,idx);});}if(this.options.accessible){this.$wrapper.add(this.$bullets).on('keydown.zf.orbit',function(e){// handle keyboard event with keyboard util
 Foundation.Keyboard.handleKey(e,'Orbit',{next:function next(){_this.changeSlide(true);},previous:function previous(){_this.changeSlide(false);},handled:function handled(){// if bullet is focused, make sure focus moves
 if($(e.target).is(_this.$bullets)){_this.$bullets.filter('.is-active').focus();}}});});}}}/**
    * Resets Orbit so it can be reinitialized
    */},{key:'_reset',value:function _reset(){// Don't do anything if there are no slides (first run)
 if(typeof this.$slides=='undefined'){return;}if(this.$slides.length>1){// Remove old events
-this.$element.off('.zf.orbit').find('*').off('.zf.orbit');// Restart timer if autoPlay is enabled
-if(this.options.autoPlay){this.timer.restart();}// Reset all sliddes
+this.$element.off('.zf.orbit').find('*').off('.zf.orbit'// Restart timer if autoPlay is enabled
+);if(this.options.autoPlay){this.timer.restart();}// Reset all sliddes
 this.$slides.each(function(el){$(el).removeClass('is-active is-active is-in').removeAttr('aria-live').hide();});// Show the first slide
 this.$slides.first().addClass('is-active').show();// Triggers when the slide has finished animating
 this.$element.trigger('slidechange.zf.orbit',[this.$slides.first()]);// Select first bullet if bullets are present
@@ -1829,8 +1829,8 @@ this.$element.css({'visibility':'hidden'}).show().scrollTop(0);if(this.options.o
        * Closes any other modals that are currently open
        * @event Reveal#closeme
        */this.$element.trigger('closeme.zf.reveal',this.id);}var _this=this;function addRevealOpenClasses(){if(_this.isMobile){if(!_this.originalScrollPos){_this.originalScrollPos=window.pageYOffset;}$('html, body').addClass('is-reveal-open');}else{$('body').addClass('is-reveal-open');}}// Motion UI method of reveal
-if(this.options.animationIn){(function(){var afterAnimation=function afterAnimation(){_this.$element.attr({'aria-hidden':false,'tabindex':-1}).focus();addRevealOpenClasses();Foundation.Keyboard.trapFocus(_this.$element);};if(_this3.options.overlay){Foundation.Motion.animateIn(_this3.$overlay,'fade-in');}Foundation.Motion.animateIn(_this3.$element,_this3.options.animationIn,function(){if(_this3.$element){// protect against object having been removed
-_this3.focusableElements=Foundation.Keyboard.findFocusable(_this3.$element);afterAnimation();}});})();}// jQuery method of reveal
+if(this.options.animationIn){var afterAnimation=function afterAnimation(){_this.$element.attr({'aria-hidden':false,'tabindex':-1}).focus();addRevealOpenClasses();Foundation.Keyboard.trapFocus(_this.$element);};if(this.options.overlay){Foundation.Motion.animateIn(this.$overlay,'fade-in');}Foundation.Motion.animateIn(this.$element,this.options.animationIn,function(){if(_this3.$element){// protect against object having been removed
+_this3.focusableElements=Foundation.Keyboard.findFocusable(_this3.$element);afterAnimation();}});}// jQuery method of reveal
 else{if(this.options.overlay){this.$overlay.show(0);}this.$element.show(this.options.showDelay);}// handle accessibility
 this.$element.attr({'aria-hidden':false,'tabindex':-1}).focus();Foundation.Keyboard.trapFocus(this.$element);/**
      * Fires when the modal has successfully opened.
@@ -2049,8 +2049,8 @@ value=this._adjustValue(null,val);hasVal=true;}this._setHandlePos($handle,value,
    * @private
    * @param {jQuery} $handle - the current handle to apply listeners to.
    */},{key:'_eventsForHandle',value:function _eventsForHandle($handle){var _this=this,curHandle,timer;this.inputs.off('change.zf.slider').on('change.zf.slider',function(e){var idx=_this.inputs.index($(this));_this._handleEvent(e,_this.handles.eq(idx),$(this).val());});if(this.options.clickSelect){this.$element.off('click.zf.slider').on('click.zf.slider',function(e){if(_this.$element.data('dragging')){return false;}if(!$(e.target).is('[data-slider-handle]')){if(_this.options.doubleSided){_this._handleEvent(e);}else{_this._handleEvent(e,_this.$handle);}}});}if(this.options.draggable){this.handles.addTouch();var $body=$('body');$handle.off('mousedown.zf.slider').on('mousedown.zf.slider',function(e){$handle.addClass('is-dragging');_this.$fill.addClass('is-dragging');//
-_this.$element.data('dragging',true);curHandle=$(e.currentTarget);$body.on('mousemove.zf.slider',function(e){e.preventDefault();_this._handleEvent(e,curHandle);}).on('mouseup.zf.slider',function(e){_this._handleEvent(e,curHandle);$handle.removeClass('is-dragging');_this.$fill.removeClass('is-dragging');_this.$element.data('dragging',false);$body.off('mousemove.zf.slider mouseup.zf.slider');});})// prevent events triggered by touch
-.on('selectstart.zf.slider touchmove.zf.slider',function(e){e.preventDefault();});}$handle.off('keydown.zf.slider').on('keydown.zf.slider',function(e){var _$handle=$(this),idx=_this.options.doubleSided?_this.handles.index(_$handle):0,oldValue=parseFloat(_this.inputs.eq(idx).val()),newValue;// handle keyboard event with keyboard util
+_this.$element.data('dragging',true);curHandle=$(e.currentTarget);$body.on('mousemove.zf.slider',function(e){e.preventDefault();_this._handleEvent(e,curHandle);}).on('mouseup.zf.slider',function(e){_this._handleEvent(e,curHandle);$handle.removeClass('is-dragging');_this.$fill.removeClass('is-dragging');_this.$element.data('dragging',false);$body.off('mousemove.zf.slider mouseup.zf.slider');});}// prevent events triggered by touch
+).on('selectstart.zf.slider touchmove.zf.slider',function(e){e.preventDefault();});}$handle.off('keydown.zf.slider').on('keydown.zf.slider',function(e){var _$handle=$(this),idx=_this.options.doubleSided?_this.handles.index(_$handle):0,oldValue=parseFloat(_this.inputs.eq(idx).val()),newValue;// handle keyboard event with keyboard util
 Foundation.Keyboard.handleKey(e,'Slider',{decrease:function decrease(){newValue=oldValue-_this.options.step;},increase:function increase(){newValue=oldValue+_this.options.step;},decrease_fast:function decrease_fast(){newValue=oldValue-_this.options.step*10;},increase_fast:function increase_fast(){newValue=oldValue+_this.options.step*10;},handled:function handled(){// only set handle pos when event was handled specially
 e.preventDefault();_this._setHandlePos(_$handle,newValue,true);}});/*if (newValue) { // if pressed key has special function, update value
         e.preventDefault();
@@ -2181,22 +2181,22 @@ if(!_this.isStuck){_this._removeSticky(scroll>=_this.topPoint?false:true);}});_t
    * @fires Sticky#stuckto
    * @function
    * @private
-   */},{key:'_setSticky',value:function _setSticky(){var _this=this,stickTo=this.options.stickTo,mrgn=stickTo==='top'?'marginTop':'marginBottom',notStuckTo=stickTo==='top'?'bottom':'top',css={};css[mrgn]=this.options[mrgn]+'em';css[stickTo]=0;css[notStuckTo]='auto';this.isStuck=true;this.$element.removeClass('is-anchored is-at-'+notStuckTo).addClass('is-stuck is-at-'+stickTo).css(css)/**
+   */},{key:'_setSticky',value:function _setSticky(){var _this=this,stickTo=this.options.stickTo,mrgn=stickTo==='top'?'marginTop':'marginBottom',notStuckTo=stickTo==='top'?'bottom':'top',css={};css[mrgn]=this.options[mrgn]+'em';css[stickTo]=0;css[notStuckTo]='auto';this.isStuck=true;this.$element.removeClass('is-anchored is-at-'+notStuckTo).addClass('is-stuck is-at-'+stickTo).css(css/**
                   * Fires when the $element has become `position: fixed;`
                   * Namespaced to `top` or `bottom`, e.g. `sticky.zf.stuckto:top`
                   * @event Sticky#stuckto
-                  */.trigger('sticky.zf.stuckto:'+stickTo);this.$element.on("transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd",function(){_this._setSizes();});}/**
+                  */).trigger('sticky.zf.stuckto:'+stickTo);this.$element.on("transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd",function(){_this._setSizes();});}/**
    * Causes the $element to become unstuck.
    * Removes `position: fixed;`, and helper classes.
    * Adds other helper classes.
    * @param {Boolean} isTop - tells the function if the $element should anchor to the top or bottom of its $anchor element.
    * @fires Sticky#unstuckfrom
    * @private
-   */},{key:'_removeSticky',value:function _removeSticky(isTop){var stickTo=this.options.stickTo,stickToTop=stickTo==='top',css={},anchorPt=(this.points?this.points[1]-this.points[0]:this.anchorHeight)-this.elemHeight,mrgn=stickToTop?'marginTop':'marginBottom',notStuckTo=stickToTop?'bottom':'top',topOrBottom=isTop?'top':'bottom';css[mrgn]=0;css['bottom']='auto';if(isTop){css['top']=0;}else{css['top']=anchorPt;}this.isStuck=false;this.$element.removeClass('is-stuck is-at-'+stickTo).addClass('is-anchored is-at-'+topOrBottom).css(css)/**
+   */},{key:'_removeSticky',value:function _removeSticky(isTop){var stickTo=this.options.stickTo,stickToTop=stickTo==='top',css={},anchorPt=(this.points?this.points[1]-this.points[0]:this.anchorHeight)-this.elemHeight,mrgn=stickToTop?'marginTop':'marginBottom',notStuckTo=stickToTop?'bottom':'top',topOrBottom=isTop?'top':'bottom';css[mrgn]=0;css['bottom']='auto';if(isTop){css['top']=0;}else{css['top']=anchorPt;}this.isStuck=false;this.$element.removeClass('is-stuck is-at-'+stickTo).addClass('is-anchored is-at-'+topOrBottom).css(css/**
                   * Fires when the $element has become anchored.
                   * Namespaced to `top` or `bottom`, e.g. `sticky.zf.unstuckfrom:bottom`
                   * @event Sticky#unstuckfrom
-                  */.trigger('sticky.zf.unstuckfrom:'+topOrBottom);}/**
+                  */).trigger('sticky.zf.unstuckfrom:'+topOrBottom);}/**
    * Sets the $element and $container sizes for plugin.
    * Calls `_setBreakPoints`.
    * @param {Function} cb - optional callback function to fire on completion of `_setBreakPoints`.
