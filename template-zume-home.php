@@ -169,9 +169,9 @@ Template Name: Full Width Home
                                             <h4 class="zume-slider-name" style="text-transform: uppercase">Zach Duke — Indiana</h4>
                                         </div>
                                     </li>
-                                    <li class="is-active orbit-slide">
+                                    <li class="orbit-slide">
                                         <div>
-                                            <h4 class="text-center "><strong>The potential for ZÚME to catalyze a movement of multiplying disciple-makers is unprecedented in our lifetime.</strong></h4>
+                                            <h4 class="text-center zume-slider-text"><strong>The potential for ZÚME to catalyze a movement of multiplying disciple-makers is unprecedented in our lifetime.</strong></h4>
                                             <h4 class="zume-slider-name" style="text-transform: uppercase">Forrest Head - Georgia</h4>
                                         </div>
 
@@ -192,7 +192,6 @@ Template Name: Full Width Home
                                     <button data-slide="4"><span class="show-for-sr">Fifth slide details.</span></button>
                                     <button data-slide="5"><span class="show-for-sr">Sixth slide details.</span></button>
                                     <button data-slide="6"><span class="show-for-sr">Seventh slide details.</span></button>
-                                    <button data-slide="7"><span class="show-for-sr">Eigth slide details.</span></button>
                                 </nav>
                             </div>
                         </div>

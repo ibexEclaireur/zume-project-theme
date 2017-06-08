@@ -4893,7 +4893,8 @@ ul.orbit-container {
   width: 90%;
   font-weight: 700;
   font-size: 1.2rem;
-  color: white; }
+  color: white;
+  margin: 0 auto; }
 
 /**************************************/
 /**************************************/
