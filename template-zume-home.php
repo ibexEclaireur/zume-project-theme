@@ -31,6 +31,7 @@ Template Name: Full Width Home
 
                     .laptop__screen {
                         /* background-color: #22336B; */
+                        background-color: black;
                         position: absolute;
                         <?php /* These values match the laptop screen bezel in the image of the parent */ ?>
                         top: <?php echo (56 * 100 / 606) ?>%;
@@ -63,7 +64,7 @@ Template Name: Full Width Home
                             height="360"
                             frameborder="0"
                             allowfullscreen
-                            src="https://www.youtube-nocookie.com/embed/qIs-PiCowlw?rel=0&amp;showinfo=0"
+                            src="https://www.youtube-nocookie.com/embed/EOdSAdJ6AhI?rel=0&amp;showinfo=0"
 
                             ></iframe>
                     </div></div></div>
