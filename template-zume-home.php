@@ -202,6 +202,14 @@ Template Name: Full Width Home
 
                 </div>
 
+                <div class="row ">
+                    <div class="small-8 medium-3 small-centered columns center vertical-padding">
+                        <br>
+                        <a href="/about" class="button large center " style="text-transform: uppercase">Find out more about Zúme</a>
+                        <br>
+                    </div>
+                </div>
+
             </main> <!-- end #main -->
 
         </div> <!-- end #inner-content -->
