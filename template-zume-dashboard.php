@@ -30,47 +30,6 @@ get_header();
 
                         <!-- First Row -->
                         <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
-                            <div class="medium-4 columns">
-                                <div class="callout" data-equalizer-watch>
-                                    <h2 class="center">Start a Group</h2>
-                                    <p class="center " style="height:175px;">
-                                        <a href="/groups/create/step/group-details/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/training.jpg"  /></a><br><br>
-                                    </p>
-                                    <p class="center"><a href="/groups/create/step/group-details/" class="button">New Group</a></p>
-
-                                </div>
-                            </div>
-                            <div class="medium-4 columns">
-                                <div class="callout" data-equalizer-watch>
-                                    <a href="<?php echo $zume_get_userLink . '/invite-anyone/'; ?>">
-                                    <h2 class="center">Connect</h2>
-                                    <p class="center" style="height:175px;">
-                                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/invite.jpg"  class="center" /><br>
-                                    </p>
-                                    <p class="center" >
-                                        <a href="<?php echo $zume_get_userLink . '/invite-anyone/';?>" class="button">Send Invites</a>
-                                    </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="medium-4 columns">
-                                <div class="callout" data-equalizer-watch>
-                                    <a href="<?php echo $zume_get_userLink; ?>">
-                                    <h2 class="center">Profile</h2>
-                                        <p class="center" style="height:175px;">
-                                            <?php echo bp_core_fetch_avatar( array( 'item_id' => $zume_current_user, 'type' => 'full', 'css_id' => 'dashboard-avatar' ) ); ?>
-                                        </p>
-                                    <p class="center" >
-                                       <a href="<?php echo bp_core_get_userlink($zume_current_user, false, true) ; ?>" class="button">View Profile</a>
-                                    </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!--Second Row-->
-                        <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
                             <div class="medium-12 columns">
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Your Groups</h2>
@@ -118,8 +77,6 @@ get_header();
                                                             <div class="button-group">
                                                                 <a href="<?php echo $zume_get_userLink . 'invite-anyone/invite-new-members/group-invites/' . bp_get_group_id(); ?>" class=" button  ">Invite</a>
                                                                 <span class="hide-for-medium"><br></span>
-                                                                <a href="<?php bp_group_permalink() ?>" class=" button  ">View Group</a>
-                                                                <span class="hide-for-medium"><br></span>
                                                                 <a href="/zume-training/?id=<?php echo zume_group_next_session(bp_get_group_id()) ?>&group_id=<?php echo bp_group_id() ?>" class="button   ">Next Session</a>
                                                             </div>
                                                         </div>
@@ -139,15 +96,19 @@ get_header();
                                         </div>
 
                                     <?php endif; ?>
+
+                                    <p class="center">
+                                        <a href="/groups/create/" class="button">Start New Group</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Third Row -->
+                        <!-- Second Row -->
                         <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
                             <div class="medium-8 columns">
                                 <div class="callout" data-equalizer-watch>
-                                    <h2 class="center">Your Coaches</h2>
+                                    <h2 class="center">Your Coach</h2>
 
                                     <?php if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) : ?>
 
@@ -155,7 +116,10 @@ get_header();
 
                                             <?php while ( bp_groups() ) : bp_the_group(); ?>
 
-                                                <?php foreach (bp_group_mod_ids(false, 'array') as $mod) : ?>
+                                                <?php
+                                                $mod_ids = bp_group_mod_ids(false, 'array');
+                                                foreach ($mod_ids as $mod) :
+                                                ?>
 
                                                     <li>
                                                         <div class="item-avatar">
@@ -186,6 +150,12 @@ get_header();
 
                                                 <?php endforeach; // Coach Loop ?>
 
+                                                <?php if (empty($mod_ids)): ?>
+                                                    <div id="message" class="info">
+                                                        <p><?php _e("You have not yet been assigned a coach.", "buddypress") ?></p>
+                                                    </div>
+                                                <?php endif; ?>
+
                                             <?php endwhile; // Group loop ?>
                                         </ul>
 
@@ -194,7 +164,7 @@ get_header();
                                     <?php else: ?>
 
                                         <div id="message" class="info">
-                                            <p><?php _e( 'You have no coaches assigned.', 'buddypress' ) ?></p>
+                                            <p><?php _e( 'You are not in any groups.', 'buddypress' ) ?></p>
                                         </div>
 
                                     <?php endif; ?>
@@ -204,19 +174,19 @@ get_header();
 
                                 </div>
                             </div>
-                            <!--<div class="medium-4 columns">
-                                <div class="callout" data-equalizer-watch>
-                                    <p class="center">Zúme</p>
-                                    <br><br><br><br>
-                                </div>
-                            </div>-->
                             <div class="medium-4 columns">
                                 <div class="callout" data-equalizer-watch>
-                                    <h2 class="center">Resources</h2>
+                                    <h2 class="center">Messages</h2>
 
-                                    <ul>
-                                        <li><a href="">Zume Handbook</a></li>
-                                    </ul>
+                                    <p class="center">
+                                        <a href="<?php echo bp_core_get_userlink($zume_current_user, false, true) ; ?>/messages/" class="button">View Messages</a>
+                                    </p>
+                                    <p class="center text-gray text-small">
+                                        <?php
+                                        $unread_messages_count = bp_get_total_unread_messages_count();
+                                        echo sprintf(_n("You have %s unread message.", "You have %s unread messages.", $unread_messages_count), $unread_messages_count);
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
