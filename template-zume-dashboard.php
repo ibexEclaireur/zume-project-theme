@@ -34,9 +34,9 @@ get_header();
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Start a Group</h2>
                                     <p class="center " style="height:175px;">
-                                        <a href="/groups/create/step/group-details/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/training.jpg"  /></a><br><br>
+                                        <a href="/groups/create/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/training.jpg"  /></a><br><br>
                                     </p>
-                                    <p class="center"><a href="/groups/create/step/group-details/" class="button">New Group</a></p>
+                                    <p class="center"><a href="/groups/create/" class="button">New Group</a></p>
 
                                 </div>
                             </div>
