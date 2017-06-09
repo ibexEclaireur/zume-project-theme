@@ -98,8 +98,7 @@ get_header();
                                     <?php endif; ?>
 
                                     <p class="center">
-                                        <a href="/groups/create/step/group-details/" class="button">Start New Group</a>
-                                        <a href="/groups/" class="button">Join Group</a>
+                                        <a href="/groups/create/" class="button">Start New Group</a>
                                     </p>
                                 </div>
                             </div>
