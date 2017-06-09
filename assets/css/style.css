@@ -4718,173 +4718,50 @@ BUDDYPRESS STYLES
 JQUERY STEPS WIZARD
 *********************/
 /* Jquery Steps Wizard css */
-.wizard, .tabcontrol {
-  display: block;
-  width: 100%;
-  overflow: hidden; }
-
-.wizard a, .tabcontrol a {
-  outline: 0; }
-
-.wizard ul, .tabcontrol ul {
-  list-style: none !important;
-  padding: 0;
-  margin: 0; }
-
-.wizard ul > li, .tabcontrol ul > li {
-  display: block;
-  padding: 0; }
-
-.wizard > .steps .current-info, .tabcontrol > .steps .current-info {
-  position: absolute;
-  left: -999em; }
-
-.wizard > .content > .title, .tabcontrol > .content > .title {
-  position: absolute;
-  left: -999em; }
-
 .wizard > .steps {
-  position: relative;
-  display: block;
-  width: 100%; }
-
-.wizard.vertical > .steps {
-  display: inline;
-  float: left;
-  width: 30%; }
-
-.wizard > .steps .number {
-  font-size: 1.429em;
-  color: #323A68; }
-
-.wizard > .steps > ul > li {
-  /*width: 25%;*/
-  /*width: 20%;*/
-  width: 10%;
   text-align: center; }
-
-.wizard > .steps > ul > li, .wizard > .actions > ul > li {
-  float: left; }
-
-.wizard.vertical > .steps > ul > li {
-  float: none;
-  width: 100%; }
-
-.wizard > .steps a, .wizard > .steps a:hover, .wizard > .steps a:active {
-  display: block;
-  width: auto;
-  padding: 1em 1em;
-  text-decoration: none;
-  border-radius: 0px; }
-
-.wizard > .steps .disabled a, .wizard > .steps .disabled a:hover, .wizard > .steps .disabled a:active {
-  background: #fefefe;
-  color: #323A68;
-  border: #323A68 solid 1px;
-  cursor: default; }
-
-.wizard > .steps .current a, .wizard > .steps .current a:hover, .wizard > .steps .current a:active {
-  background: #00aeff;
-  color: #fefefe;
-  cursor: default; }
-
-.wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
-  background: #323A68;
-  color: #fefefe; }
-
-.wizard > .steps .error a, .wizard > .steps .error a:hover, .wizard > .steps .error a:active {
-  background: #7CA821;
-  color: #fefefe; }
-
-.wizard > .content {
-  /*background: #eee;*/
-  display: block;
-  margin: .5em;
-  /*min-height: 35em;*/
-  overflow: hidden;
-  position: relative;
-  width: auto;
-  border-radius: 0px; }
-
-.wizard.vertical > .content {
-  display: inline;
-  float: left;
-  margin: 0 2.5% .5em 2.5%;
-  width: 65%; }
-
-.wizard > .content > .body {
-  float: left;
-  /*position: absolute;*/
-  width: 100%;
-  height: 95%;
-  padding: 2.5%; }
-
-.wizard > .content > .body ul {
-  list-style: disc !important; }
-
-.wizard > .content > .body ul > li {
-  display: list-item; }
-
-.wizard > .content > .body > iframe {
-  border: 0 none;
-  width: 100%;
-  height: 100%; }
-
-.wizard > .content > .body input {
-  display: block;
-  border: 1px solid #ccc; }
-
-.wizard > .content > .body input[type="checkbox"] {
-  display: inline-block; }
-
-.wizard > .content > .body input.error {
-  background: #fbe3e4;
-  border: 1px solid #fbc2c4;
-  color: #8a1f11; }
-
-.wizard > .content > .body label {
-  display: inline-block;
-  margin-bottom: .5em; }
-
-.wizard > .content > .body label.error {
-  color: #8a1f11;
-  display: inline-block;
-  margin-left: 1.5em; }
-
-.wizard > .actions {
-  position: relative;
-  display: block;
-  text-align: center;
-  width: 100%; }
-
-.wizard.vertical > .actions {
-  display: inline;
-  float: right;
-  margin: 0 2.5%;
-  width: 95%; }
-
-.wizard > .actions > ul {
-  display: inline-block;
-  text-align: right; }
-
-.wizard > .actions > ul > li {
-  margin: 0 .5em; }
-
-.wizard.vertical > .actions > ul > li {
-  margin: 0 0 0 1em; }
-
-.wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions a:active {
-  background: #00aeff;
-  color: #fefefe;
-  display: block;
-  padding: 1em 5em;
-  text-decoration: none;
-  border-radius: 0px; }
-
-.wizard > .actions .disabled a, .wizard > .actions .disabled a:hover,
-.wizard > .actions .disabled a:active {
-  background: #eee;
-  color: #aaa; }
+  .wizard > .steps li {
+    display: inline-block;
+    border: 2px solid #CCCCCC;
+    color: #CCCCCC;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: 0 15px;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-size: 1.8rem;
+    position: relative; }
+  .wizard > .steps li:not(:last-child):after {
+    content: "";
+    position: absolute;
+    border: 1px #CCC solid;
+    left: 48px;
+    top: 25px;
+    width: 16px; }
+  .wizard > .steps li:not(:first-child):before {
+    content: "";
+    position: absolute;
+    border: 1px #CCC solid;
+    left: -16px;
+    width: 16px;
+    top: 25px; }
+  .wizard > .steps li.current:not(:last-child):after,
+  .wizard > .steps li.current:not(:first-child):before,
+  .wizard > .steps .current {
+    border-color: #00AEFF; }
+  .wizard > .steps li:hover:not(.disabled),
+  .wizard > .steps li:hover:not(.disabled):not(:last-child):after,
+  .wizard > .steps li:hover:not(.disabled):not(:first-child):before {
+    border-color: #008bcc; }
+  .wizard > .steps .current-info.audible {
+    display: none; }
+  .wizard > .steps .number {
+    color: #CCCCCC; }
 
 ul.orbit-container {
   padding-right: 1rem;
