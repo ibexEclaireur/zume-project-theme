@@ -4662,6 +4662,17 @@ COMMENT FORM STYLES
 .nocomments {
   margin: 0 20px 1.1em; }
 
+.overview-image-bar {
+  display: -ms-flexbox;
+  display: flex; }
+
+@media only screen and (max-width: 900px) {
+  .overview-image-bar {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center; } }
+
 /*********************
 SIDEBARS & ASIDES
 *********************/

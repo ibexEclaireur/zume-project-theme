@@ -552,6 +552,19 @@ COMMENT FORM STYLES
 	margin: 0 20px 1.1em;
 }
 
+// Overview image bar at the top
+
+.overview-image-bar {
+    display: flex;
+}
+
+@media only screen and (max-width: 900px) {
+    .overview-image-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
 /*********************
 SIDEBARS & ASIDES
 *********************/
