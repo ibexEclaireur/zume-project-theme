@@ -30,7 +30,6 @@ gulp.task('styles', function() {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(gulp.dest('./assets/css/'))
         .pipe(rename({suffix: '.min'}))
         .pipe(cssnano())
         .pipe(sourcemaps.write('.')) // Creates sourcemaps for minified styles
