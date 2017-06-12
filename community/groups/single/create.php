@@ -72,14 +72,14 @@ if ( bp_is_active( 'groups' ) ) :
       $this->settings_screen($group_id);
     }
 
-    function invite_message($group){
+    function invite_message($group, $sign_up_url, $know_more_url){
 		  $message = "Hey,
 
         I just signed up for a 9-week online training course, called Zúme Training. It teaches ordinary men and women, like ourselves, how to make disciples who make more disciples. In order to start the training, I need at least 3 other people to gather in-person with me each week.
 
-        You can check out the course at https://zumeproject.com.
+        You can check out the course at " . $know_more_url . "
 
-        To accept the invitation to join my Zúme Training group \"" .  $group->name . "\", click on this link: " . esc_url("https://zumeproject.com/register") ."
+        To accept the invitation to join my Zúme Training group \"" .  $group->name . "\", click on this link: " . $sign_up_url ."
 
         After you click on the link, it will ask you to create an account. Then you will be joined to our group. When we have at least four people ready to gather together, we can begin going through Zúme Training.
 
@@ -105,10 +105,8 @@ if ( bp_is_active( 'groups' ) ) :
 
 
         $group = groups_get_group($group_id);
-
         $token = groups_get_groupmeta($group_id, "group_token");
-        update_option("group_token_test", $token);
-
+		    $know_more_url = get_site_url() . "/?group-id=".$group_id ."&zgt=" . $token;
         $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token
 
         ?>
@@ -126,7 +124,7 @@ if ( bp_is_active( 'groups' ) ) :
             <p>
 
             <pre style="white-space: pre-line;">
-              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group) ) ) ?>
+              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group, $sign_up_url, $know_more_url) ) ) ?>
             </pre>
 
             </p>
@@ -153,20 +151,10 @@ if ( bp_is_active( 'groups' ) ) :
 	    global $bp;
 	    if ($group_id > 0){
 
-		    $returned_data = !empty( $bp->invite_anyone->returned_data ) ? $bp->invite_anyone->returned_data : false;
-		    $returned_groups = array( 0 );
-		    if ( ! empty( $returned_data['groups'] ) ) {
-			    foreach( $returned_data['groups'] as $group_id ) {
-				    $returned_groups[] = $group_id;
-			    }
-		    }
-		    $returned_message = ! empty( $returned_data['message'] ) ? stripslashes( $returned_data['message'] ) : false;
 	      $group = groups_get_group($group_id);
-
 		    $token = groups_get_groupmeta($group_id, "group_token");
-		    update_option("group_token_test", $token);
-
-		    $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token
+		    $know_more_url = get_site_url() . "/?group-id=".$group_id ."&zgt=" . $token;
+		    $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token;
 
 		    ?>
           <h3>Invite 3-11 friends, you have to have 4 people present to start the Zume Sessions.</h3>
@@ -181,7 +169,7 @@ if ( bp_is_active( 'groups' ) ) :
               <p>
 
               <pre style="white-space: pre-line;">
-              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group) ) ) ?>
+              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group, $sign_up_url, $know_more_url) ) ) ?>
             </pre>
 
               </p>
