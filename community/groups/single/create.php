@@ -54,7 +54,7 @@ if ( bp_is_active( 'groups' ) ) :
 		function __construct() {
 			$args = array(
 				'slug' => 'group_invite_by_url',
-				'name' => 'Invite By URL',
+				'name' => 'Send Invite',
         "visibility" => "private",
         "show_tab"=> 'members',
         "access" => "members",
@@ -72,6 +72,24 @@ if ( bp_is_active( 'groups' ) ) :
       $this->settings_screen($group_id);
     }
 
+    function invite_message($group){
+		  $message = "Hey,
+
+        I just signed up for a 9-week online training course, called Zúme Training. It teaches ordinary men and women, like ourselves, how to make disciples who make more disciples. In order to start the training, I need at least 3 other people to gather in-person with me each week.
+
+        You can check out the course at https://zumeproject.com.
+
+        To accept the invitation to join my Zúme Training group \"" .  $group->name . "\", click on this link: " . esc_url("https://zumeproject.com/register") ."
+
+        After you click on the link, it will ask you to create an account. Then you will be joined to our group. When we have at least four people ready to gather together, we can begin going through Zúme Training.
+
+        Let's learn how God can use people like us to change the world together,
+
+        [Insert your name here]";
+
+		  return $message;
+    }
+
 
 		function create_screen_save($group_id = NULL){
 			if (isset($_POST["redirect_invite"]) && $_POST["redirect_invite"] == "yes"){
@@ -85,16 +103,8 @@ if ( bp_is_active( 'groups' ) ) :
 			global $bp;
 			if ($group_id > 0){
 
-		  $returned_data = !empty( $bp->invite_anyone->returned_data ) ? $bp->invite_anyone->returned_data : false;
-			  $returned_groups = array( 0 );
-        if ( ! empty( $returned_data['groups'] ) ) {
-          foreach( $returned_data['groups'] as $group_id ) {
-            $returned_groups[] = $group_id;
-          }
-        }
-        $returned_message = ! empty( $returned_data['message'] ) ? stripslashes( $returned_data['message'] ) : false;
 
-
+        $group = groups_get_group($group_id);
 
         $token = groups_get_groupmeta($group_id, "group_token");
         update_option("group_token_test", $token);
@@ -116,7 +126,7 @@ if ( bp_is_active( 'groups' ) ) :
             <p>
 
             <pre style="white-space: pre-line;">
-              <?php echo esc_textarea( invite_anyone_invitation_message( $returned_message ) ) ?>
+              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group) ) ) ?>
             </pre>
 
             </p>
@@ -151,8 +161,7 @@ if ( bp_is_active( 'groups' ) ) :
 			    }
 		    }
 		    $returned_message = ! empty( $returned_data['message'] ) ? stripslashes( $returned_data['message'] ) : false;
-
-
+	      $group = groups_get_group($group_id);
 
 		    $token = groups_get_groupmeta($group_id, "group_token");
 		    update_option("group_token_test", $token);
@@ -172,7 +181,7 @@ if ( bp_is_active( 'groups' ) ) :
               <p>
 
               <pre style="white-space: pre-line;">
-              <?php echo esc_textarea( invite_anyone_invitation_message( $returned_message ) ) ?>
+              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group) ) ) ?>
             </pre>
 
               </p>
