@@ -108,69 +108,75 @@ get_header();
                         <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
                             <div class="medium-8 columns">
                                 <div class="callout" data-equalizer-watch>
-                                    <h2 class="center">Your Coach</h2>
 
-                                    <?php if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) : ?>
+                                    <?php
+                                    if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) :
+
+                                        $mod_ids = [];
+                                        while ( bp_groups() ) {
+                                            bp_the_group();
+                                            $mod_ids = array_unique(array_merge(
+                                                $mod_ids,
+                                                bp_group_mod_ids(false, 'array')
+                                            ));
+                                        }
+                                        ?>
+
+                                        <h2 class="center"><?php echo _n("Your Coach", "Your Coaches", count($mod_ids)) ?></h2>
 
                                         <ul id="groups-list" class="item-list">
+                                        <?php
+                                        foreach ($mod_ids as $mod) :
+                                        ?>
 
-                                            <?php while ( bp_groups() ) : bp_the_group(); ?>
+                                            <li>
+                                                <div class="item-avatar">
+                                                    <a href="<?php echo bp_core_get_userlink($mod, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $mod) ) ?></a>
+                                                </div>
 
-                                                <?php
-                                                $mod_ids = bp_group_mod_ids(false, 'array');
-                                                foreach ($mod_ids as $mod) :
-                                                ?>
+                                                <div class="item">
+                                                    <div class="item-title"><?php  echo bp_core_get_userlink($mod); ?></div>
+                                                    <div class="item-meta"><span class="activity"><?php echo bp_core_get_last_activity( bp_get_user_last_activity( $mod ), __( 'active %s', 'buddypress' ) )  ?></span></div>
 
-                                                    <li>
-                                                        <div class="item-avatar">
-                                                            <a href="<?php echo bp_core_get_userlink($mod, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $mod) ) ?></a>
-                                                        </div>
+                                                    <div class="item-desc"><?php  ?> </div>
 
-                                                        <div class="item">
-                                                            <div class="item-title"><?php  echo bp_core_get_userlink($mod); ?></div>
-                                                            <div class="item-meta"><span class="activity"><?php echo bp_core_get_last_activity( bp_get_user_last_activity( $mod ), __( 'active %s', 'buddypress' ) )  ?></span></div>
+                                                    <?php do_action( 'bp_directory_groups_item' ) ?>
+                                                </div>
 
-                                                            <div class="item-desc"><?php  ?> </div>
+                                                <div class="action">
+                                                    <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $mod ) ); ?>" class="btn button">Private Message</a>
 
-                                                            <?php do_action( 'bp_directory_groups_item' ) ?>
-                                                        </div>
+                                                    <div class="meta">
 
-                                                        <div class="action">
-                                                            <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $mod ) ); ?>" class="btn button">Private Message</a>
-
-                                                            <div class="meta">
-
-                                                            </div>
+                                                    </div>
 
 <!--                                                            --><?php //do_action( 'zume_directory_members_item' ) ?>
-                                                        </div>
+                                                </div>
 
-                                                        <div class="clear"></div>
-                                                    </li>
+                                                <div class="clear"></div>
+                                            </li>
 
-                                                <?php endforeach; // Coach Loop ?>
+                                        <?php endforeach; // Coach Loop ?>
 
-                                                <?php if (empty($mod_ids)): ?>
-                                                    <div id="message" class="info">
-                                                        <p><?php _e("You have not yet been assigned a coach.", "buddypress") ?></p>
-                                                    </div>
-                                                <?php endif; ?>
-
-                                            <?php endwhile; // Group loop ?>
                                         </ul>
 
                                         <?php do_action( 'bp_after_groups_loop' ) ?>
 
+                                        <?php if (empty($mod_ids)): ?>
+                                            <div id="message" class="info">
+                                                <p><?php _e("You have not yet been assigned any coaches.", "buddypress") ?></p>
+                                            </div>
+                                        <?php endif; ?>
+
+
                                     <?php else: ?>
 
+                                        <h2 class="center">Your Coach</h2>
                                         <div id="message" class="info">
                                             <p><?php _e( 'You are not in any groups.', 'buddypress' ) ?></p>
                                         </div>
 
                                     <?php endif; ?>
-
-
-
 
                                 </div>
                             </div>
