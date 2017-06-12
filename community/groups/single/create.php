@@ -56,8 +56,8 @@ if ( bp_is_active( 'groups' ) ) :
 				'slug' => 'group_invite_by_url',
 				'name' => 'Invite By URL',
         "visibility" => "private",
-        "show_tab"=> 'admin',
-        "access" => "admin",
+        "show_tab"=> 'members',
+        "access" => "members",
 
 
 			);
