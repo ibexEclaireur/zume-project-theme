@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Zume Training
+Template Name: Zúme Training
 */
 
 get_header();
@@ -25,7 +25,7 @@ get_header();
 
 							<?php
                             /**
-                             * Zume Course Content Loader
+                             * Zúme Course Content Loader
                              *
                              * @param 'id' in the url the id and session number is used to call the correct session.
                              */

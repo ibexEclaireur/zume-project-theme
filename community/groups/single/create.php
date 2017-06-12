@@ -104,7 +104,7 @@ if ( bp_is_active( 'groups' ) ) :
         ?>
 
         <h2>To Invite people you have 3 options</h2>
-        <p>Invite 3-11 friends, you have to have 4 people present to start the Zume Sessions.</p>
+        <p>Invite 3-11 friends, you have to have 4 people present to start the Zúme Sessions.</p>
         <ul>
           <li>
             <p><strong>Send this invite link to your group</strong></p>
@@ -122,10 +122,10 @@ if ( bp_is_active( 'groups' ) ) :
             </p>
           </li>
           <li>
-            <p><strong>Have the email come from Zume:</strong></p>
+            <p><strong>Have the email come from Zúme:</strong></p>
             <p>
               <input type="checkbox" name="redirect_invite" id="redirect_invite" value="yes"  />
-                Check this box if you would like the invite email to come from Zume.
+                Check this box if you would like the invite email to come from Zúme.
               You will be redirected after you click finish.
             </p>
           </li>
@@ -160,7 +160,7 @@ if ( bp_is_active( 'groups' ) ) :
 		    $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token
 
 		    ?>
-          <h3>Invite 3-11 friends, you have to have 4 people present to start the Zume Sessions.</h3>
+          <h3>Invite 3-11 friends, you have to have 4 people present to start the Zúme Sessions.</h3>
           <ul>
             <li>
               <p><strong>Send this invite link to your group</strong></p>
@@ -178,9 +178,9 @@ if ( bp_is_active( 'groups' ) ) :
               </p>
             </li>
             <li>
-              <p><strong>Have the email come from Zume:</strong></p>
+              <p><strong>Have the email come from Zúme:</strong></p>
               <p>
-                Click <a href="<?php echo $this->get_invite_anyone_email_link($group_id)?>">here</a> if you would like the invite email to come from Zume.
+                Click <a href="<?php echo $this->get_invite_anyone_email_link($group_id)?>">here</a> if you would like the invite email to come from Zúme.
                 You will be redirected after you click finish.
               </p>
             </li>

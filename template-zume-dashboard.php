@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Zume Dashboard
+Template Name: Zúme Dashboard
 */
 
 $zume_dashboard = Zume_Dashboard::instance();
