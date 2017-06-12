@@ -556,12 +556,12 @@ COMMENT FORM STYLES
 
 .overview-image-bar {
     display: flex;
-}
-
-@media only screen and (max-width: 900px) {
-    .overview-image-bar {
+    @media only screen and (max-width: 900px) {
         flex-wrap: wrap;
         justify-content: center;
+    }
+    @media only screen and (max-width: 600px) {
+        display: none;
     }
 }
 
