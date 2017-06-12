@@ -669,6 +669,17 @@ BUDDYPRESS STYLES
 }
 
 
+/********************
+Overview pages
+********************/
+.overview {
+    table tbody tr:nth-child(2n) {
+        background-color: transparent;
+    }
+    table tr td:first-child {
+        width: 70px;
+    }
+}
 
 
 /*********************
@@ -681,35 +692,56 @@ JQUERY STEPS WIZARD
 .wizard > .steps {
     text-align: center;
 
+    $step-width: 70px;
+    $step-margin: 21px;
+    $mobile-step-width: 30px;
+    $mobile-step-margin: 10px;
+
     li {
         display: inline-block;
         border: 2px solid #CCCCCC;
         color: #CCCCCC;
-        width: 50px;
-        height: 50px;
+        width: $step-width;
+        height: $step-width;
+        margin: 0 $step-margin;
         text-align: center;
-        margin: 0 15px;
         display: inline-flex;
         justify-content: center;
         flex-direction: column;
         font-size: 1.8rem;
         position: relative;
+        @media only screen and (max-width: 500px) {
+            width: $mobile-step-width;
+            height: $mobile-step-width;
+            margin: 5px $mobile-step-margin;
+            font-size: 1.2rem;
+        }
     }
     li:not(:last-child):after {
         content: "";
         position: absolute;
         border: 1px #CCC solid;
-        left: 48px;
-        top: 25px;
-        width: 16px;
+        left: $step-width - 2px;
+        top: $step-width / 2;
+        width: $step-margin + 1px;
+        @media only screen and (max-width: 500px) {
+            left: $mobile-step-width - 2px;
+            top: $mobile-step-width / 2;
+            width: $mobile-step-margin + 1px;
+        }
     }
     li:not(:first-child):before {
         content: "";
         position: absolute;
         border: 1px #CCC solid;
-        left: -16px;
-        width: 16px;
-        top: 25px;
+        left: -$step-margin - 1px;
+        width: $step-margin + 1px;
+        top: $step-width / 2;
+        @media only screen and (max-width: 500px) {
+            left: -$mobile-step-margin - 1px;
+            width: $mobile-step-margin + 1px;
+            top: $mobile-step-width / 2;
+        }
     }
     li.current:not(:last-child):after,
     li.current:not(:first-child):before,
