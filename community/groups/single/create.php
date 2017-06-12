@@ -14,7 +14,30 @@ function bp_remove_group_step_settings($array) {
 }
 add_filter ('groups_create_group_steps', 'bp_remove_group_step_settings', 10, 1);
 
+function bpex_remove_group_tabs() {
 
+/**
+ * @since 2.6.0 Introduced the $component parameter.
+ *
+ * @param string $slug      The slug of the primary navigation item.
+ * @param string $component The component the navigation is attached to. Defaults to 'members'.
+ * @return bool Returns false on failure, True on success.
+ */
+
+	if ( ! bp_is_group() ) {
+		return;
+	}
+
+	$slug = bp_get_current_group_slug();
+        // all existing default group tabs are listed here. Uncomment or remove.
+//		bp_core_remove_subnav_item( $slug, 'members' );
+//		bp_core_remove_subnav_item( $slug, 'send-invites' );
+		bp_core_remove_subnav_item( $slug, 'invite-anyone' );
+//		bp_core_remove_subnav_item( $slug, 'admin' );
+//		bp_core_remove_subnav_item( $slug, 'forum' );
+
+}
+add_action( 'bp_actions', 'bpex_remove_group_tabs' );
 
 if ( !defined( 'BP_INVITE_ANYONE_SLUG' ) )
 	define( 'BP_INVITE_ANYONE_SLUG', 'invite-anyone' );
@@ -33,8 +56,8 @@ if ( bp_is_active( 'groups' ) ) :
 				'slug' => 'group_invite_by_url',
 				'name' => 'Invite By URL',
         "visibility" => "private",
-        "show_tab"=> 'admin',
-        "access" => "admin",
+        "show_tab"=> 'members',
+        "access" => "members",
 
 
 			);
