@@ -42,7 +42,7 @@ add_action( 'bp_actions', 'bpex_remove_group_tabs' );
 if ( !defined( 'BP_INVITE_ANYONE_SLUG' ) )
 	define( 'BP_INVITE_ANYONE_SLUG', 'invite-anyone' );
 
-if ( bp_is_active( 'groups' ) ) :
+if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
 
 	class Invite_By_URL extends BP_Group_Extension {
