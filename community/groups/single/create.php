@@ -119,7 +119,7 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
       <pre><a href="<?php echo $sign_up_url?>"><?php echo $sign_up_url?></a></pre>
 
       <h3 class="group-invite-header"><strong>Option 2: </strong></h3>
-      <span class="group-invite-header-side-text">Use our email template:</span>
+      <span class="group-invite-header-side-text">Use our email template.</span>
         <div style="padding:10px; background-color:#eee; border:1px solid #cecece">
         <?php echo $this->invite_message($group, $sign_up_url, $know_more_url) ?>
         </div>
@@ -139,7 +139,7 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
         $this->invite_options($sign_up_url, $group, $know_more_url );
         ?>
-        <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme:</span>
+        <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme.</span>
         <p>
           <input id="redirect_invite" class="checkbox-custom" name="redirect_invite" value="yes" type="checkbox">
           <label for="redirect_invite" class="checkbox-custom-label">
@@ -168,7 +168,7 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
 		    $this->invite_options($sign_up_url, $group, $know_more_url )
 		    ?>
-        <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme:</span>
+        <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme.</span>
         <p>
           Click <strong><a style="font-size: 14pt ;" href="<?php echo bp_get_group_permalink($group) . "group_invite_by_email/"?>">here</a></strong> if you would like the invitation email to come from Zúme.
           You can add your friend's email addresses on the next page.
