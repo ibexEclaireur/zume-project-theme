@@ -54,7 +54,7 @@ if ( bp_is_active( 'groups' ) ) :
 		function __construct() {
 			$args = array(
 				'slug' => 'group_invite_by_url',
-				'name' => 'Send Invite',
+				'name' => 'Invite your friends',
         "visibility" => "private",
         "show_tab"=> 'members',
         "access" => "members",
@@ -99,6 +99,27 @@ if ( bp_is_active( 'groups' ) ) :
       		}
 		}
 
+
+		function invite_options($sign_up_url, $group, $know_more_url){
+    ?>
+      <h2 style="margin-top:15px">To Invite people you have 3 options</h2>
+      <p>Invite 3-11 friends, Zúme requires at least 4 people to  present to start each session.</p>
+
+      <h3 class="group-invite-header"><strong>Option 1: </strong></h3>
+      <span class="group-invite-header-side-text">
+        Write your own message. Simply include this link and send it by email or any method you wish.
+      </span>
+      <pre><a href="<?php echo $sign_up_url?>"><?php echo $sign_up_url?></a></pre>
+
+      <h3 class="group-invite-header"><strong>Option 2: </strong></h3>
+      <span class="group-invite-header-side-text">Copy and send this email template:</span>
+      <pre style="white-space: pre-line;">
+        <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group, $sign_up_url, $know_more_url) ) ) ?>
+      </pre>
+
+    <?php
+    }
+
 		function create_screen($group_id = NULL){
 			global $bp;
 			if ($group_id > 0){
@@ -107,37 +128,18 @@ if ( bp_is_active( 'groups' ) ) :
         $group = groups_get_group($group_id);
         $token = groups_get_groupmeta($group_id, "group_token");
 		    $know_more_url = get_site_url() . "/?group-id=".$group_id ."&zgt=" . $token;
-        $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token
+        $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token;
 
+        $this->invite_options($sign_up_url, $group, $know_more_url );
         ?>
-
-        <h2>To Invite people you have 3 options</h2>
-        <p>Invite 3-11 friends, you have to have 4 people present to start the Zúme Sessions.</p>
-        <ul>
-          <li>
-            <p><strong>Send this invite link to your group</strong></p>
-              <pre><a href="<?php echo $sign_up_url?>"><?php echo $sign_up_url?></a></pre></li>
-          </li>
-
-          <li>
-            <p><strong>Copy and send this Email template:</strong></p>
-            <p>
-
-            <pre style="white-space: pre-line;">
-              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group, $sign_up_url, $know_more_url) ) ) ?>
-            </pre>
-
-            </p>
-          </li>
-          <li>
-            <p><strong>Have the email come from Zúme:</strong></p>
-            <p>
-              <input type="checkbox" name="redirect_invite" id="redirect_invite" value="yes"  />
-                Check this box if you would like the invite email to come from Zúme.
-              You will be redirected after you click finish.
-            </p>
-          </li>
-        </ul>
+        <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme:</span>
+        <p>
+          <input id="redirect_invite" class="checkbox-custom" name="redirect_invite" value="yes" type="checkbox">
+          <label for="redirect_invite" class="checkbox-custom-label">
+            Check this box if you would like the invitation email to come from Zúme.
+            After you click "Finish" you will be redirected to the next page where you can add your friend's email addresses.
+          </label>
+        </p>
         <?php
       }
 		}
@@ -156,32 +158,15 @@ if ( bp_is_active( 'groups' ) ) :
 		    $know_more_url = get_site_url() . "/?group-id=".$group_id ."&zgt=" . $token;
 		    $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token;
 
+
+		    $this->invite_options($sign_up_url, $group, $know_more_url )
 		    ?>
-          <h3>Invite 3-11 friends, you have to have 4 people present to start the Zúme Sessions.</h3>
-          <ul>
-            <li>
-              <p><strong>Send this invite link to your group</strong></p>
-              <pre><a href="<?php echo $sign_up_url?>"><?php echo $sign_up_url?></a></pre></li>
-            </li>
+        <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme:</span>
+        <p>
+          Click <a href="<?php echo $this->get_invite_anyone_email_link($group_id)?>">here</a> if you would like the invitation email to come from Zúme.
+          You can add your friend's email addresses on the next page.
+        </p>
 
-            <li>
-              <p><strong>Copy and send this Email template:</strong></p>
-              <p>
-
-              <pre style="white-space: pre-line;">
-              <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group, $sign_up_url, $know_more_url) ) ) ?>
-            </pre>
-
-              </p>
-            </li>
-            <li>
-              <p><strong>Have the email come from Zúme:</strong></p>
-              <p>
-                Click <a href="<?php echo $this->get_invite_anyone_email_link($group_id)?>">here</a> if you would like the invite email to come from Zúme.
-                You will be redirected after you click finish.
-              </p>
-            </li>
-          </ul>
 		    <?php
 	    }
 	  }
