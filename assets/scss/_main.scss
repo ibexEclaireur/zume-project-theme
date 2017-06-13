@@ -796,6 +796,29 @@ JQUERY STEPS WIZARD
     }
 }
 
+.wizard .actions {
+    ul {
+        list-style-type: none;
+        text-align: center;
+    }
+    li {
+        margin: 0 20px;
+        min-width: 130px;
+        display: inline-block;
+    }
+    li > a {
+        background-color: #21336A;
+        width: 100%;
+        height: 100%;
+        padding: 10px 15px;
+        display: inline-block;
+        color: white;
+        text-align: center;
+        border: 1px solid #CCCCCC;
+        font-size: 1.5rem;
+    }
+}
+
 ul.orbit-container {
 	padding-right: 1rem;
 	padding-left: 1rem;
