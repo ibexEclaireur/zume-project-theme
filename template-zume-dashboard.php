@@ -50,6 +50,7 @@ get_header();
                                         -->
                                         <ul id="groups-list" class="item-list">
                                             <?php while ( bp_groups() ) : bp_the_group(); ?>
+                                                <?php $member_count = bp_get_group_member_count(); ?>
 
                                                 <li>
                                                     <div class="row">
@@ -69,20 +70,29 @@ get_header();
                                                         <div class="medium-2 large-2 columns gutter-medium center">
                                                             <!--<span class="activity"><?php /*echo 'warning'; */?></span><br>-->
 
-                                                            <span class="text-gray text-small"><?php bp_group_type() ?> <br> <?php bp_group_member_count() ?><br>
+                                                            <span class="text-gray text-small"><?php bp_group_type() ?> <br> <?php echo $member_count; ?><br>
                                                             <?php /*echo 'active ' . bp_get_group_last_active() */?></span>
 
                                                         </div>
                                                         <div class="medium-5 large-5 columns gutter-medium center">
                                                             <div class="button-group">
-                                                                <a href="<?php echo $zume_get_userLink . 'invite-anyone/invite-new-members/group-invites/' . bp_get_group_id(); ?>" class=" button  ">Invite</a>
+
+                                                                <a href="<?php echo $zume_get_userLink . 'invite-anyone/invite-new-members/group-invites/' . bp_get_group_id(); ?>" class=" button  ">Invite <?php if($member_count < 4 ) { echo 4 - $member_count . ' more to start'; } ?></a>
+
                                                                 <span class="hide-for-medium"><br></span>
-                                                                <?php
-                                                                $group_next_session = zume_group_next_session(bp_get_group_id());
-                                                                if (is_null($group_next_session)): ?>
-                                                                    <a href="/zume-training/?id=10&group_id=<?php bp_group_id() ?>" class="button   ">See Sessions</a>
-                                                                <?php else: ?>
-                                                                    <a href="/zume-training/?id=<?php echo $group_next_session; ?>&group_id=<?php bp_group_id() ?>" class="button   ">Next Session (<?php echo $group_next_session; ?>)</a>
+
+                                                                <?php if($member_count > 3 ): // check if there are minimum 4 members ?>
+
+                                                                    <?php // Next session button
+                                                                    $group_next_session = zume_group_next_session(bp_get_group_id());
+
+                                                                    if (is_null($group_next_session)): ?>
+                                                                        <a href="/zume-training/?id=10&group_id=<?php bp_group_id() ?>" class="button   ">See Sessions</a>
+                                                                    <?php else: ?>
+                                                                        <a href="/zume-training/?id=<?php echo $group_next_session; ?>&group_id=<?php bp_group_id() ?>" class="button   ">Next Session (<?php echo $group_next_session; ?>)</a>
+                                                                    <?php endif; ?>
+
+
                                                                 <?php endif; ?>
                                                             </div>
                                                         </div>
