@@ -222,7 +222,7 @@ POSTS & CONTENT STYLES
 }
 
 .button {
-  border: $primary-color solid 1px;
+  border: solid 1px $primary-color;
 
     &:hover {
       background: $primary-color;
@@ -816,15 +816,17 @@ JQUERY STEPS WIZARD
         display: inline-block;
     }
     li > a {
-        background-color: #21336A;
         width: 100%;
         height: 100%;
-        padding: 10px 15px;
+        padding: 0.85em 1em;
         display: inline-block;
-        color: white;
+        vertical-align: middle;
         text-align: center;
-        border: 1px solid #CCCCCC;
-        font-size: 1.5rem;
+        border: solid 1px $primary-color;
+        &:hover {
+            background: $primary-color;
+            color: white;
+        }
     }
 }
 
