@@ -50,7 +50,7 @@ get_header();
                                         -->
                                         <ul id="groups-list" class="item-list">
                                             <?php while ( bp_groups() ) : bp_the_group(); ?>
-                                                <?php $member_count = bp_get_group_member_count(); ?>
+                                                <?php $member_count = bp_get_group_member_count(); $missing_members = (int) 4 - $member_count; ?>
 
                                                 <li>
                                                     <div class="row">
@@ -70,14 +70,16 @@ get_header();
                                                         <div class="medium-2 large-2 columns gutter-medium center">
                                                             <!--<span class="activity"><?php /*echo 'warning'; */?></span><br>-->
 
-                                                            <span class="text-gray text-small"><?php bp_group_type() ?> <br> <?php echo $member_count; ?><br>
-                                                            <?php /*echo 'active ' . bp_get_group_last_active() */?></span>
+                                                            <span class="text-gray text-small">
+                                                                <?php echo $member_count; ?><br>
+                                                                <?php if($member_count < 4 ) { echo '<span style="color:red;">You need ' . $missing_members . ' more! <br>You can do it!</span>'; } ?>
+                                                            </span>
 
                                                         </div>
                                                         <div class="medium-5 large-5 columns gutter-medium center">
                                                             <div class="button-group">
 
-                                                                <a href="<?php echo $zume_get_userLink . 'invite-anyone/invite-new-members/group-invites/' . bp_get_group_id(); ?>" class=" button  ">Invite <?php if($member_count < 4 ) { echo 4 - $member_count . ' more to start'; } ?></a>
+                                                                <a href="<?php echo $zume_get_userLink . 'invite-anyone/invite-new-members/group-invites/' . bp_get_group_id(); ?>" class=" button  ">Invite <?php if($member_count < 4 ) { echo $missing_members . ' more!'; } ?></a>
 
                                                                 <span class="hide-for-medium"><br></span>
 
