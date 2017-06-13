@@ -692,25 +692,21 @@ JQUERY STEPS WIZARD
 /* Jquery Steps Wizard css */
 
 
-.wizard > .steps {
+@mixin steps($step-width, $step-margin, $mobile-step-width, $mobile-step-margin) {
     text-align: center;
 
-    $step-width: 70px;
-    $step-margin: 21px;
-    $mobile-step-width: 30px;
-    $mobile-step-margin: 10px;
+    $border-thickness: 2px;
+
 
     li {
         display: inline-block;
-        border: 2px solid #CCCCCC;
+        border: $border-thickness solid #CCCCCC;
         color: #CCCCCC;
         width: $step-width;
         height: $step-width;
         margin: 0 $step-margin;
         text-align: center;
-        display: inline-flex;
-        justify-content: center;
-        flex-direction: column;
+        display: inline-block;
         font-size: 1.8rem;
         position: relative;
         @media only screen and (max-width: 500px) {
@@ -723,27 +719,27 @@ JQUERY STEPS WIZARD
     li:not(:last-child):after {
         content: "";
         position: absolute;
-        border: 1px #CCC solid;
-        left: $step-width - 2px;
-        top: $step-width / 2;
+        border: $border-thickness / 2 #CCC solid;
+        left: $step-width - $border-thickness;
+        top: ($step-width / 2) - $border-thickness - 1px;
         width: $step-margin + 1px;
         @media only screen and (max-width: 500px) {
-            left: $mobile-step-width - 2px;
-            top: $mobile-step-width / 2;
+            left: $mobile-step-width - $border-thickness;
+            top: ($mobile-step-width / 2) - $border-thickness - 1px;
             width: $mobile-step-margin + 1px;
         }
     }
     li:not(:first-child):before {
         content: "";
         position: absolute;
-        border: 1px #CCC solid;
-        left: -$step-margin - 1px;
+        border: $border-thickness / 2 #CCC solid;
+        left: -$step-margin - $border-thickness;
         width: $step-margin + 1px;
-        top: $step-width / 2;
+        top: ($step-width / 2) - $border-thickness - 1px;
         @media only screen and (max-width: 500px) {
-            left: -$mobile-step-margin - 1px;
+            left: -$mobile-step-margin - $border-thickness;
             width: $mobile-step-margin + 1px;
-            top: $mobile-step-width / 2;
+            top: ($mobile-step-width / 2) - $border-thickness - 1px;
         }
     }
     li.current:not(:last-child):after,
@@ -761,6 +757,42 @@ JQUERY STEPS WIZARD
     }
     .number {
         color: #CCCCCC;
+    }
+
+    li > a {
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        justify-content: center;
+        flex-direction: column;
+        left: 0;
+        top: 0;
+        position: absolute;
+    }
+}
+
+#overview.wizard > .steps {
+    @include steps(70px, 21px, 30px, 10px);
+}
+
+.course-steps.wizard > .steps {
+    @include steps(20px, 20px, 15px, 15px);
+    .number {
+        display: none;
+    }
+    li.done {
+        background-color: #21336A;
+        &, &:after, &:before {
+            border-color: #21336A;
+        }
+        &:hover {
+            &, &:after, &:before {
+                border-color: #CCCCCC;
+            }
+        }
+    }
+    li.disabled a:hover {
+        cursor: default;
     }
 }
 
