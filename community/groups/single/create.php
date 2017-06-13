@@ -73,19 +73,13 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
     }
 
     function invite_message($group, $sign_up_url, $know_more_url){
-		  $message = "Hey,
-
-        I just signed up for a 9-week online training course, called Zúme Training. It teaches ordinary men and women, like ourselves, how to make disciples who make more disciples. In order to start the training, I need at least 3 other people to gather in-person with me each week.
-
-        You can check out the course at " . $know_more_url . "
-
-        To accept the invitation to join my Zúme Training group \"" .  $group->name . "\", click on this link: " . $sign_up_url ."
-
-        After you click on the link, it will ask you to create an account. Then you will be joined to our group. When we have at least four people ready to gather together, we can begin going through Zúme Training.
-
-        Let's learn how God can use people like us to change the world together,
-
-        [Insert your name here]";
+		  $message = "<p>Hey,</p>
+        <p>I just signed up for a 9-week online training course, called Zúme Training. It teaches ordinary men and women, like ourselves, how to make disciples who make more disciples. In order to start the training, I need at least 3 other people to gather in-person with me each week.</p>
+        <p>You can check out the course at <a href=\"" . $know_more_url . "\"> " . $know_more_url . "</a></p>
+        <p>To accept the invitation to join my Zúme Training group \"" .  $group->name . "\", click on this link: <a href=\"". $sign_up_url ."\" >" . $sign_up_url ."</a></p>
+        <p>After you click on the link, it will ask you to create an account. Then you will be joined to our group. When we have at least four people ready to gather together, we can begin going through Zúme Training.</p>
+        <p>Let's learn how God can use people like us to change the world together,</p>
+        <p>[Insert your name here]</p>";
 
 		  return $message;
     }
@@ -102,20 +96,21 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
 		function invite_options($sign_up_url, $group, $know_more_url){
     ?>
-      <h2 style="margin-top:15px">To Invite people you have 3 options</h2>
-      <p>Invite 3-11 friends, Zúme requires at least 4 people to  present to start each session.</p>
+      <h2 class="group-invite-hearer-with-text-under" style="margin-top:15px">To invite people you have 3 options:</h2>
+      <p>Invite 3-11 friends, Zúme requires at least 4 people to be present to start each session.</p>
 
-      <h3 class="group-invite-header"><strong>Option 1: </strong></h3>
+      <h3 class="group-invite-header group-invite-hearer-with-text-under"><strong>Option 1: </strong></h3>
       <span class="group-invite-header-side-text">
-        Write your own message. Simply include this link and send it by email or any method you wish.
+        Write your own message.
       </span>
+      <p> Simply include this link and send it by email or any method you wish.</p>
       <pre><a href="<?php echo $sign_up_url?>"><?php echo $sign_up_url?></a></pre>
 
       <h3 class="group-invite-header"><strong>Option 2: </strong></h3>
-      <span class="group-invite-header-side-text">Copy and send this email template:</span>
-      <pre style="white-space: pre-line;">
-        <?php echo esc_textarea( invite_anyone_invitation_message( $this->invite_message($group, $sign_up_url, $know_more_url) ) ) ?>
-      </pre>
+      <span class="group-invite-header-side-text">Use our email template:</span>
+        <div style="padding:10px; background-color:#eee; border:1px solid #cecece">
+        <?php echo $this->invite_message($group, $sign_up_url, $know_more_url) ?>
+        </div>
 
     <?php
     }
@@ -163,7 +158,7 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 		    ?>
         <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme:</span>
         <p>
-          Click <a href="<?php echo $this->get_invite_anyone_email_link($group_id)?>">here</a> if you would like the invitation email to come from Zúme.
+          Click <strong><a style="font-size: 14pt ;" href="<?php echo $this->get_invite_anyone_email_link($group_id)?>">here</a></strong> if you would like the invitation email to come from Zúme.
           You can add your friend's email addresses on the next page.
         </p>
 
