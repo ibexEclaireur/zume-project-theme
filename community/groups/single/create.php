@@ -42,7 +42,17 @@ add_action( 'bp_actions', 'bpex_remove_group_tabs' );
 if ( !defined( 'BP_INVITE_ANYONE_SLUG' ) )
 	define( 'BP_INVITE_ANYONE_SLUG', 'invite-anyone' );
 
+
+
+
 if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
+
+  function group_urls($group_id){
+	  $token = groups_get_groupmeta($group_id, "group_token");
+	  $know_more_url = get_site_url() . "/?group-id=".$group_id ."&zgt=" . $token;
+	  $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token;
+	  return array("know_more"=>$know_more_url, "sign_up"=>$sign_up_url);
+  }
 
 
 	class Invite_By_URL extends BP_Group_Extension {
@@ -86,8 +96,10 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
 
 		function create_screen_save($group_id = NULL){
+      $group = groups_get_group($group_id);
+
 			if (isset($_POST["redirect_invite"]) && $_POST["redirect_invite"] == "yes"){
-				  bp_core_redirect( $this->get_invite_anyone_email_link($group_id));
+				  bp_core_redirect( bp_get_group_permalink($group) . "group_invite_by_email/");
 			} else {
 				  bp_core_redirect( "/dashboard");
       		}
@@ -121,9 +133,9 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
 
         $group = groups_get_group($group_id);
-        $token = groups_get_groupmeta($group_id, "group_token");
-		    $know_more_url = get_site_url() . "/?group-id=".$group_id ."&zgt=" . $token;
-        $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token;
+        $urls = group_urls($group_id);
+		    $know_more_url = $urls["know_more"];
+        $sign_up_url = $urls["sign_up"];
 
         $this->invite_options($sign_up_url, $group, $know_more_url );
         ?>
@@ -149,16 +161,16 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 	    if ($group_id > 0){
 
 	      $group = groups_get_group($group_id);
-		    $token = groups_get_groupmeta($group_id, "group_token");
-		    $know_more_url = get_site_url() . "/?group-id=".$group_id ."&zgt=" . $token;
-		    $sign_up_url = get_site_url() . "/register/?group-id=".$group_id ."&zgt=" . $token;
+	      $urls = group_urls($group_id);
+	      $know_more_url = $urls["know_more"];
+	      $sign_up_url = $urls["sign_up"];
 
 
 		    $this->invite_options($sign_up_url, $group, $know_more_url )
 		    ?>
         <h3 class="group-invite-header"><strong>Option 3:</strong></h3><span class="group-invite-header-side-text">Have the email come from Zúme:</span>
         <p>
-          Click <strong><a style="font-size: 14pt ;" href="<?php echo $this->get_invite_anyone_email_link($group_id)?>">here</a></strong> if you would like the invitation email to come from Zúme.
+          Click <strong><a style="font-size: 14pt ;" href="<?php echo bp_get_group_permalink($group) . "group_invite_by_email/"?>">here</a></strong> if you would like the invitation email to come from Zúme.
           You can add your friend's email addresses on the next page.
         </p>
 
@@ -169,6 +181,103 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
 	}
 
-	bp_register_group_extension( 'Invite_By_URL' );
+	class Invite_By_Email extends BP_Group_Extension {
+		/**
+		 * Your __construct() method will contain configuration options for
+		 * your extension, and will pass them to parent::init()
+		 */
+		function __construct() {
+			$args = array(
+				'slug' => 'group_invite_by_email',
+				'name' => 'Group Invite By Email',
+        'screens' => array(
+            "create" => array(
+                "enabled" => false
+            )
+        ),
+				'show_tab' => 'noone'
+			);
+			parent::init( $args );
+		}
 
+
+    function display( $group_id = NULL ) {
+      $this->settings_screen($group_id);
+    }
+
+
+		function settings_screen_save($group_id = NULL){
+
+			update_option("save_group_email", $_POST);
+
+		}
+
+
+
+
+
+
+
+		function settings_screen($group_id = NULL){
+			global $bp;
+
+
+			$group = groups_get_group($group_id);
+      $urls = group_urls($group_id);
+      $know_more_url = $urls["know_more"];
+      $sign_up_url = $urls["sign_up"];
+      $current_user = wp_get_current_user();
+
+      $message = "";
+      $subject = "";
+
+			?>
+          <form id="invite_by_email" action="/wp-admin/admin-post.php" method="post">
+            <h4>Invite Friends to <?php echo $group->name ?></h4>
+
+            <ol id="invite-anyone-steps">
+              <li>
+                <div class="manual-email">
+                  <p>
+					          <?php _e( 'Enter email addresses below, one per line.', 'zume_project' ) ?>
+                    <textarea name="invite_by_email_addresses" rows="15" cols="10" class="invite-anyone-email-addresses" id="invite-by-email-addresses"></textarea>
+                  </p>
+                </div>
+              </li>
+
+<!--              <li>-->
+<!--                    <label for="invite-anyone-custom-subject">--><?php //_e( '(optional) Customize the subject line of the invitation email.', 'zume_project' ) ?><!--</label>-->
+<!--                    <textarea name="invite_anyone_custom_subject" id="invite-anyone-custom-subject" rows="1" cols="10" >--><?php //echo esc_textarea( invite_anyone_invitation_subject( $subject ) ) ?><!--</textarea>-->
+<!--              </li>-->
+<!--              <li>-->
+<!--                    <label for="invite-anyone-custom-message">--><?php //_e( '(optional) Customize the text of the invitation.', 'zume_project' ) ?><!--</label>-->
+<!--                    <p class="description">--><?php //_e( 'The message will also contain a custom footer containing links to accept the invitation or opt out of further email invitations from this site.', 'invite-anyone' ) ?><!--</p>-->
+<!--                    <textarea name="invite_anyone_custom_message" id="invite-anyone-custom-message" cols="40" rows="15">--><?php //echo $message ?><!--</textarea>-->
+<!---->
+<!--              </li>-->
+
+              <p>We will send an invitation to each email address to sign up to Zúme and join this group</p>
+
+				    <?php wp_nonce_field( 'invite_by_email') ?>
+            <input type="hidden" name="action" value="group_invite_by_email">
+            <input type="hidden" name="group_id" value=" <?php echo esc_attr( $group_id )?>">
+            <input type="hidden" name="inviter_name" value=" <?php echo esc_attr( $current_user->display_name )?>">
+            <input type="hidden" name="sign_up_url" value=" <?php echo esc_attr( $sign_up_url )?>">
+
+
+            </ol>
+
+              <div class="submit">
+                <input type="submit" name="invite-anyone-submit" id="invite-anyone-submit" value="<?php _e( 'Send Invites', 'zume-project' ) ?> " />
+              </div>
+
+          </form>
+			<?php
+		}
+	}
+
+
+
+	bp_register_group_extension( 'Invite_By_URL' );
+  bp_register_group_extension( 'Invite_By_Email' );
 endif; // if ( bp_is_active( 'groups' ) )
