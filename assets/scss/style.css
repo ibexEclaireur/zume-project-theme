@@ -4898,6 +4898,10 @@ ul.orbit-container {
 .hero-blocks {
   height: 300px; }
 
+.switch {
+  margin-bottom: 0;
+  height: 0; }
+
 .group-invite-header-side-text {
   display: inline-block;
   color: #323a68;
