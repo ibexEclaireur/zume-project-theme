@@ -75,14 +75,14 @@ get_header();
                                                         </div>
                                                         <div class="medium-5 large-5 columns gutter-medium center">
                                                             <div class="button-group">
-                                                                <a href="<?php echo $zume_get_userLink . 'invite-anyone/invite-new-members/group-invites/' . bp_get_group_id(); ?>" class=" button  ">Invite</a>
+                                                                <a href="<?php echo bp_get_group_permalink(). 'group_invite_by_url/' . bp_get_group_id(); ?>" class=" button  ">Invite</a>
                                                                 <span class="hide-for-medium"><br></span>
                                                                 <?php
                                                                 $group_next_session = zume_group_next_session(bp_get_group_id());
                                                                 if (is_null($group_next_session)): ?>
                                                                     <a href="/zume-training/?id=10&group_id=<?php bp_group_id() ?>" class="button   ">See Sessions</a>
                                                                 <?php else: ?>
-                                                                    <a href="/zume-training/?id=<?php echo $group_next_session; ?>&group_id=<?php bp_group_id() ?>" class="button   ">Next Session (<?php echo $group_next_session; ?>)</a>
+                                                                    <a href="/zume-training/?id=<?php echo $group_next_session; ?>&group_id=<?php bp_group_id() ?>" class="button   ">Start session <?php echo $group_next_session; ?></a>
                                                                 <?php endif; ?>
                                                             </div>
                                                         </div>
