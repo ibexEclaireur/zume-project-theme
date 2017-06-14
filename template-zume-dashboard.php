@@ -108,7 +108,11 @@ get_header();
                                     <?php else: ?>
 
                                         <div id="message" class="info">
-                                            <p><?php _e( 'There were no groups found.', 'buddypress' ) ?></p>
+                                          <p>You are currently not in a group.</p>
+                                          <p>Zume requires participants to go through the training in groups for several important reasons.
+                                            You will need at least 4 people gathered together to start each new session. Please start a group below.</p>
+                                          <p>If you intended to join someone else's group, please return to the invitation they sent and use
+                                            the link provided to be automatically added to that group.</p>
                                         </div>
 
                                     <?php endif; ?>
