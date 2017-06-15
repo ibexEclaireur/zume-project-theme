@@ -3,6 +3,24 @@
 Template Name: Zúme Dashboard
 */
 
+/**
+ * Gets all available coaches in the system who have the coach role.
+ * @return array
+ */
+function zume_get_coach_ids () {
+    $result = get_users( array('role' => 'coach') );
+    $coaches = array();
+    foreach($result as $coach) {
+        $coaches[] = $coach;
+    }
+    return $coaches;
+}
+
+function zume_get_coach_in_group ($group_id) {
+    global $wpdb;
+    return $wpdb->get_results( "SELECT wp_usermeta.user_id FROM wp_bp_groups_members INNER JOIN wp_usermeta ON wp_usermeta.user_id=wp_bp_groups_members.user_id WHERE group_id = '$group_id' AND meta_key = 'wp_capabilities' AND meta_value LIKE '%coach%'", ARRAY_A );
+}
+
 $zume_dashboard = Zume_Dashboard::instance();
 $zume_current_user = get_current_user_id();
 $zume_get_userLink = bp_core_get_userlink($zume_current_user, false, true);
@@ -36,18 +54,6 @@ get_header();
 
                                     <?php if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) : ?>
 
-                                        <!--<div class="pagination">
-
-                                            <div class="pag-count" id="group-dir-count">
-                                                <?php /*bp_groups_pagination_count() */?>
-                                            </div>
-
-                                            <div class="pagination-links" id="group-dir-pag">
-                                                <?php /*bp_groups_pagination_links() */?>
-                                            </div>
-
-                                        </div>
-                                        -->
                                         <ul id="groups-list" class="item-list">
                                             <?php while ( bp_groups() ) : bp_the_group(); ?>
                                                 <?php $member_count = bp_get_group_member_count(); ?>
@@ -125,69 +131,60 @@ get_header();
                             </div>
                         </div>
 
+
+
                         <!-- Second Row -->
                         <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
                             <div class="medium-8 columns">
+
                                 <div class="callout" data-equalizer-watch>
+                                    <h2 class="center">Your Coaches</h2>
 
                                     <?php
                                     if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) :
+                                        while ( bp_groups() ) : bp_the_group(); ?>
 
-                                        $mod_ids = [];
-                                        while ( bp_groups() ) {
-                                            bp_the_group();
-                                            $mod_ids = array_unique(array_merge(
-                                                $mod_ids,
-                                                bp_group_mod_ids(false, 'array')
-                                            ));
-                                        }
-                                        ?>
+                                           <?php $coach_ids = zume_get_coach_in_group (bp_get_group_id()); if(!empty($coach_ids)) :?>
 
-                                        <h2 class="center"><?php echo _n("Your Coach", "Your Coaches", count($mod_ids)) ?></h2>
+
 
                                         <ul id="groups-list" class="item-list">
-                                        <?php
-                                        foreach ($mod_ids as $mod) :
-                                        ?>
+                                                <li style="text-align:center;"><?php print bp_get_group_name(); ?></li>
+                                            <?php foreach ($coach_ids as $coach) : ?>
 
-                                            <li>
-                                                <div class="item-avatar">
-                                                    <a href="<?php echo bp_core_get_userlink($mod, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $mod) ) ?></a>
-                                                </div>
+                                                <li>
+                                                    <div class="item-avatar">
+                                                        <a href="<?php echo bp_core_get_userlink($coach['user_id'], false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach['user_id']) ) ?></a>
+                                                    </div>
 
-                                                <div class="item">
-                                                    <div class="item-title"><?php  echo bp_core_get_userlink($mod); ?></div>
-                                                    <div class="item-meta"><span class="activity"><?php echo bp_core_get_last_activity( bp_get_user_last_activity( $mod ), __( 'active %s', 'buddypress' ) )  ?></span></div>
+                                                    <div class="item">
+                                                        <div class="item-title"><?php  echo bp_core_get_userlink($coach['user_id']); ?></div>
+                                                        <div class="item-meta"><span class="activity"><?php echo bp_core_get_last_activity( bp_get_user_last_activity( $coach['user_id'] ), __( 'active %s', 'buddypress' ) )  ?></span></div>
 
-                                                    <div class="item-desc"><?php  ?> </div>
+                                                        <div class="item-desc"><?php  ?> </div>
 
-                                                    <?php do_action( 'bp_directory_groups_item' ) ?>
-                                                </div>
+                                                        <?php do_action( 'bp_directory_groups_item' ) ?>
+                                                    </div>
 
-                                                <div class="action">
-                                                    <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $mod ) ); ?>" class="btn button">Private Message</a>
+                                                    <div class="action">
+                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach['user_id'] ) ); ?>" class="btn button">Private Message</a>
 
-                                                    <div class="meta">
+                                                        <div class="meta">
+
+                                                        </div>
 
                                                     </div>
 
-<!--                                                            --><?php //do_action( 'zume_directory_members_item' ) ?>
-                                                </div>
+                                                    <div class="clear"></div>
+                                                </li>
 
-                                                <div class="clear"></div>
-                                            </li>
-
-                                        <?php endforeach; // Coach Loop ?>
+                                            <?php endforeach; // Coach Loop ?>
 
                                         </ul>
 
-                                        <?php do_action( 'bp_after_groups_loop' ) ?>
+                                        <?php endif;?>
 
-                                        <?php if (empty($mod_ids)): ?>
-                                            <div id="message" class="info">
-                                                <p><?php _e("You have not yet been assigned any coaches.", "buddypress") ?></p>
-                                            </div>
-                                        <?php endif; ?>
+                                    <?php endwhile; ?>
 
 
                                     <?php else: ?>
@@ -199,8 +196,11 @@ get_header();
 
                                     <?php endif; ?>
 
+
                                 </div>
                             </div>
+
+
                             <div class="medium-4 columns">
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Messages</h2>
