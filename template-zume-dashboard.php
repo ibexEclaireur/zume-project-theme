@@ -159,7 +159,7 @@ get_header();
 
                                                     <div class="item">
                                                         <div class="item-title"><?php  echo bp_core_get_userlink($coach['user_id']); ?></div>
-                                                        <div class="item-meta"><span class="activity"><?php echo bp_core_get_last_activity( bp_get_user_last_activity( $coach['user_id'] ), __( 'active %s', 'buddypress' ) )  ?></span></div>
+                                                        <div class="item-meta"><!--<span class="activity"><?php /*echo bp_core_get_last_activity( bp_get_user_last_activity( $coach['user_id'] ), __( 'active %s', 'buddypress' ) )  */?></span>--></div>
 
                                                         <div class="item-desc"><?php  ?> </div>
 
