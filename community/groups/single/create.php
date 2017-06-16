@@ -68,6 +68,11 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
         "visibility" => "private",
         "show_tab"=> 'members',
         "access" => "members",
+		    'screens' => array(
+            "admin" => array(
+                "enabled" => false
+            )
+        ),
 
 
 			);
@@ -192,6 +197,9 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 				'name' => 'Group Invite By Email',
         'screens' => array(
             "create" => array(
+                "enabled" => false
+            ),
+            "admin" => array(
                 "enabled" => false
             )
         ),
