@@ -66,7 +66,7 @@ get_header();
 
                                                 <li>
                                                     <div class="row">
-                                                        <div class="medium-5 large-5 columns gutter-medium">
+                                                        <div class="medium-3 large-3 columns gutter-medium">
                                                             <div class="item-avatar">
                                                                 <a href="<?php bp_group_permalink() ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ) ?></a>
                                                             </div>
@@ -79,6 +79,13 @@ get_header();
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="medium-3 large-3 columns gutter-medium center dashboard-group-images">
+                                                            <?php if (bp_group_has_members(['group_id' => bp_get_group_id()])): ?>
+                                                                <?php while (bp_group_members(['per_page' => 11, 'max' => 11])): bp_group_the_member(); ?>
+                                                                    <?php bp_group_member_avatar(); ?>
+                                                                <?php endwhile; ?>
+                                                            <?php endif; ?>
+                                                        </div>
                                                         <div class="medium-2 large-2 columns gutter-medium center">
                                                             <!--<span class="activity"><?php /*echo 'warning'; */?></span><br>-->
 
@@ -86,7 +93,7 @@ get_header();
                                                             <?php /*echo 'active ' . bp_get_group_last_active() */?></span>
 
                                                         </div>
-                                                        <div class="medium-5 large-5 columns gutter-medium center">
+                                                        <div class="medium-4 large-4 columns gutter-medium center">
                                                             <div class="button-group">
 
                                                                 <a href="<?php echo bp_get_group_permalink(). 'group_invite_by_url/'; ?>" class=" button  ">Invite <?php if($member_count < 4 ) { echo (4 - $member_count) . ' more to start'; } ?></a>
@@ -110,7 +117,8 @@ get_header();
                                                         </div>
 
 
-                                                    <div class="clear"></div>
+                                                        <div class="clear"></div>
+                                                    </div>
                                                 </li>
 
                                             <?php endwhile; ?>

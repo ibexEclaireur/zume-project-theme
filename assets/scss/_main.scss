@@ -846,6 +846,21 @@ ul.orbit-container {
 
 
 /**************************************/
+// Dashboard
+/**************************************/
+
+.dashboard-group-images {
+    min-height: 10px; // Needed when for some reason there are no avatars
+    overflow: hidden;
+}
+
+.dashboard-group-images img {
+    width: 40px;
+    height: 40px;
+}
+
+
+/**************************************/
 // Additional Css classes
 /**************************************/
 
