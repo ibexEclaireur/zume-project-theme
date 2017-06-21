@@ -39,7 +39,7 @@ do_action( 'bp_before_group_header' );
 
 <div id="item-header-content">
 	<h2><a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>"><?php bp_group_name(); ?></a></h2>
-	<span class="highlight"><?php bp_group_type(); ?></span> <span class="activity"><?php printf( __( 'active %s', 'buddypress' ), bp_get_group_last_active() ); ?></span>
+
 
 	<?php do_action( 'bp_before_group_header_meta' ); ?>
 
@@ -57,6 +57,13 @@ do_action( 'bp_before_group_header' );
 
 	</div>
 </div><!-- #item-header-content -->
+
+<script>
+    jQuery(document).ready(function() {
+        /* Hide default (redundant) group title */
+        jQuery('.article-header').hide();
+    })
+</script>
 
 <?php
 do_action( 'bp_after_group_header' );
