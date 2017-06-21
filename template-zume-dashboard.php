@@ -56,7 +56,13 @@ get_header();
 
                                         <ul id="groups-list" class="item-list">
                                             <?php while ( bp_groups() ) : bp_the_group(); ?>
-                                                <?php $member_count = bp_get_group_member_count(); ?>
+                                                <?php
+                                                if (1 === preg_match('/[0-9]+/', bp_get_group_member_count(), $matches)) {
+                                                    $member_count = $matches[0];
+                                                } else {
+                                                    $member_count = 0;
+                                                }
+                                                ?>
 
                                                 <li>
                                                     <div class="row">
@@ -76,14 +82,14 @@ get_header();
                                                         <div class="medium-2 large-2 columns gutter-medium center">
                                                             <!--<span class="activity"><?php /*echo 'warning'; */?></span><br>-->
 
-                                                            <span class="text-gray text-small"><?php bp_group_type() ?> <br> <?php echo $member_count; ?><br>
+                                                            <span class="text-gray text-small"><?php bp_group_type() ?> <br> <?php bp_group_member_count(); ?><br>
                                                             <?php /*echo 'active ' . bp_get_group_last_active() */?></span>
 
                                                         </div>
                                                         <div class="medium-5 large-5 columns gutter-medium center">
                                                             <div class="button-group">
 
-                                                                <a href="<?php echo bp_get_group_permalink(). 'group_invite_by_url/'; ?>" class=" button  ">Invite <?php if($member_count < 4 ) { echo 4 - $member_count . ' more to start'; } ?></a>
+                                                                <a href="<?php echo bp_get_group_permalink(). 'group_invite_by_url/'; ?>" class=" button  ">Invite <?php if($member_count < 4 ) { echo (4 - $member_count) . ' more to start'; } ?></a>
 
                                                                 <span class="hide-for-medium"><br></span>
 
