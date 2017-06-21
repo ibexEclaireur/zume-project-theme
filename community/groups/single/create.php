@@ -43,8 +43,6 @@ if ( !defined( 'BP_INVITE_ANYONE_SLUG' ) )
 	define( 'BP_INVITE_ANYONE_SLUG', 'invite-anyone' );
 
 
-
-
 if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 
   function group_urls($group_id){
@@ -64,16 +62,15 @@ if (  function_exists( 'bp_is_active') &&  bp_is_active( 'groups' ) ) :
 		function __construct() {
 			$args = array(
 				'slug' => 'group_invite_by_url',
-				'name' => 'Invite your friends',
-        "visibility" => "private",
-        "show_tab"=> 'members',
-        "access" => "members",
-		    'screens' => array(
-            "admin" => array(
+				'name' => 'Invite Your Friends',
+                "visibility" => "private",
+                "show_tab"=> 'members',
+                "access" => "members",
+                'screens' => array(
+                "admin" => array(
                 "enabled" => false
             )
         ),
-
 
 			);
 			parent::init( $args );
