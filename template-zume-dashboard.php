@@ -80,8 +80,8 @@ get_header();
                                                             </div>
                                                         </div>
                                                         <div class="medium-3 large-3 columns gutter-medium center dashboard-group-images">
-                                                            <?php if (bp_group_has_members(['group_id' => bp_get_group_id()])): ?>
-                                                                <?php while (bp_group_members(['per_page' => 11, 'max' => 11])): bp_group_the_member(); ?>
+                                                            <?php if (bp_group_has_members(['group_id' => bp_get_group_id(), 'exclude_admins_mods' => false, 'per_page' => 11, 'max' => 11])): ?>
+                                                                <?php while (bp_group_members()): bp_group_the_member(); ?>
                                                                     <?php bp_group_member_avatar(); ?>
                                                                 <?php endwhile; ?>
                                                             <?php endif; ?>
