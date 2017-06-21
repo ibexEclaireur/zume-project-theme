@@ -58,12 +58,10 @@ do_action( 'bp_before_group_header' );
 	</div>
 </div><!-- #item-header-content -->
 
-<script>
-    jQuery(document).ready(function() {
-        /* Hide default (redundant) group title */
-        jQuery('.article-header').hide();
-    })
-</script>
+<style>
+    .article-header {display:none;}
+</style>
+
 
 <?php
 do_action( 'bp_after_group_header' );
