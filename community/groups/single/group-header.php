@@ -12,11 +12,9 @@ do_action( 'bp_before_group_header' );
 
 		<?php bp_group_list_admins();
 
-		if ( bp_group_has_moderators() ) :
-                bp_group_list_mods();
-		endif;
 
 	endif; ?>
+
 
 </div><!-- #item-actions -->
 
@@ -38,13 +36,9 @@ do_action( 'bp_before_group_header' );
 
 		<?php bp_group_description(); ?>
 
-		<div id="item-buttons">
 
-			<?php do_action( 'bp_group_header_actions' ); ?>
+        <?php do_action( 'bp_group_header_meta' ); ?>
 
-		</div><!-- #item-buttons -->
-
-		<?php do_action( 'bp_group_header_meta' ); ?>
 
 	</div>
 </div><!-- #item-header-content -->
