@@ -309,7 +309,10 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
                 'screens' => array(
                     "admin" => array(
                         "enabled" => false
-                    )
+                    ),
+                    "create" => array(
+                        "enabled" => false
+                    ),
                 ),
             );
             parent::init($args);
