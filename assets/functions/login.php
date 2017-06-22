@@ -14,3 +14,26 @@ function joints_login_title() { return get_option('blogname'); }
 add_action( 'login_enqueue_scripts', 'joints_login_css', 10 );
 add_filter('login_headerurl', 'joints_login_url');
 add_filter('login_headertitle', 'joints_login_title');
+
+
+function action_bp_signup_pre_validate(){
+    if(isset($_POST['signup_email']) && !empty($_POST['signup_email'])){
+        $_POST['signup_username'] = $_POST['signup_email'];
+    }
+}
+add_action( 'bp_signup_pre_validate', 'action_bp_signup_pre_validate', 10, 0 );
+
+
+//Remove error for username, only show error for email only.
+add_filter('registration_errors', 'remove_username_empty_error', 10, 3);
+
+function remove_username_empty_error($wp_error, $sanitized_user_login, $user_email){
+
+    if(isset($wp_error->errors['empty_username'])){
+        $wp_error->remove('empty_username');
+    }
+    if(isset($wp_error->errors['username_exists'])){
+        $wp_error->remove('username_exists');
+    }
+    return $wp_error;
+}

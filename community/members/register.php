@@ -83,16 +83,45 @@
 
 				<h2><?php _e( 'Account Details', 'buddypress' ); ?></h2>
 
-				<label for="signup_username"><?php _e( 'Username', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
-				<?php
 
-				/**
-				 * Fires and displays any member registration username errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_username_errors' ); ?>
-				<input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?> required/>
+		  <?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
+		  <?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
+
+			  <?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+
+              <div<?php bp_field_css_class( 'editfield' ); ?>>
+
+				  <?php
+				  $field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
+				  $field_type->edit_field_html(array('required' => 'true'));
+
+				  /**
+				   * Fires before the display of the visibility options for xprofile fields.
+				   *
+				   * @since 1.7.0
+				   */
+				  do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
+
+
+
+				  /**
+				   * Fires after the display of the visibility options for xprofile fields.
+				   *
+				   * @since 1.1.0
+				   */
+				  do_action( 'bp_custom_profile_edit_fields' ); ?>
+
+                <p class="description"><?php bp_the_profile_field_description(); ?></p>
+
+              </div>
+
+			  <?php endwhile; ?>
+
+            <input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+
+		  <?php endwhile; endif; endif; ?>
+
+
 
 				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
 				<?php
@@ -148,113 +177,12 @@
 			 */
 			do_action( 'bp_after_account_details_fields' ); ?>
 
-			<?php /***** Extra Profile Details ******/ ?>
 
-			<?php if ( bp_is_active( 'xprofile' ) ) : ?>
+        <?php
+				do_action( 'bp_before_signup_profile_fields' );
 
-				<?php
-
-				/**
-				 * Fires before the display of member registration xprofile fields.
-				 *
-				 * @since 1.2.4
-				 */
-				do_action( 'bp_before_signup_profile_fields' ); ?>
-
-				<div class="flex-register-item">
-
-					<h2><?php _e( 'Profile Details', 'buddypress' ); ?></h2>
-
-					<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
-
-					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
-
-						<div<?php bp_field_css_class( 'editfield' ); ?>>
-
-							<?php
-							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-							$field_type->edit_field_html(array('required' => 'true'));
-
-							/**
-							 * Fires before the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.7.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
-
-//							if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
-<!--								<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle---><?php //bp_the_profile_field_id() ?><!--">-->
-<!--									--><?php
-//									printf(
-//										__( 'This field can be seen by: %s', 'buddypress' ),
-//										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-//									);
-//									?>
-<!--									<button type="button" class="visibility-toggle-link">--><?php //_ex( 'Change', 'Change profile field visibility level', 'buddypress' ); ?><!--</button>-->
-<!--								</p>-->
-<!---->
-<!--								<div class="field-visibility-settings" id="field-visibility-settings---><?php //bp_the_profile_field_id() ?><!--">-->
-<!--									<fieldset>-->
-<!--										<legend>--><?php //_e( 'Who can see this field?', 'buddypress' ) ?><!--</legend>-->
-<!---->
-<!--										--><?php //bp_profile_visibility_radio_buttons() ?>
-<!---->
-<!--									</fieldset>-->
-<!--									<button type="button" class="field-visibility-settings-close">--><?php //_e( 'Close', 'buddypress' ) ?><!--</button>-->
-<!---->
-<!--								</div>-->
-<!--							--><?php //else : ?>
-<!--								<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle---><?php //bp_the_profile_field_id() ?><!--">-->
-<!--									--><?php
-//									printf(
-//										__( 'This field can be seen by: %s', 'buddypress' ),
-//										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-//									);
-//									?>
-<!--								</p>-->
-<!--							--><?php //endif ?>
-
-							<?php
-
-							/**
-							 * Fires after the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.1.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields' ); ?>
-
-							<p class="description"><?php bp_the_profile_field_description(); ?></p>
-
-						</div>
-
-					<?php endwhile; ?>
-
-					<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
-
-					<?php endwhile; endif; endif; ?>
-
-					<?php
-
-					/**
-					 * Fires and displays any extra member registration xprofile fields.
-					 *
-					 * @since 1.9.0
-					 */
-					do_action( 'bp_signup_profile_fields' ); ?>
-
-				</div><!-- #profile-details-section -->
-
-				<?php
-
-				/**
-				 * Fires after the display of member registration xprofile fields.
-				 *
-				 * @since 1.1.0
-				 */
+        do_action( 'bp_signup_profile_fields' );
 				do_action( 'bp_after_signup_profile_fields' ); ?>
-
-			<?php endif; ?>
 
         </div>
 
@@ -354,9 +282,7 @@
 			 */
 			do_action( 'bp_before_registration_submit_buttons' ); ?>
 
-			<div class="" style="text-align: center;">
-				<input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'Complete Sign Up', 'buddypress' ); ?>" />
-			</div>
+      <input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'Complete Sign Up', 'buddypress' ); ?>" />
 
 			<?php
 
