@@ -241,7 +241,7 @@ get_header();
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Messages</h2>
 
-                                    <p class="center">
+                                    <p class="center" style="margin-top: 15px">
                                         <a href="<?php echo bp_core_get_userlink($zume_current_user, false, true) ; ?>/messages/" class="button">View Messages</a>
                                     </p>
                                     <p class="center text-gray text-small">
