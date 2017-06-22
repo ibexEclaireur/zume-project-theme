@@ -142,7 +142,7 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
                         email addresses.
                     </label>
                 </p>
-                <style>h1.page-title{display:none;}</style>
+                <style>h1.page-title{display:none;} #group-create-tabs{border-bottom:1px solid #eaeaea;}</style>
                 <?php
             }
         }
