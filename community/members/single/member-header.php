@@ -67,7 +67,9 @@
 </div><!-- #item-header-content -->
 
 <style>
+    /* members/single/member-header.php */
   .article-header {display:none;}
+    #profile-personal-li {display:none;}
 </style>
 
 <?php do_action( 'bp_after_member_header' ); ?>
