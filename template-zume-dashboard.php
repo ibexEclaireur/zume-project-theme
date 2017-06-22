@@ -184,42 +184,31 @@ get_header();
                                         <ul id="groups-list" class="item-list">
                                             <?php foreach ($groups_for_coach as $coach_id => $group_ids) : ?>
 
-                                                <li>
-                                                    <div class="item-avatar">
-                                                        <a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
-                                                    </div>
-
-                                                    <div class="item">
-                                                        <div class="item-title"><?php  echo bp_core_get_userlink($coach_id); ?></div>
-                                                        <div class="item-meta"><!--<span class="activity"><?php /*echo bp_core_get_last_activity( bp_get_user_last_activity( $coach_id ), __( 'active %s', 'buddypress' ) )  */?></span>--></div>
-
-                                                        <div class="item-desc"><?php  ?> </div>
+                                                <li style="margin-bottom: 10px">
+                                                    <div class="coach-floated">
 
                                                         <?php do_action( 'bp_directory_groups_item' ) ?>
+                                                        <?php  echo bp_core_get_userlink($coach_id); ?>
+                                                        <a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
+                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button" style="margin-bottom: 0">Private Message</a>
                                                     </div>
 
-                                                    <div class="action">
-                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button">Private Message</a>
 
-                                                        <div class="meta">
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="clear"></div>
+                                                    <p>
+                                                    <?php for ($i = 0; $i < count($group_ids); $i++): ?>
+                                                        <?php
+                                                        $group = groups_get_group(['group_id' => $group_ids[$i]]);
+                                                        ?>
+                                                        <a href="<?php bp_group_permalink($group); ?>">
+                                                            <?php bp_group_name($group); ?>
+                                                        </a>
+                                                        <?php if ($i < count($group_ids) - 1): ?>
+                                                            •
+                                                        <?php endif; ?>
+                                                    <?php endfor; ?>
+                                                    </p>
+                                                    <div style="clear: both"></div>
                                                 </li>
-
-                                                <?php foreach ($group_ids as $group_id): ?>
-                                                <li style="padding-left: 30px">
-                                                    <?php
-                                                    $group = groups_get_group(['group_id' => $group_id]);
-                                                    ?>
-                                                    <a href="<?php bp_group_permalink($group); ?>">
-                                                        <?php bp_group_name($group); ?>
-                                                    </a>
-                                                </li>
-                                                <?php endforeach; ?>
 
                                             <?php endforeach; // Coach Loop ?>
 
