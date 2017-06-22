@@ -67,6 +67,7 @@
 
 			<p><?php _e( 'Registering for this site is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'buddypress' ); ?></p>
 
+      <div class="flex-register-container">
 			<?php
 
 			/**
@@ -76,7 +77,7 @@
 			 */
 			do_action( 'bp_before_account_details_fields' ); ?>
 
-			<div class="register-section" id="basic-details-section">
+			<div class="flex-register-item">
 
 				<?php /***** Basic Account Details ******/ ?>
 
@@ -160,7 +161,7 @@
 				 */
 				do_action( 'bp_before_signup_profile_fields' ); ?>
 
-				<div class="register-section" id="profile-details-section">
+				<div class="flex-register-item">
 
 					<h2><?php _e( 'Profile Details', 'buddypress' ); ?></h2>
 
@@ -182,37 +183,37 @@
 							 */
 							do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
 
-							if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
-								<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-									<?php
-									printf(
-										__( 'This field can be seen by: %s', 'buddypress' ),
-										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-									);
-									?>
-									<button type="button" class="visibility-toggle-link"><?php _ex( 'Change', 'Change profile field visibility level', 'buddypress' ); ?></button>
-								</p>
-
-								<div class="field-visibility-settings" id="field-visibility-settings-<?php bp_the_profile_field_id() ?>">
-									<fieldset>
-										<legend><?php _e( 'Who can see this field?', 'buddypress' ) ?></legend>
-
-										<?php bp_profile_visibility_radio_buttons() ?>
-
-									</fieldset>
-									<button type="button" class="field-visibility-settings-close"><?php _e( 'Close', 'buddypress' ) ?></button>
-
-								</div>
-							<?php else : ?>
-								<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-									<?php
-									printf(
-										__( 'This field can be seen by: %s', 'buddypress' ),
-										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-									);
-									?>
-								</p>
-							<?php endif ?>
+//							if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
+<!--								<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle---><?php //bp_the_profile_field_id() ?><!--">-->
+<!--									--><?php
+//									printf(
+//										__( 'This field can be seen by: %s', 'buddypress' ),
+//										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
+//									);
+//									?>
+<!--									<button type="button" class="visibility-toggle-link">--><?php //_ex( 'Change', 'Change profile field visibility level', 'buddypress' ); ?><!--</button>-->
+<!--								</p>-->
+<!---->
+<!--								<div class="field-visibility-settings" id="field-visibility-settings---><?php //bp_the_profile_field_id() ?><!--">-->
+<!--									<fieldset>-->
+<!--										<legend>--><?php //_e( 'Who can see this field?', 'buddypress' ) ?><!--</legend>-->
+<!---->
+<!--										--><?php //bp_profile_visibility_radio_buttons() ?>
+<!---->
+<!--									</fieldset>-->
+<!--									<button type="button" class="field-visibility-settings-close">--><?php //_e( 'Close', 'buddypress' ) ?><!--</button>-->
+<!---->
+<!--								</div>-->
+<!--							--><?php //else : ?>
+<!--								<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle---><?php //bp_the_profile_field_id() ?><!--">-->
+<!--									--><?php
+//									printf(
+//										__( 'This field can be seen by: %s', 'buddypress' ),
+//										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
+//									);
+//									?>
+<!--								</p>-->
+<!--							--><?php //endif ?>
 
 							<?php
 
@@ -254,6 +255,8 @@
 				do_action( 'bp_after_signup_profile_fields' ); ?>
 
 			<?php endif; ?>
+
+        </div>
 
 			<?php if ( bp_get_blog_signup_allowed() ) : ?>
 
@@ -351,7 +354,7 @@
 			 */
 			do_action( 'bp_before_registration_submit_buttons' ); ?>
 
-			<div class="submit">
+			<div class="" style="text-align: center;">
 				<input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'Complete Sign Up', 'buddypress' ); ?>" />
 			</div>
 

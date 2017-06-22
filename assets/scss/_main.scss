@@ -861,6 +861,22 @@ ul.orbit-container {
 
 
 /**************************************/
+// Register
+/**************************************/
+
+.flex-register-container{
+	display: flex;
+	flex-wrap:wrap;
+	margin-bottom:30px;
+}
+
+.flex-register-item{
+	padding:0 15px 0 15px;
+	flex-grow:1;
+	min-width:300px;
+}
+
+/**************************************/
 // Additional Css classes
 /**************************************/
 
