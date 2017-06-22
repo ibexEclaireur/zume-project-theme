@@ -1,3 +1,6 @@
+<!--move to members folder to activate-->
+
+
 <?php get_header( 'buddypress' ); ?>
 
 	<div id="content">
