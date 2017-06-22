@@ -93,7 +93,7 @@ get_header();
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="medium-3 large-3 columns gutter-medium dashboard-group-images">
+                                                        <div class="medium-3 large-3 columns gutter-medium center dashboard-group-images">
                                                             <?php if (bp_group_has_members(['group_id' => bp_get_group_id(), 'exclude_admins_mods' => false, 'per_page' => 11, 'max' => 11])): ?>
                                                                 <?php
                                                                 while (bp_group_members()) {
