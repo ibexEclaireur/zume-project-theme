@@ -318,7 +318,6 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
             parent::init($args);
         }
 
-
         function display($group_id = NULL)
         {
             $this->settings_screen($group_id);
@@ -327,9 +326,7 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
 
         function settings_screen_save($group_id = NULL)
         {
-
             update_option("group-map", $_POST);
-
         }
 
 
