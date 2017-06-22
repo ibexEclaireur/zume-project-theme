@@ -869,6 +869,16 @@ ul.orbit-container {
     }
 }
 
+@media only screen and (min-width: 640px) {
+    .dashboard-coaches {
+        padding-right: 0.5rem;
+    }
+
+    .dashboard-messages {
+        padding-left: 0.5rem;
+    }
+}
+
 
 /**************************************/
 // Additional Css classes

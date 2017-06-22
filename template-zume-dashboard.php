@@ -156,7 +156,7 @@ get_header();
 
                         <!-- Second Row -->
                         <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
-                            <div class="medium-8 columns">
+                            <div class="medium-8 columns dashboard-coaches">
 
                                 <div class="callout" data-equalizer-watch>
 
@@ -233,7 +233,7 @@ get_header();
                             </div>
 
 
-                            <div class="medium-4 columns">
+                            <div class="medium-4 columns dashboard-messages">
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Messages</h2>
 
