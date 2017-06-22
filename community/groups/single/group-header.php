@@ -50,6 +50,7 @@ do_action( 'bp_before_group_header' );
 </div><!-- #item-header-content -->
 
 <style>
+    /* located /groups/single/groups-header.php */
     .article-header {display:none;}
     #group_invite_by_email-groups-li {display:none;}
     #group_invite_by_url-groups-li {display:none;}
