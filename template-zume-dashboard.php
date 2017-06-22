@@ -16,9 +16,23 @@ function zume_get_coach_ids () {
     return $coaches;
 }
 
-function zume_get_coach_in_group ($group_id) {
+/**
+ * Gets all coaches in a particular group, returns an array of integers
+ * @return array
+ */
+function zume_get_coach_ids_in_group ($group_id) {
+    if (is_numeric($group_id)) {
+        $group_id = (int) $group_id;
+    } else {
+        throw new Exception("group_id argument should be an integer or pass the is_numeric test.");
+    }
     global $wpdb;
-    return $wpdb->get_results( "SELECT wp_usermeta.user_id FROM wp_bp_groups_members INNER JOIN wp_usermeta ON wp_usermeta.user_id=wp_bp_groups_members.user_id WHERE group_id = '$group_id' AND meta_key = 'wp_capabilities' AND meta_value LIKE '%coach%'", ARRAY_A );
+    $results = $wpdb->get_results( "SELECT wp_usermeta.user_id FROM wp_bp_groups_members INNER JOIN wp_usermeta ON wp_usermeta.user_id=wp_bp_groups_members.user_id WHERE group_id = '$group_id' AND meta_key = 'wp_capabilities' AND meta_value LIKE '%coach%'", ARRAY_A );
+    $rv = [];
+    foreach ($results as $result) {
+        $rv[] = (int) $result["user_id"];
+    }
+    return $rv;
 }
 
 $zume_dashboard = Zume_Dashboard::instance();
@@ -145,28 +159,39 @@ get_header();
                             <div class="medium-8 columns">
 
                                 <div class="callout" data-equalizer-watch>
-                                    <h2 class="center">Your Coaches</h2>
 
                                     <?php
                                     if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) :
-                                        while ( bp_groups() ) : bp_the_group(); ?>
+                                        $groups_for_coach = [];
+                                        // Eg: $groups_for_coach[$mod_id] = [$group_id_1, $group_id_2];
+                                        while (bp_groups()) {
+                                            bp_the_group();
+                                            $coach_ids = zume_get_coach_ids_in_group(bp_get_group_id());
+                                            foreach ($coach_ids as $coach_id) {
+                                                if (! isset($groups_for_coach[$coach_id])) {
+                                                    $groups_for_coach[$coach_id] = [];
+                                                }
+                                                $groups_for_coach[$coach_id] = array_unique(array_merge(
+                                                    $groups_for_coach[$coach_id], [bp_get_group_id()]
+                                                ));
+                                            }
+                                        }
+                                        ?>
 
-                                           <?php $coach_ids = zume_get_coach_in_group (bp_get_group_id()); if(!empty($coach_ids)) :?>
+                                        <h2 class="center"><?php echo _n("Your Coach", "Your Coaches", count($groups_for_coach)) ?></h2>
 
-
-
+                                        <?php if (count($groups_for_coach)): ?>
                                         <ul id="groups-list" class="item-list">
-                                                <li style="text-align:center;"><?php print bp_get_group_name(); ?></li>
-                                            <?php foreach ($coach_ids as $coach) : ?>
+                                            <?php foreach ($groups_for_coach as $coach_id => $group_ids) : ?>
 
                                                 <li>
                                                     <div class="item-avatar">
-                                                        <a href="<?php echo bp_core_get_userlink($coach['user_id'], false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach['user_id']) ) ?></a>
+                                                        <a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
                                                     </div>
 
                                                     <div class="item">
-                                                        <div class="item-title"><?php  echo bp_core_get_userlink($coach['user_id']); ?></div>
-                                                        <div class="item-meta"><!--<span class="activity"><?php /*echo bp_core_get_last_activity( bp_get_user_last_activity( $coach['user_id'] ), __( 'active %s', 'buddypress' ) )  */?></span>--></div>
+                                                        <div class="item-title"><?php  echo bp_core_get_userlink($coach_id); ?></div>
+                                                        <div class="item-meta"><!--<span class="activity"><?php /*echo bp_core_get_last_activity( bp_get_user_last_activity( $coach_id ), __( 'active %s', 'buddypress' ) )  */?></span>--></div>
 
                                                         <div class="item-desc"><?php  ?> </div>
 
@@ -174,7 +199,7 @@ get_header();
                                                     </div>
 
                                                     <div class="action">
-                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach['user_id'] ) ); ?>" class="btn button">Private Message</a>
+                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button">Private Message</a>
 
                                                         <div class="meta">
 
@@ -185,13 +210,24 @@ get_header();
                                                     <div class="clear"></div>
                                                 </li>
 
+                                                <?php foreach ($group_ids as $group_id): ?>
+                                                <li style="padding-left: 30px">
+                                                    <?php
+                                                    $group = groups_get_group(['group_id' => $group_id]);
+                                                    ?>
+                                                    <a href="<?php bp_group_permalink($group); ?>">
+                                                        <?php bp_group_name($group); ?>
+                                                    </a>
+                                                </li>
+                                                <?php endforeach; ?>
+
                                             <?php endforeach; // Coach Loop ?>
 
                                         </ul>
+                                        <?php else: ?>
+                                            <p><?php _e("You have not yet been assigned a coach."); ?></p>
+                                        <?php endif; ?>
 
-                                        <?php endif;?>
-
-                                    <?php endwhile; ?>
 
 
                                     <?php else: ?>
