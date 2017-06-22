@@ -309,12 +309,14 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
                 'screens' => array(
                     "admin" => array(
                         "enabled" => false
-                    )
+                    ),
+                    "create" => array(
+                        "enabled" => false
+                    ),
                 ),
             );
             parent::init($args);
         }
-
 
         function display($group_id = NULL)
         {
@@ -324,9 +326,7 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
 
         function settings_screen_save($group_id = NULL)
         {
-
             update_option("group-map", $_POST);
-
         }
 
 

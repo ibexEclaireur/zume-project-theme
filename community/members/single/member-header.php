@@ -68,7 +68,7 @@
 
 <style>
     /* members/single/member-header.php */
-  .article-header {display:none;}
+    .article-header {display:none;}
     #profile-personal-li {display:none;}
 </style>
 

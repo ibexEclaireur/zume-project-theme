@@ -80,7 +80,7 @@ get_header();
 
                                                 <li>
                                                     <div class="row">
-                                                        <div class="medium-4 large-4 columns gutter-medium">
+                                                        <div class="medium-5 large-5 columns gutter-medium">
                                                             <div class="item-avatar">
                                                                 <a href="<?php bp_group_permalink() ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ) ?></a>
                                                             </div>
@@ -93,11 +93,15 @@ get_header();
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="medium-4 large-4 columns gutter-medium center dashboard-group-images">
+                                                        <div class="medium-3 large-3 columns gutter-medium center dashboard-group-images">
                                                             <?php if (bp_group_has_members(['group_id' => bp_get_group_id(), 'exclude_admins_mods' => false, 'per_page' => 11, 'max' => 11])): ?>
-                                                                <?php while (bp_group_members()): bp_group_the_member(); ?>
-                                                                    <?php bp_group_member_avatar(); ?>
-                                                                <?php endwhile; ?>
+                                                                <?php
+                                                                while (bp_group_members()) {
+                                                                    bp_group_the_member();
+                                                                    bp_group_member_avatar();
+                                                                    /* It's important that we don't print spaces between avatars */
+                                                                }
+                                                                ?>
                                                             <?php endif; ?>
                                                         </div>
                                                         <div class="medium-4 large-4 columns gutter-medium center">
@@ -156,7 +160,7 @@ get_header();
 
                         <!-- Second Row -->
                         <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
-                            <div class="medium-8 columns">
+                            <div class="medium-8 columns dashboard-coaches">
 
                                 <div class="callout" data-equalizer-watch>
 
@@ -184,42 +188,35 @@ get_header();
                                         <ul id="groups-list" class="item-list">
                                             <?php foreach ($groups_for_coach as $coach_id => $group_ids) : ?>
 
-                                                <li>
-                                                    <div class="item-avatar">
-                                                        <a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
-                                                    </div>
+                                                <li class="coach-item">
 
-                                                    <div class="item">
-                                                        <div class="item-title"><?php  echo bp_core_get_userlink($coach_id); ?></div>
-                                                        <div class="item-meta"><!--<span class="activity"><?php /*echo bp_core_get_last_activity( bp_get_user_last_activity( $coach_id ), __( 'active %s', 'buddypress' ) )  */?></span>--></div>
-
-                                                        <div class="item-desc"><?php  ?> </div>
-
+                                                    <div class="coach-item__intro">
+                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button" style="margin-bottom: 0"
+                                                            >Private Message</a
+                                                        ><a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
                                                         <?php do_action( 'bp_directory_groups_item' ) ?>
-                                                    </div>
-
-                                                    <div class="action">
-                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button">Private Message</a>
-
-                                                        <div class="meta">
-
-                                                        </div>
 
                                                     </div>
+                                                    <div class="coach-item__text">
+                                                        <?php  echo bp_core_get_userlink($coach_id); ?>
 
-                                                    <div class="clear"></div>
-                                                </li>
 
-                                                <?php foreach ($group_ids as $group_id): ?>
-                                                <li style="padding-left: 30px">
-                                                    <?php
-                                                    $group = groups_get_group(['group_id' => $group_id]);
-                                                    ?>
-                                                    <a href="<?php bp_group_permalink($group); ?>">
-                                                        <?php bp_group_name($group); ?>
-                                                    </a>
+                                                        <?php _e("for groups:"); ?>
+
+
+                                                        <?php for ($i = 0; $i < count($group_ids); $i++): ?>
+                                                            <?php
+                                                            $group = groups_get_group(['group_id' => $group_ids[$i]]);
+                                                            ?>
+                                                            <a href="<?php bp_group_permalink($group); ?>">
+                                                                <?php bp_group_name($group); ?>
+                                                            </a>
+                                                            <?php if ($i < count($group_ids) - 1): ?>
+                                                                •
+                                                            <?php endif; ?>
+                                                        <?php endfor; ?>
+                                                    </div>
                                                 </li>
-                                                <?php endforeach; ?>
 
                                             <?php endforeach; // Coach Loop ?>
 
@@ -244,11 +241,11 @@ get_header();
                             </div>
 
 
-                            <div class="medium-4 columns">
+                            <div class="medium-4 columns dashboard-messages">
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Messages</h2>
 
-                                    <p class="center">
+                                    <p class="center" style="margin-top: 15px">
                                         <a href="<?php echo bp_core_get_userlink($zume_current_user, false, true) ; ?>/messages/" class="button">View Messages</a>
                                     </p>
                                     <p class="center text-gray text-small">
