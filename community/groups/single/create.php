@@ -363,8 +363,9 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
                     </div>
 
             <div id="map"></div>
-
+             <?php if (groups_is_user_admin( get_current_user_id(), $group_id )) : ?>
                 <div style="padding:20px 0;">If this is not correct or you have changed location, please <a  href="<?php echo home_url('groups/'); echo bp_get_current_group_slug(); ?>/admin/edit-details/">update your new location in the Manage section.</a><br><a class="button large" href="<?php echo home_url('groups/'); echo bp_get_current_group_slug(); ?>/admin/edit-details/">Go to Edit</a> </div>
+             <?php endif; ?>
 
             <script type="text/javascript">
 
