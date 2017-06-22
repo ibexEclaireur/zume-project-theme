@@ -184,30 +184,34 @@ get_header();
                                         <ul id="groups-list" class="item-list">
                                             <?php foreach ($groups_for_coach as $coach_id => $group_ids) : ?>
 
-                                                <li style="margin-bottom: 10px">
-                                                    <div class="coach-floated">
+                                                <li class="coach-item">
 
+                                                    <div class="coach-item__intro">
+                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button" style="margin-bottom: 0"
+                                                            >Private Message</a
+                                                        ><a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
                                                         <?php do_action( 'bp_directory_groups_item' ) ?>
-                                                        <?php  echo bp_core_get_userlink($coach_id); ?>
-                                                        <a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
-                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button" style="margin-bottom: 0">Private Message</a>
+
                                                     </div>
+                                                    <div class="coach-item__text">
+                                                        <?php  echo bp_core_get_userlink($coach_id); ?>
 
 
-                                                    <p>
-                                                    <?php for ($i = 0; $i < count($group_ids); $i++): ?>
-                                                        <?php
-                                                        $group = groups_get_group(['group_id' => $group_ids[$i]]);
-                                                        ?>
-                                                        <a href="<?php bp_group_permalink($group); ?>">
-                                                            <?php bp_group_name($group); ?>
-                                                        </a>
-                                                        <?php if ($i < count($group_ids) - 1): ?>
-                                                            •
-                                                        <?php endif; ?>
-                                                    <?php endfor; ?>
-                                                    </p>
-                                                    <div style="clear: both"></div>
+                                                        <?php _e("for groups:"); ?>
+
+
+                                                        <?php for ($i = 0; $i < count($group_ids); $i++): ?>
+                                                            <?php
+                                                            $group = groups_get_group(['group_id' => $group_ids[$i]]);
+                                                            ?>
+                                                            <a href="<?php bp_group_permalink($group); ?>">
+                                                                <?php bp_group_name($group); ?>
+                                                            </a>
+                                                            <?php if ($i < count($group_ids) - 1): ?>
+                                                                •
+                                                            <?php endif; ?>
+                                                        <?php endfor; ?>
+                                                    </div>
                                                 </li>
 
                                             <?php endforeach; // Coach Loop ?>
