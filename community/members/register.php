@@ -395,6 +395,10 @@
 				<?php endif; ?>
 			</div>
 
+      <div style="text-align: center">
+        <img class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>noun_send_email.png" alt=""  height="300" width="300"/>
+      </div>
+
 			<?php
 
 			/**
