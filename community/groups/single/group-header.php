@@ -48,11 +48,13 @@ do_action( 'bp_before_group_header' );
     .article-header {display:none;}
     #group_invite_by_email-groups-li {display:none;}
     #group_invite_by_url-groups-li {display:none;}
-    #invite-options {border-top:1px solid #eaeaea;}
     form#invite_by_email {margin-top: 15px;
         border-top: 1px solid #eaeaea;
         padding-top: 15px;}
     #group-map-groups-li {display:none;}
+    #item-nav {border-bottom:1px solid #eaeaea;}
+    #buddypress div.item-list-tabs#subnav {margin:0;}
+
 </style>
 
 

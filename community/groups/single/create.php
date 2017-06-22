@@ -347,7 +347,7 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
                 /* Always set the map height explicitly to define the size of the div
             * element that contains the map. */
                 #map {
-                    height: 600px;
+                    height: 475px;
                     width: 100%;
                 }
                 /* Optional: Makes the sample page fill the window. */
@@ -357,6 +357,7 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
                     padding: 0;
                 }
                 #search-response {padding: 15px 0;}
+
             </style>
 
                 <div id="search-response">Your current census tract is <strong><?php echo custom_field('tract'); ?></strong> as shown on the map below. <br>
@@ -384,7 +385,7 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
                         jQuery.post( restURL, { geoid: geoid, lng: lng, lat: lat })
                             .done(function( data ) {
 
-                                jQuery('#map').css('height', '600px');
+                                jQuery('#map').css('height', '475px');
 
                                 var map = new google.maps.Map(document.getElementById('map'), {
                                     zoom: data.zoom,
