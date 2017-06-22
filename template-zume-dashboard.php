@@ -80,7 +80,7 @@ get_header();
 
                                                 <li>
                                                     <div class="row">
-                                                        <div class="medium-4 large-4 columns gutter-medium">
+                                                        <div class="medium-5 large-5 columns gutter-medium">
                                                             <div class="item-avatar">
                                                                 <a href="<?php bp_group_permalink() ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ) ?></a>
                                                             </div>
@@ -93,11 +93,15 @@ get_header();
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="medium-4 large-4 columns gutter-medium center dashboard-group-images">
+                                                        <div class="medium-3 large-3 columns gutter-medium dashboard-group-images">
                                                             <?php if (bp_group_has_members(['group_id' => bp_get_group_id(), 'exclude_admins_mods' => false, 'per_page' => 11, 'max' => 11])): ?>
-                                                                <?php while (bp_group_members()): bp_group_the_member(); ?>
-                                                                    <?php bp_group_member_avatar(); ?>
-                                                                <?php endwhile; ?>
+                                                                <?php
+                                                                while (bp_group_members()) {
+                                                                    bp_group_the_member();
+                                                                    bp_group_member_avatar();
+                                                                    /* It's important that we don't print spaces between avatars */
+                                                                }
+                                                                ?>
                                                             <?php endif; ?>
                                                         </div>
                                                         <div class="medium-4 large-4 columns gutter-medium center">
