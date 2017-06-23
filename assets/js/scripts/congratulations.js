@@ -16,7 +16,7 @@ jQuery(function($) {
   if (group_permalink) {
     var href = group_permalink + "group_invite_by_url/";
     $(".js-congratulations-more-invite-button").append(
-      $("<p>").append(
+      $("<p>").addClass("center").append(
        $("<a>").addClass("button").attr("href", href).text("Invite friends")
       )
     );
