@@ -67,6 +67,14 @@ get_header();
                 <div class="congratulations-icon congratulations-icon-contact-coach"></div>
                 <span>Contact my coach</span>
             </button>
+            <button class="button js-congratulations-more-button" data-item="share">
+                <div class="congratulations-icon congratulations-icon-share"></div>
+                <span>Share on Social Media</span>
+            </button>
+            <button class="button js-congratulations-more-button" data-item="champion">
+                <div class="congratulations-icon congratulations-icon-champion"></div>
+                <span>Champion Zúme on Social Media</span>
+            </button>
         </div>
 
         <div class="congratulations-more__text js-congratulations-more-item" data-item="learn-more" hidden>
@@ -143,6 +151,20 @@ get_header();
         <div class="congratulations-more__text js-congratulations-more-item" data-item="contact-coach" hidden>
             <p class="center">
                 <a class="button" href="/dashboard/#your-coaches">Contact my coach</a>
+            </p>
+        </div>
+        <div class="congratulations-more__text js-congratulations-more-item" data-item="share" hidden>
+            <p class="center">
+                <a class="button" href="https://www.facebook.com/zumeproject" target="_blank">Facebook page</a>
+            </p>
+        </div>
+        <div class="congratulations-more__text js-congratulations-more-item" data-item="champion" hidden>
+            <p>
+                Contact us at <a href="mailto:info@zumeproject.com">info@zumeproject.com</a> if you are
+                interested as serving as a social media moderator or Zúme.
+            </p>
+            <p class="center">
+                <a class="button" href="mailto:info@zumeproject.com">Contact us</a>
             </p>
         </div>
 

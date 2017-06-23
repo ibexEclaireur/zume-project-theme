@@ -911,6 +911,7 @@ ul.orbit-container {
         flex: 1 1 325px;
         display: flex;
         align-items: center;
+        font-size: 1.5rem;
 
         & > span {
             text-align: center;
@@ -921,7 +922,7 @@ ul.orbit-container {
 
 .congratulations-more__text {
     background-color: #F6F6F6;
-    border: 1px solid #2398E7;
+    border: 1px solid #21336A;
     margin: 1rem 0;
     padding: 1rem;
 }
