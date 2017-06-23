@@ -37,3 +37,9 @@ function remove_username_empty_error($wp_error, $sanitized_user_login, $user_ema
     }
     return $wp_error;
 }
+
+add_filter("bp_email_recipient_get_name", "get_name_for_email", 10, 3);
+function get_name_for_email($name, $recipient){
+    $id = $recipient->user_oject->ID;
+    return  xprofile_get_field_data(1, $id);
+}
