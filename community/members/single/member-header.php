@@ -70,6 +70,9 @@
     /* members/single/member-header.php */
     .article-header {display:none;}
     #profile-personal-li {display:none;}
+    #messages_search_submit {display:none;}
+    #item-nav {border-bottom:1px solid #eaeaea;}
+    #buddypress div.item-list-tabs#subnav {margin:0;}
 </style>
 
 <?php do_action( 'bp_after_member_header' ); ?>
