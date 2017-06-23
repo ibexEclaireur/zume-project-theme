@@ -40,6 +40,12 @@ function remove_username_empty_error($wp_error, $sanitized_user_login, $user_ema
 
 add_filter("bp_email_recipient_get_name", "get_name_for_email", 10, 3);
 function get_name_for_email($name, $recipient){
-    $id = $recipient->user_oject->ID;
-    return  xprofile_get_field_data(1, $id);
+    $user_obj  = $recipient->get_user( 'search-email' );
+    $id = $user_obj->ID;
+    $display_name =  xprofile_get_field_data(1, $id);
+    if ($display_name){
+        return $display_name;
+    } else {
+        return $name;
+    }
 }
