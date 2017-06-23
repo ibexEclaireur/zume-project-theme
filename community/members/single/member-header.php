@@ -73,6 +73,7 @@
     #messages_search_submit {display:none;}
     #item-nav {border-bottom:1px solid #eaeaea;}
     #buddypress div.item-list-tabs#subnav {margin:0;}
+    #buddypress #item-body form#whats-new-form {padding-top:15px;}
 </style>
 
 <?php do_action( 'bp_after_member_header' ); ?>
