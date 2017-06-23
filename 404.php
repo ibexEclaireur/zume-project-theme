@@ -17,7 +17,7 @@
 					</section> <!-- end article section -->
 
 					<section class="search">
-					    <p><?php get_search_form(); ?></p>
+					    <p><a href="/dasboard/" </p>
 					</section> <!-- end search section -->
 			
 				</article> <!-- end article -->
