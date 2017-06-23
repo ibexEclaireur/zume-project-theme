@@ -895,6 +895,31 @@ ul.orbit-container {
 
 
 /**************************************/
+// Congratulations page after session 10 is complete
+/**************************************/
+
+.congratulations-more {
+    display: flex;
+    flex-wrap: wrap;
+    $congratulation-button-margin: 0.5rem;
+
+    // Easiest way to collapse margins with flex https://stackoverflow.com/q/20626685
+    margin: -1 * $congratulation-button-margin;
+
+    & > button {
+        margin: $congratulation-button-margin;
+        flex: 1 1 325px;
+        display: flex;
+        align-items: center;
+
+        & > span {
+            text-align: center;
+            flex-grow: 1;
+        }
+    }
+}
+
+/**************************************/
 // Register
 /**************************************/
 
