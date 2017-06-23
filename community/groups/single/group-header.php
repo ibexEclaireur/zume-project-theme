@@ -54,6 +54,7 @@ do_action( 'bp_before_group_header' );
     #group-map-groups-li {display:none;}
     #item-nav {border-bottom:1px solid #eaeaea;}
     #buddypress div.item-list-tabs#subnav {margin:0;}
+    #whats-new-form {padding-top:15px;}
 
 </style>
 
