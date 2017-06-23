@@ -67,26 +67,3 @@ function default_display_name($name) {
     return $name;
 }
 add_filter('pre_user_display_name','default_display_name');
-
-
-/**
- * Update the WP display name from buddypress
- * @param $user_id
- * @param $posted_field_ids
- * @param $errors
- * @param $old_values
- * @param $new_values
- */
-function updateSubscribe( $user_id, $posted_field_ids, $errors, $old_values, $new_values )
-{
-    if (isset($new_values[1]) && empty($errors)){
-        $name =  $new_values[1];
-        $args = array(
-            'ID' => $user_id,
-            'display_name' => $name,
-            'nickname' => $name
-        );
-        wp_update_user( $args );
-    }
-}
-add_action('xprofile_updated_profile', 'updateSubscribe', 1, 5);
