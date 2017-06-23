@@ -38,14 +38,55 @@ function remove_username_empty_error($wp_error, $sanitized_user_login, $user_ema
     return $wp_error;
 }
 
-add_filter("bp_email_recipient_get_name", "get_name_for_email", 10, 3);
-function get_name_for_email($name, $recipient){
-    $user_obj  = $recipient->get_user( 'search-email' );
-    $id = $user_obj->ID;
-    $display_name =  xprofile_get_field_data(1, $id);
-    if ($display_name){
-        return $display_name;
-    } else {
-        return $name;
+/**
+ * New user registrations should have display_name set to 'firstname lastname'
+ * Best used on 'user_register'
+ * @param int $user_id The user ID
+ * @return void
+ * @uses get_userdata()
+ * @uses wp_update_user()
+ */
+function set_default_display_name( $user_id ) {
+    if (isset($_POST["field_1"])){
+        $name =  $_POST["field_1"];
+        $args = array(
+            'ID' => $user_id,
+            'display_name' => $name,
+            'nickname' => $name
+        );
+        wp_update_user( $args );
     }
 }
+add_action( 'user_register', 'set_default_display_name' );
+
+
+function default_display_name($name) {
+    if ( isset( $_POST['field_1'] ) ) {
+        $name = sanitize_text_field( $_POST['field_1'] );
+    }
+    return $name;
+}
+add_filter('pre_user_display_name','default_display_name');
+
+
+/**
+ * Update the WP display name from buddypress
+ * @param $user_id
+ * @param $posted_field_ids
+ * @param $errors
+ * @param $old_values
+ * @param $new_values
+ */
+function updateSubscribe( $user_id, $posted_field_ids, $errors, $old_values, $new_values )
+{
+    if (isset($new_values[1]) && empty($errors)){
+        $name =  $new_values[1];
+        $args = array(
+            'ID' => $user_id,
+            'display_name' => $name,
+            'nickname' => $name
+        );
+        wp_update_user( $args );
+    }
+}
+add_action('xprofile_updated_profile', 'updateSubscribe', 1, 5);
