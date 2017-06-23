@@ -18,7 +18,7 @@ add_filter('login_headertitle', 'joints_login_title');
 
 function action_bp_signup_pre_validate(){
     if(isset($_POST['signup_email']) && !empty($_POST['signup_email'])){
-        $_POST['signup_username'] = $_POST['signup_email'];
+        $_POST['signup_username'] = md5($_POST['signup_email']);
     }
 }
 add_action( 'bp_signup_pre_validate', 'action_bp_signup_pre_validate', 10, 0 );
