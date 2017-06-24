@@ -194,7 +194,16 @@
 		  do_action( 'bp_before_account_details_fields' ); ?>
 
 
-        <?php do_action( 'bp_signup_username_errors' ); ?>
+        <label for="signup_username"><?php _e( 'Username', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+        <?php
+
+        /**
+         * Fires and displays any member registration username errors.
+         *
+         * @since 1.1.0
+         */
+        do_action( 'bp_signup_username_errors' ); ?>
+        <input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
 
 				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
 				<?php
