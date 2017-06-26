@@ -7,6 +7,8 @@ jQuery(function($) {
       .hide()
       .filter(function() { return $(this).data("item") == item; });
     textbox.show();
+    $(this).blur();
+    textbox.focus();
     if (! isScrolledIntoView(textbox[0])) {
       textbox[0].scrollIntoView({behavior: "smooth"});
     }
