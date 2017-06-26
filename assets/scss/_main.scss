@@ -910,6 +910,11 @@ ul.orbit-container {
         margin: $congratulation-button-margin;
         flex: 1 1 325px;
 
+        &.active {
+            background-color: #323a68;
+            color: white;
+        }
+
         & > span {
             display: flex;
             align-items: center;
@@ -928,6 +933,10 @@ ul.orbit-container {
     border: 1px solid #21336A;
     margin: 1rem 0;
     padding: 1rem;
+
+    .button {
+        margin: 0;
+    }
 }
 
 /**************************************/

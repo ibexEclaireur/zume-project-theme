@@ -2,11 +2,15 @@ jQuery(function($) {
   "use strict";
 
   $(".js-congratulations-more-button").on("click", function() {
+    $(".js-congratulations-more-button").removeClass("active");
+    $(this).addClass("active");
     var item = $(this).data("item");
     var textbox = $(".js-congratulations-more-item")
       .hide()
       .filter(function() { return $(this).data("item") == item; });
     textbox.show();
+    $(this).blur();
+    textbox.focus();
     if (! isScrolledIntoView(textbox[0])) {
       textbox[0].scrollIntoView({behavior: "smooth"});
     }
