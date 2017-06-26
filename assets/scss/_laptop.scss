@@ -33,7 +33,9 @@
     height: 0;
 }
 
-.laptop__iframe {
+.laptop__iframe,
+.fluid-width-video-wrapper iframe.laptop__iframe
+{
     // The little top value centers the video vertically in the laptop screen
     position: absolute;
     top: 8%;
