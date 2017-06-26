@@ -137,15 +137,14 @@ get_header();
 
 
                                     <?php else: ?>
-
-                                        <div id="message" class="info" >
-                                          <p style="padding: 10px">You are currently not in a group.<br><br>
-                                          Zume requires participants to go through the training in groups for several important reasons.
-                                            You will need at least 4 people gathered together to start each new session. Please start a group below.
-                                            <br><br>
+                                      <div style="background: url('<?php echo get_stylesheet_directory_uri() . '/assets/images/noun_attention.png'; ?>') top left no-repeat;
+                                          padding-left:55px;
+                                          background-size:50px">
+                                        <p style="padding: 10px"><strong>You are currently not in a group.</strong><br>
+                                          You will need at least four people gathered together to start each new session. Please start a group below.
                                           If you intended to join someone else's group, please return to the invitation they sent and use
-                                            the link provided to be automatically added to that group.
-                                        </div>
+                                          the link provided to be automatically added to that group.
+                                      </div>
 
                                     <?php endif; ?>
 
@@ -230,8 +229,10 @@ get_header();
                                     <?php else: ?>
 
                                         <h2 class="center">Your Coach</h2>
-                                        <div id="message" class="info">
-                                            <p><?php _e( 'You are not in any groups.', 'buddypress' ) ?></p>
+                                        <div style="background: url('<?php echo get_stylesheet_directory_uri() . '/assets/images/noun_attention.png'; ?>') top left no-repeat;
+                                            padding-left:55px;
+                                            background-size:50px">
+                                          <p style="padding: 10px"><strong>You don't have any coaches</strong></p>
                                         </div>
 
                                     <?php endif; ?>
