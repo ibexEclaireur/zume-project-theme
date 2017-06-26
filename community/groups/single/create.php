@@ -110,7 +110,7 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
 
             <h3 class="group-invite-header"><strong>Option 2: </strong></h3>
             <span class="group-invite-header-side-text">Use our email template.</span>
-            <div style="padding:10px; background-color:#eee; border:1px solid #cecece">
+            <div class="group-template-wrapper">
                 <?php echo $this->invite_message($group, $sign_up_url, $know_more_url) ?>
             </div>
 
