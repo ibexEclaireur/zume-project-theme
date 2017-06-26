@@ -232,7 +232,7 @@ get_header();
                                         <div style="background: url('<?php echo get_stylesheet_directory_uri() . '/assets/images/noun_attention.png'; ?>') top left no-repeat;
                                             padding-left:55px;
                                             background-size:50px">
-                                          <p style="padding: 10px"><strong>You don't have any coaches</strong></p>
+                                          <p style="padding: 10px"><strong>You don't have any coaches.</strong></p>
                                         </div>
 
                                     <?php endif; ?>
