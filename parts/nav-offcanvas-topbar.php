@@ -4,7 +4,9 @@
 <div class="top-bar" id="top-bar-menu">
 	<div class="top-bar-left float-left">
 		<ul class="menu">
-			<li><a href="<?php if (is_user_logged_in()) { echo '/dashboard'; } else { echo home_url(); } ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/zume-logo-white.png" /></a></li>
+			<li class="zume-logo-in-top-bar"><a href="<?php if (is_user_logged_in()) { echo '/dashboard'; } else { echo home_url(); } ?>"><!--
+			    --><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/zume-logo-white.png" ><!--
+			--></a></li>
 		</ul>
 	</div>
 	<div class="top-bar-right float-right show-for-large">
