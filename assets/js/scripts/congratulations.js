@@ -2,6 +2,8 @@ jQuery(function($) {
   "use strict";
 
   $(".js-congratulations-more-button").on("click", function() {
+    $(".js-congratulations-more-button").removeClass("active");
+    $(this).addClass("active");
     var item = $(this).data("item");
     var textbox = $(".js-congratulations-more-item")
       .hide()
