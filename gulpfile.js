@@ -63,6 +63,23 @@ gulp.task('foundation-js', function() {
           './vendor/foundation-sites/js/foundation.core.js',
           './vendor/foundation-sites/js/foundation.util.*.js',
 
+          /* We do not want to load foundation.util.timerAndImageLoader.js .
+           * This is because it appends a question mark and a timestamp to
+           * image URLs, which causes images hosted on Gravatar to fail. In a
+           * comment, it says that it is trying to follow this technique:
+           *
+           * https://css-tricks.com/snippets/jquery/fixing-load-in-ie-for-cached-images/
+           *
+           * Newer versions of foundation-sites don't have this file any more,
+           * and I presume they don't have this bug any more, we should
+           * probably update foundation-sites at some point.
+           *
+           * https://github.com/zurb/foundation-sites
+           *
+           * Note the exclamation point, which indicates negation.
+           */
+          '!./vendor/foundation-sites/js/foundation.util.timerAndImageLoader.js',
+
           // Pick the components you need in your project
           './vendor/foundation-sites/js/foundation.abide.js',
           './vendor/foundation-sites/js/foundation.accordion.js',
