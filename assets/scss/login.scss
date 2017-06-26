@@ -57,7 +57,7 @@ p {
       font-size: medium;
       cursor: pointer;
       outline: $primary-color solid 1px;
-      padding: 0 !important;
+      padding: $global-button-padding;
       text-align: center;
       text-decoration: none;
       -webkit-border-radius: $global-radius;
@@ -72,7 +72,7 @@ p {
         font-size: medium;
         cursor: pointer;
         outline: $primary-color solid 1px;
-        padding: 0 !important;
+        padding: $global-button-padding;
         text-align: center;
         text-decoration: none;
         -webkit-border-radius: $global-radius;
@@ -124,6 +124,4 @@ p {
 
 }
 
-.login #nav {
-  padding: 0 !important;
-}
+
