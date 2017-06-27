@@ -26,6 +26,24 @@
     right: percentage(135 / 1024);
 }
 
+.laptop__video-wrapper {
+    // This matches the video aspect ratio, while being responsive
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.laptop__iframe,
+.fluid-width-video-wrapper iframe.laptop__iframe
+{
+    // The little top value centers the video vertically in the laptop screen
+    position: absolute;
+    top: 8%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
 .front-page-header {
     text-align: center;
     text-transform: uppercase;
