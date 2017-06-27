@@ -112,7 +112,7 @@ Let's learn how God can use people like us to change the world together,
         Write your own message.
       </span>
             <p> Simply include this link and send it by email or any method you wish.</p>
-            <pre><a href="<?php echo $sign_up_url ?>"><?php echo $sign_up_url ?></a></pre>
+            <textarea readonly rows=1 style="cursor: text"><?php echo $sign_up_url ?></textarea>
 
             <h3 class="group-invite-header"><strong>Option 2: </strong></h3>
             <span class="group-invite-header-side-text">Use our email template.</span>
