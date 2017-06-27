@@ -14,3 +14,13 @@ function joints_login_title() { return get_option('blogname'); }
 add_action( 'login_enqueue_scripts', 'joints_login_css', 10 );
 add_filter('login_headerurl', 'joints_login_url');
 add_filter('login_headertitle', 'joints_login_title');
+
+
+//set the display name before the user is created/activated
+function default_display_name($name) {
+    if ( isset( $_POST['field_1'] ) ) {
+        $name = sanitize_text_field( $_POST['field_1'] );
+    }
+    return $name;
+}
+add_filter('pre_user_display_name','default_display_name');
