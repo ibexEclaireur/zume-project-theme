@@ -10,3 +10,4 @@ npm-debug.log
 /vendor/
 
 config.rb
+/config.codekit
