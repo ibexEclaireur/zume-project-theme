@@ -16,11 +16,23 @@ add_filter('login_headerurl', 'joints_login_url');
 add_filter('login_headertitle', 'joints_login_title');
 
 
-//set the display name before the user is created/activated
-function default_display_name($name) {
-    if ( isset( $_POST['field_1'] ) ) {
-        $name = sanitize_text_field( $_POST['field_1'] );
+//set the display name before the user is created/activate
+add_filter("bp_email_recipient_get_name", "get_name_for_email", 10, 3);
+function get_name_for_email($name, $recipient){
+    $user = $recipient->get_user();
+    $display_name = null;
+    if (isset($user->ID)){
+        $id = $user->ID;
+        $display_name =  xprofile_get_field_data(1, $id);
     }
-    return $name;
+
+    if ($display_name){
+        return $display_name;
+    } else {
+        if (isset($_POST["field_1"])){
+            return $_POST["field_1"];
+        } else {
+            return $name;
+        }
+    }
 }
-add_filter('pre_user_display_name','default_display_name');
