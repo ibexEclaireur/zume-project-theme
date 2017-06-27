@@ -70,13 +70,19 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
 
         function invite_message($group, $sign_up_url, $know_more_url)
         {
-            $message = "<p>Hey,</p>
-        <p>I just signed up for a 9-week online training course, called Zúme Training. It teaches ordinary men and women, like ourselves, how to make disciples who make more disciples. In order to start the training, I need at least 3 other people to gather in-person with me each week.</p>
-        <p>You can check out the course at <a href=\"" . $know_more_url . "\"> " . $know_more_url . "</a></p>
-        <p>To accept the invitation to join my Zúme Training Group \"" . $group->name . "\", click on this link: <a href=\"" . $sign_up_url . "\" >" . $sign_up_url . "</a></p>
-        <p>After you click on the link, it will ask you to create an account. Then you will be joined to our group. When we have at least four people ready to gather together, we can begin going through Zúme Training.</p>
-        <p>Let's learn how God can use people like us to change the world together,</p>
-        <p>[Insert your name here]</p>";
+            $message = "Hey,
+
+I just signed up for a 9-week online training course, called Zúme Training. It teaches ordinary men and women, like ourselves, how to make disciples who make more disciples. In order to start the training, I need at least 3 other people to gather in-person with me each week.
+
+You can check out the course at $know_more_url
+
+To accept the invitation to join my Zúme Training group \"" . $group->name . "\", click on this link: $sign_up_url
+
+After you click on the link, it will ask you to create an account. Then you will be joined to our group. When we have at least four people ready to gather together, we can begin going through Zúme Training.
+
+Let's learn how God can use people like us to change the world together,
+
+[Insert your name here]";
 
             return $message;
         }
@@ -110,9 +116,11 @@ if (function_exists('bp_is_active') && bp_is_active('groups')) :
 
             <h3 class="group-invite-header"><strong>Option 2: </strong></h3>
             <span class="group-invite-header-side-text">Use our email template.</span>
-            <div class="group-template-wrapper">
-                <?php echo $this->invite_message($group, $sign_up_url, $know_more_url) ?>
-            </div>
+            <?php $invite_message = $this->invite_message($group, $sign_up_url, $know_more_url); ?>
+            <textarea readonly rows=15 style="cursor: text"><?php echo $invite_message?></textarea>
+            <p>
+                <a class="button" href="mailto:?body=<?php echo rawurlencode($invite_message); ?>">Create this email in default email app</a>
+            </p>
 
 
             <?php
