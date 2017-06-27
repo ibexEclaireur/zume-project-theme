@@ -11,18 +11,13 @@ Template Name: Full Width Home
 
             <main id="main" role="main">
 
-                <div class="max-width-1024-wrapper">
-                    <div class="laptop"><div class="laptop__screen"><div class="laptop__video-wrapper">
-                        <iframe
-                            class="laptop__iframe"
-                            width="640"
-                            height="360"
-                            frameborder="0"
-                            allowfullscreen
-                            src="https://www.youtube-nocookie.com/embed/EOdSAdJ6AhI?rel=0&amp;showinfo=0"
 
-                            ></iframe>
-                    </div></div></div>
+                <div class="max-width-1024-wrapper">
+                    <div class="laptop"><div class="laptop__screen">
+                        <script src="https://fast.wistia.com/embed/medias/slvi7hufcp.jsonp" async></script>
+                        <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                        <div class="wistia_responsive_padding" style="padding:56.0% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:8%;width:100%;"><div class="wistia_embed wistia_async_slvi7hufcp videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
+                    </div></div>
                 </div>
 
                 <div class="row">
