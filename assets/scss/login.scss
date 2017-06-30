@@ -57,7 +57,7 @@ p {
       font-size: medium;
       cursor: pointer;
       outline: $primary-color solid 1px;
-      padding: $global-button-padding;
+      padding: 5px;
       text-align: center;
       text-decoration: none;
       -webkit-border-radius: $global-radius;
@@ -72,7 +72,7 @@ p {
         font-size: medium;
         cursor: pointer;
         outline: $primary-color solid 1px;
-        padding: $global-button-padding;
+        padding: 5px;
         text-align: center;
         text-decoration: none;
         -webkit-border-radius: $global-radius;
@@ -80,6 +80,16 @@ p {
         border-radius: $global-radius;
         margin: 2px;
       }
+    }
+
+    @media only screen and (min-width: 640px) {
+      a {
+        padding: $global-button-padding;
+      }
+      &:hover {
+        padding: $global-button-padding;
+      }
+
     }
 
   }
