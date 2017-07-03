@@ -36,3 +36,14 @@ function get_name_for_email($name, $recipient){
         }
     }
 }
+
+
+function custom_login_footer() {
+    ?>
+    <div style="width: 550px; max-width: 90%; padding: 20px 0; margin: auto">
+        Looking for the old site? Visit
+        <a href="https://old.zumeproject.com">old.zumeproject.com</a>.
+    </div>
+    <?php
+}
+add_action("login_footer", "custom_login_footer");
