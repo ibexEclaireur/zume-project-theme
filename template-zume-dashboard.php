@@ -234,7 +234,7 @@ get_header();
                                             background-size:50px">
                                           <p style="padding: 10px">
                                             Every group will be assigned a live coach who will help mentor you during the disciple-making process and help keep you accountable.
-                                            When your coach is assigned you’ll see his/her name here and you'll be able to private message them.
+                                            When your coach is assigned you'll see his/her name here and you'll be able to send a private message.
                                           </p>
                                         </div>
 
