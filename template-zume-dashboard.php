@@ -119,7 +119,7 @@ get_header();
                                                                     if (is_null($group_next_session)): ?>
                                                                         <a href="/zume-training/?id=10&group_id=<?php bp_group_id() ?>" class="button   ">See Sessions</a>
                                                                     <?php else: ?>
-                                                                        <a href="/zume-training/?id=<?php echo $group_next_session; ?>&group_id=<?php bp_group_id() ?>" class="button   ">Start session <?php echo $group_next_session; ?></a>
+                                                                        <a href="/zume-training/?id=<?php echo $group_next_session; ?>&group_id=<?php bp_group_id() ?>" class="button   ">Start Session <?php echo $group_next_session; ?></a>
                                                                     <?php endif; ?>
 
 
