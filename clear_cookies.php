@@ -15,3 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: /wp-login.php");
     }
 }
+else {
+    ?>
+
+    <p>
+        Some users have experienced issues with the log in process. If you're
+        one of them, click this button, and then try to log in again.
+    </p>
+
+    <form action="" method="post">
+        <button type="submit">Clear cookies</button>
+    </form>
+    <?php
+}
