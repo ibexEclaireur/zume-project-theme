@@ -203,7 +203,7 @@
          * @since 1.1.0
          */
         do_action( 'bp_signup_username_errors' ); ?>
-        <input type="text" name="signup_username" id="signup_username" required minlength=4 value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
+        <input type="text" name="signup_username" id="signup_username" required minlength=4 pattern="^[a-z0-9]+" title="<?php _e("Username must be at least four letters long and can only contain lowercase letters (a-z) and numbers.") ?>" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
 
 				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
 				<?php
