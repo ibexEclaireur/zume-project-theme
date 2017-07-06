@@ -39,11 +39,30 @@ function get_name_for_email($name, $recipient){
 
 
 function custom_login_footer() {
+	$clear_cookies_path = get_template_directory_uri() . '/clear_cookies.php';
     ?>
+    <style>
+        .inline-form,
+        .login .inline-form {
+            margin: 0;
+            padding: 0;
+            display: inline;
+            background: transparent;
+            box-shadow: none;
+        }
+    </style>
     <div style="width: 550px; max-width: 90%; padding: 20px 0; margin: auto">
         Looking for the old site? Visit
         <a href="https://old.zumeproject.com">old.zumeproject.com</a>.
+        <br>
+        Some users have experienced issues with the log in process. To fix the
+        issue, click this button, and then try to log in again.
+        <form action="<?php echo esc_attr($clear_cookies_path) ?>" method="post" class="inline-form">
+            <input type=hidden name=redirect_to value="<?php echo esc_attr($_SERVER["REQUEST_URI"]); ?>">
+            <button type=submit>Clear cookies</button>
+        </form>
     </div>
+
     <?php
 }
 add_action("login_footer", "custom_login_footer");
