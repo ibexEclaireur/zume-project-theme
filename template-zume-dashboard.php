@@ -21,18 +21,80 @@ function zume_get_coach_ids () {
  * @return array
  */
 function zume_get_coach_ids_in_group ($group_id) {
+    global $wpdb;
     if (is_numeric($group_id)) {
         $group_id = (int) $group_id;
     } else {
         throw new Exception("group_id argument should be an integer or pass the is_numeric test.");
     }
-    global $wpdb;
-    $results = $wpdb->get_results( "SELECT wp_usermeta.user_id FROM wp_bp_groups_members INNER JOIN wp_usermeta ON wp_usermeta.user_id=wp_bp_groups_members.user_id WHERE group_id = '$group_id' AND meta_key = 'wp_capabilities' AND meta_value LIKE '%coach%'", ARRAY_A );
+    $results = $wpdb->get_results( "SELECT $wpdb->usermeta.user_id FROM $wpdb->bp_groups_members INNER JOIN $wpdb->usermeta ON $wpdb->usermeta.user_id=$wpdb->bp_groups_members.user_id WHERE group_id = '$group_id' AND meta_key = '$wpdb->capabilities' AND meta_value LIKE '%coach%'", ARRAY_A );
     $rv = [];
     foreach ($results as $result) {
         $rv[] = (int) $result["user_id"];
     }
     return $rv;
+}
+
+
+/**
+ * Returns the User ID of assigned_to field
+ *
+ * @param $assigned_to
+ * @return string|bool          If team or dispatch, returns false.
+ */
+function zume_get_assigned_to_user_id ($assigned_to) {
+    $user_array = explode('-', $assigned_to);
+
+    if($user_array[0] == 'dispatch') {
+        return false;
+    } elseif ($user_array[0] == 'group') {
+        return false;
+    } else { /* else it equals group */
+        $userid = $user_array[1];
+        $user = get_userdata( $userid );
+        return $user->ID;
+    }
+}
+
+/**
+ * Returns $result['coaches'] (string) for the assigned_to id's of the coaches, and $result['count'] (int) with the number of groups the coach is assigned to.
+ * @return array
+ */
+function zume_get_coaches_for_groups() {
+    global $wpdb;
+    $current_user = get_current_user_id();
+    $result = $wpdb->get_results('
+              SELECT wp_bp_groups_groupmeta.meta_value as coach_id, wp_bp_groups_groupmeta.group_id, count(meta_value) as count
+              FROM wp_bp_groups_members
+              INNER JOIN wp_bp_groups_groupmeta ON wp_bp_groups_groupmeta.group_id=wp_bp_groups_members.group_id
+              WHERE wp_bp_groups_members.user_id = \''.$current_user.'\'
+              AND wp_bp_groups_groupmeta.meta_key = \'assigned_to\'
+              AND wp_bp_groups_groupmeta.meta_value != \'dispatch\'
+              GROUP BY meta_value
+              ', ARRAY_A);
+    return $result;
+}
+/**
+ * Returns $result['coaches'] (string) for the assigned_to id's of the coaches, and $result['count'] (int) with the number of groups the coach is assigned to.
+ * @return array
+ */
+function zume_get_groups_for_coach($coach_id, $user_id = null) {
+    global $wpdb;
+
+    if(empty($user_id)) {
+        $user_id = get_current_user_id();
+    }
+
+    $result = $wpdb->get_results("
+              SELECT wp_bp_groups_groupmeta.group_id
+              FROM wp_bp_groups_members
+              INNER JOIN wp_bp_groups_groupmeta ON wp_bp_groups_groupmeta.group_id=wp_bp_groups_members.group_id
+              WHERE wp_bp_groups_members.user_id = '$user_id'
+              AND wp_bp_groups_groupmeta.meta_key = 'assigned_to'
+              AND wp_bp_groups_groupmeta.meta_value = '$coach_id'
+              ", ARRAY_A);
+
+    return $result;
 }
 
 $zume_dashboard = Zume_Dashboard::instance();
@@ -163,67 +225,47 @@ get_header();
 
                                 <div class="callout" data-equalizer-watch>
 
-                                    <?php
-                                    if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) :
-                                        $groups_for_coach = [];
-                                        // Eg: $groups_for_coach[$mod_id] = [$group_id_1, $group_id_2];
-                                        while (bp_groups()) {
-                                            bp_the_group();
-                                            $coach_ids = zume_get_coach_ids_in_group(bp_get_group_id());
-                                            foreach ($coach_ids as $coach_id) {
-                                                if (! isset($groups_for_coach[$coach_id])) {
-                                                    $groups_for_coach[$coach_id] = [];
-                                                }
-                                                $groups_for_coach[$coach_id] = array_unique(array_merge(
-                                                    $groups_for_coach[$coach_id], [bp_get_group_id()]
-                                                ));
-                                            }
-                                        }
-                                        ?>
+                                    <?php $result = zume_get_coaches_for_groups(); ?>
 
-                                        <h2 class="center"><?php echo _n("Your Coach", "Your Coaches", count($groups_for_coach)) ?></h2>
+                                    <?php if ( !empty($result) ) : ?>
 
-                                        <?php if (count($groups_for_coach)): ?>
-                                        <ul id="groups-list" class="item-list">
-                                            <?php foreach ($groups_for_coach as $coach_id => $group_ids) : ?>
+                                    <h2 class="center"><?php echo _n("Your Coach", "Your Coaches", count($result)) ?></h2>
+
+                                        <?php foreach($result as $value) : $coach_id = substr($value['coach_id'], 5); $group_ids[] = $value['group_id']; if($value['count'] > 1) { $group_ids = zume_get_groups_for_coach($value['coach_id'], get_current_user_id()); } ?>
+
+                                            <ul id="groups-list" class="item-list">
 
                                                 <li class="coach-item">
 
                                                     <div class="coach-item__intro">
-                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button" style="margin-bottom: 0"
-                                                            >Private Message</a
-                                                        ><a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
-                                                        <?php do_action( 'bp_directory_groups_item' ) ?>
+
+                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button" style="margin-bottom: 0">
+                                                            Private Message</a>
+                                                        <a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
 
                                                     </div>
-                                                    <div class="coach-item__text">
-                                                        <?php  echo bp_core_get_userlink($coach_id); ?>
 
+                                                    <div class="coach-item__text">
+
+                                                        <?php  echo bp_core_get_userlink($coach_id); ?>
 
                                                         <?php _e("for groups:"); ?>
 
+                                                        <?php $i = 0; foreach ($group_ids as $group_id) : $group = groups_get_group($group_id) ?>
 
-                                                        <?php for ($i = 0; $i < count($group_ids); $i++): ?>
-                                                            <?php
-                                                            $group = groups_get_group(['group_id' => $group_ids[$i]]);
-                                                            ?>
                                                             <a href="<?php bp_group_permalink($group); ?>">
                                                                 <?php bp_group_name($group); ?>
                                                             </a>
-                                                            <?php if ($i < count($group_ids) - 1): ?>
-                                                                •
-                                                            <?php endif; ?>
-                                                        <?php endfor; ?>
+
+                                                            <?php $i++; if(count($group_ids) > 1 && $i < count($group_ids) ) { echo '-'; } ?>
+
+                                                        <?php endforeach ?>
+
                                                     </div>
                                                 </li>
+                                            </ul>
 
-                                            <?php endforeach; // Coach Loop ?>
-
-                                        </ul>
-                                        <?php else: ?>
-                                            <p><?php _e("You have not yet been assigned a coach."); ?></p>
-                                        <?php endif; ?>
-
+                                        <?php endforeach; ?>
 
 
                                     <?php else: ?>
