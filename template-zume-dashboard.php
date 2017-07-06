@@ -231,7 +231,7 @@ get_header();
 
                                     <h2 class="center"><?php echo _n("Your Coach", "Your Coaches", count($result)) ?></h2>
 
-                                        <?php foreach($result as $value) : $coach_id = substr($value['coach_id'], 5); $group_ids[] = $value['group_id']; if($value['count'] > 1) { $group_ids = zume_get_groups_for_coach($value['coach_id'], get_current_user_id()); } ?>
+                                        <?php foreach($result as $value) : $coach_id = substr($value['coach_id'], 5); $group_ids = array(); $group_ids[] = $value['group_id']; if($value['count'] > 1) { $group_ids = zume_get_groups_for_coach($value['coach_id'], get_current_user_id()); } ?>
 
                                             <ul id="groups-list" class="item-list">
 
