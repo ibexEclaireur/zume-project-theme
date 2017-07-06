@@ -55,12 +55,14 @@ function custom_login_footer() {
         Looking for the old site? Visit
         <a href="https://old.zumeproject.com">old.zumeproject.com</a>.
         <br>
-        Some users have experienced issues with the log in process. To fix the
-        issue, click this button, and then try to log in again.
+        Some users have experienced issues with the log in process. If you're
+        one of them, click this button, and then try to log in again.
         <form action="<?php echo esc_attr($clear_cookies_path) ?>" method="post" class="inline-form">
             <input type=hidden name=redirect_to value="<?php echo esc_attr($_SERVER["REQUEST_URI"]); ?>">
             <button type=submit>Clear cookies</button>
         </form>
+        <br>
+        Contact us at <a href="mailto:<?php echo antispambot("info@zumeproject.com"); ?>"><?php echo antispambot("info@zumeproject.com"); ?></a>.
     </div>
 
     <?php
