@@ -8,7 +8,7 @@
 						<div class="large-12 medium-12 columns">
 							<p class="source-org copyright">
 							    &copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>.
-                                <?php if( user_can( get_current_user_id(), 'manage_options') || user_can( get_current_user_id(), 'Edit Users') ) { echo '| <a href="/wp-admin" > Admin Panel</a>'; } ?>
+                                <?php if( user_can( get_current_user_id(), 'manage_options') || user_can( get_current_user_id(), 'bp_moderate') ) { echo '| <a href="/wp-admin" > Admin Panel</a>'; } ?>
                             </p>
 						</div>
 					</div> <!-- end #inner-footer -->
