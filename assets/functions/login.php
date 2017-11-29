@@ -65,19 +65,3 @@ function custom_login_footer() {
     <?php
 }
 add_action("login_footer", "custom_login_footer");
-
-function custom_login_message($message) {
-    if (empty($message)) {
-        return '<p class="message">
-        Welcome! If you created an account before July 6th 2017 and have not
-        reset your password, you will need to do so by clicking
-        <a href="/wp-login.php?action=lostpassword">here</a>. This is the result
-        of a migration to a new platform and holds no risk to your account
-        security.
-        </p>';
-    } else {
-        return $message;
-    }
-}
-
-add_filter('login_message', "custom_login_message");
