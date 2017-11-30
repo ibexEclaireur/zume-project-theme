@@ -52,14 +52,8 @@ function custom_login_footer() {
         }
     </style>
     <div style="width: 550px; max-width: 90%; padding: 20px 0; margin: auto">
-        Some users have experienced issues with the log in process. If you're
-        one of them, click this button,
-        <form action="<?php echo esc_attr($clear_cookies_path) ?>" method="post" class="inline-form">
-            <input type=hidden name=redirect_to value="<?php echo esc_attr($_SERVER["REQUEST_URI"]); ?>">
-            <button type=submit>Clear cookies</button>
-        </form>
-        and then try to log in again.
-        If you are still having problems, contact us at <a href="mailto:<?php echo antispambot("info@zumeproject.com"); ?>"><?php echo antispambot("info@zumeproject.com"); ?></a>.
+        If you experience any issues with logging in,
+        contact us at <a href="mailto:<?php echo antispambot("info@zumeproject.com"); ?>"><?php echo antispambot("info@zumeproject.com"); ?></a>.
     </div>
 
     <?php
