@@ -346,16 +346,16 @@ Let's learn how God can use people like us to change the world together,
 
         public function settings_screen($group_id = null)
         {
-            if (empty( custom_field( 'tract' ) )) :
+            if (empty( zume_custom_field( 'tract' ) )) :
                 echo 'You haven\'t yet set your locations. <a href="'. esc_attr( home_url( '/groups/' ) . bp_get_current_group_slug() ) .'/admin/edit-details/">Please set your census location under Manage->Details.</a>';
             else :
             ?>
 
-            <input type="hidden" id="tract" name="tract" value="<?php echo esc_attr( custom_field( 'tract' ) ); ?>" required/>
-            <input type="hidden" id="lng" name="lng" value="<?php echo esc_attr( custom_field( 'lng' ) ); ?>"  required/>
-            <input type="hidden" id="lat" name="lat" value="<?php echo esc_attr( custom_field( 'lat' ) ); ?>"  required/>
-            <input type="hidden" id="state" name="state" value="<?php echo esc_attr( custom_field( 'state' ) ); ?>"  required/>
-            <input type="hidden" id="county" name="county" value="<?php echo esc_attr( custom_field( 'county' ) ); ?>"  required/>
+            <input type="hidden" id="tract" name="tract" value="<?php echo esc_attr( zume_custom_field( 'tract' ) ); ?>" required/>
+            <input type="hidden" id="lng" name="lng" value="<?php echo esc_attr( zume_custom_field( 'lng' ) ); ?>"  required/>
+            <input type="hidden" id="lat" name="lat" value="<?php echo esc_attr( zume_custom_field( 'lat' ) ); ?>"  required/>
+            <input type="hidden" id="state" name="state" value="<?php echo esc_attr( zume_custom_field( 'state' ) ); ?>"  required/>
+            <input type="hidden" id="county" name="county" value="<?php echo esc_attr( zume_custom_field( 'county' ) ); ?>"  required/>
 
             <style>
                 /* Always set the map height explicitly to define the size of the div
@@ -374,7 +374,7 @@ Let's learn how God can use people like us to change the world together,
 
             </style>
 
-                <div id="search-response">Your current census tract is <strong><?php echo esc_html( custom_field( 'tract' ) ); ?></strong> as shown on the map below. <br>
+                <div id="search-response">Your current census tract is <strong><?php echo esc_html( zume_custom_field( 'tract' ) ); ?></strong> as shown on the map below. <br>
                     </div>
 
             <div id="map"></div>
@@ -389,11 +389,11 @@ echo esc_attr( bp_get_current_group_slug() ); ?>/admin/edit-details/">Go to Edit
                 jQuery(document).ready(function() {
 
                     jQuery(window).load(function () {
-                        var geoid = '<?php echo esc_js( custom_field( 'tract' ) ); ?>';
-                        var lng = '<?php echo esc_js( custom_field( 'lng' ) ); ?>';
-                        var lat = '<?php echo esc_js( custom_field( 'lat' ) ); ?>';
-                        var state = '<?php echo esc_js( custom_field( 'state' ) ); ?>';
-                        var county = '<?php echo esc_js( custom_field( 'county' ) ); ?>';
+                        var geoid = '<?php echo esc_js( zume_custom_field( 'tract' ) ); ?>';
+                        var lng = '<?php echo esc_js( zume_custom_field( 'lng' ) ); ?>';
+                        var lat = '<?php echo esc_js( zume_custom_field( 'lat' ) ); ?>';
+                        var state = '<?php echo esc_js( zume_custom_field( 'state' ) ); ?>';
+                        var county = '<?php echo esc_js( zume_custom_field( 'county' ) ); ?>';
 
 
                         var restURL = '<?php echo esc_js( get_rest_url( null, '/lookup/v1/tract/getmapbygeoid' ) ); ?>';
