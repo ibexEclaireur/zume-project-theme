@@ -5,8 +5,6 @@ Template Name: Zúme Overview
 
 get_header();
 
-( function() {
-
 ?>
 
     <div id="content">
@@ -32,13 +30,13 @@ get_header();
                          * @param 'id' in the url the id and session number is used to call the correct session.
                          */
 
-                        $user_id = get_current_user_id();
-                        $meta_key = 'zume_active_group';
+                        /* $user_id = get_current_user_id(); */
+                        /* $meta_key = 'zume_active_group'; */
 
-                        $group_id = '';
-                        $next_session = '';
-                        $session = '';
-                        Zume_Overview::instance()->zume_sessions_overview( $group_id, $next_session, $session );
+                        /* $group_id = ''; */
+                        /* $next_session = ''; */
+                        /* $session = ''; */
+                        Zume_Overview::instance()->zume_sessions_overview( '', '', '' );
 
 
 
@@ -61,7 +59,5 @@ get_header();
         </div> <!-- end #inner-content -->
 
     </div> <!-- end #content -->
-
-<?php } )(); ?>
 
 <?php get_footer(); ?>
