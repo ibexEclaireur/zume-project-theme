@@ -43,7 +43,8 @@ function site_scripts() {
             "stats", "wpApiSettings", array(
                 "test" => "test1",
                 "locations" => $stats->get_group_locations(),
-                "sizes" => $stats->get_group_sizes()
+                "sizes" => $stats->get_group_sizes(),
+                "steps" => $stats->get_group_steps()
             )
         );
 

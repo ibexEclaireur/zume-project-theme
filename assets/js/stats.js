@@ -25,9 +25,12 @@ jQuery(document).ready(function($) {
 
 
       var options = {
+        sizeAxis: { minValue: 0, maxValue: 1 },
         region: 'US',
+        title: "Location of each group",
         displayMode: 'markers',
-//        colorAxis: {colors: ['green', 'blue']}
+        defaultColor: '#000ef5',
+        backgroundColor: "#caf8ff"
       };
 
       var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
@@ -55,4 +58,24 @@ jQuery(document).ready(function($) {
     }
   }
   group_sizes()
+
+  let group_progress = function () {
+    google.charts.load("current", {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(wpApiSettings.steps);
+
+      var view = new google.visualization.DataView(data);
+
+      var options = {
+        bars: 'horizontal',
+        title: "Number of groups completing each session",
+        legend: {position: "none"},
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("sessions"));
+      chart.draw(view, options)
+    }
+  }
+  group_progress()
 })
