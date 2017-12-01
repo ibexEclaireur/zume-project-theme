@@ -15,7 +15,7 @@ get_header();
 
 
 
-                <article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
+                <article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
 
                     <header class="article-header">
 
@@ -30,13 +30,13 @@ get_header();
                          * @param 'id' in the url the id and session number is used to call the correct session.
                          */
 
-                        $user_id = get_current_user_id();
-                        $meta_key = 'zume_active_group';
+                        /* $user_id = get_current_user_id(); */
+                        /* $meta_key = 'zume_active_group'; */
 
-                        $group_id = '';
-                        $next_session = '';
-                        $session = '';
-                        Zume_Overview::instance()->zume_sessions_overview($group_id, $next_session, $session);
+                        /* $group_id = ''; */
+                        /* $next_session = ''; */
+                        /* $session = ''; */
+                        Zume_Overview::instance()->zume_sessions_overview( '', '', '' );
 
 
 

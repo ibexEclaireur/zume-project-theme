@@ -6,41 +6,41 @@ do_action( 'bp_before_group_header' );
 
 <div id="item-actions">
 
-	<?php if ( bp_group_is_visible() ) : ?>
+    <?php if ( bp_group_is_visible() ) : ?>
 
-		<h3><?php _e( 'Leaders', 'buddypress' ); ?></h3>
+        <h3><?php esc_html_e( 'Leaders', 'buddypress' ); ?></h3>
 
-		<?php bp_group_list_admins();
+        <?php bp_group_list_admins();
 
 
-	endif; ?>
+    endif; ?>
 
 
 </div><!-- #item-actions -->
 
 <div id="item-header-avatar">
-	<a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>">
+    <a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>">
 
-		<?php bp_group_avatar(); ?>
+        <?php bp_group_avatar(); ?>
 
-	</a>
+    </a>
 </div><!-- #item-header-avatar -->
 
 <div id="item-header-content">
-	<h2><a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>"><?php bp_group_name(); ?></a></h2>
+    <h2><a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>"><?php bp_group_name(); ?></a></h2>
 
 
-	<?php do_action( 'bp_before_group_header_meta' ); ?>
+    <?php do_action( 'bp_before_group_header_meta' ); ?>
 
-	<div id="item-meta">
+    <div id="item-meta">
 
-		<?php bp_group_description(); ?>
+        <?php bp_group_description(); ?>
 
 
         <?php do_action( 'bp_group_header_meta' ); ?>
 
 
-	</div>
+    </div>
 </div><!-- #item-header-content -->
 
 <style>

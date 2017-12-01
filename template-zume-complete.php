@@ -15,7 +15,7 @@ get_header();
 
 
 
-                <article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
+                <article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
 
                     <header class="article-header">
 
@@ -31,7 +31,7 @@ get_header();
                          */
                         zume_session_complete();
 
-                        function zume_session_complete () {
+                        function zume_session_complete() {
 
                             /*** VARIABLES ***/
 
@@ -39,7 +39,7 @@ get_header();
                             $user_id = get_current_user_id();
 
                             // Set variable for session
-                            if ( isset( $_GET['id']) ) {
+                            if ( isset( $_GET['id'] ) ) {
                                 $zume_session = $_GET['id'];
                             }
                             else { $zume_session = '1'; }

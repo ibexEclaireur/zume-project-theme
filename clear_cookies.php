@@ -1,18 +1,18 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $cookies = explode('; ', $_SERVER['HTTP_COOKIE']);
-    foreach ($cookies as $cookie) {
-        $parts = explode("=", $cookie, 2);
-        $name = $parts[0];
-        if (preg_match("/^wordpress_/", $name)) {
-            setcookie($name, "", time()-1000);
-            setcookie($name, "", time()-1000, "/");
+    $zume_cookies = explode( '; ', $_SERVER['HTTP_COOKIE'] );
+    foreach ($zume_cookies as $zume_cookie) {
+        $zume_parts = explode( "=", $zume_cookie, 2 );
+        $zume_name = $zume_parts[0];
+        if (preg_match( "/^wordpress_/", $zume_name )) {
+            setcookie( $zume_name, "", time() -1000 );
+            setcookie( $zume_name, "", time() -1000, "/" );
         }
     }
-    if (isset($_POST['redirect_to']) && preg_match("/^\//", $_POST["redirect_to"])) {
-        header("Location: $_POST[redirect_to]");
+    if (isset( $_POST['redirect_to'] ) && preg_match( "/^\//", $_POST["redirect_to"] )) {
+        header( "Location: $_POST[redirect_to]" );
     } else {
-        header("Location: /wp-login.php");
+        header( "Location: /wp-login.php" );
     }
 }
 else {

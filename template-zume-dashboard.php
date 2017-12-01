@@ -7,10 +7,10 @@ Template Name: Zúme Dashboard
  * Gets all available coaches in the system who have the coach role.
  * @return array
  */
-function zume_get_coach_ids () {
-    $result = get_users( array('role' => 'coach') );
+function zume_get_coach_ids() {
+    $result = get_users( array( 'role' => 'coach' ) );
     $coaches = array();
-    foreach($result as $coach) {
+    foreach ($result as $coach) {
         $coaches[] = $coach;
     }
     return $coaches;
@@ -20,14 +20,19 @@ function zume_get_coach_ids () {
  * Gets all coaches in a particular group, returns an array of integers
  * @return array
  */
-function zume_get_coach_ids_in_group ($group_id) {
+function zume_get_coach_ids_in_group($group_id) {
     global $wpdb;
-    if (is_numeric($group_id)) {
+    if (is_numeric( $group_id )) {
         $group_id = (int) $group_id;
     } else {
-        throw new Exception("group_id argument should be an integer or pass the is_numeric test.");
+        throw new Exception( "group_id argument should be an integer or pass the is_numeric test." );
     }
-    $results = $wpdb->get_results( "SELECT $wpdb->usermeta.user_id FROM $wpdb->bp_groups_members INNER JOIN $wpdb->usermeta ON $wpdb->usermeta.user_id=$wpdb->bp_groups_members.user_id WHERE group_id = '$group_id' AND meta_key = '$wpdb->capabilities' AND meta_value LIKE '%coach%'", ARRAY_A );
+    $results = $wpdb->get_results( $wpdb->prepare(
+        "SELECT $wpdb->usermeta.user_id FROM $wpdb->bp_groups_members INNER JOIN $wpdb->usermeta ON $wpdb->usermeta.user_id=$wpdb->bp_groups_members.user_id WHERE group_id = %s AND meta_key = %s AND meta_value LIKE %s",
+        $group_id,
+        $wpdb->capabilities,
+        '%coach%'
+    ), ARRAY_A );
     $rv = [];
     foreach ($results as $result) {
         $rv[] = (int) $result["user_id"];
@@ -42,10 +47,10 @@ function zume_get_coach_ids_in_group ($group_id) {
  * @param $assigned_to
  * @return string|bool          If team or dispatch, returns false.
  */
-function zume_get_assigned_to_user_id ($assigned_to) {
-    $user_array = explode('-', $assigned_to);
+function zume_get_assigned_to_user_id($assigned_to) {
+    $user_array = explode( '-', $assigned_to );
 
-    if($user_array[0] == 'dispatch') {
+    if ($user_array[0] == 'dispatch') {
         return false;
     } elseif ($user_array[0] == 'group') {
         return false;
@@ -63,15 +68,17 @@ function zume_get_assigned_to_user_id ($assigned_to) {
 function zume_get_coaches_for_groups() {
     global $wpdb;
     $current_user = get_current_user_id();
-    $result = $wpdb->get_results('
+    $result = $wpdb->get_results( $wpdb->prepare( '
               SELECT wp_bp_groups_groupmeta.meta_value as coach_id, wp_bp_groups_groupmeta.group_id, count(meta_value) as count
               FROM wp_bp_groups_members
               INNER JOIN wp_bp_groups_groupmeta ON wp_bp_groups_groupmeta.group_id=wp_bp_groups_members.group_id
-              WHERE wp_bp_groups_members.user_id = \''.$current_user.'\'
+              WHERE wp_bp_groups_members.user_id = %s
               AND wp_bp_groups_groupmeta.meta_key = \'assigned_to\'
               AND wp_bp_groups_groupmeta.meta_value != \'dispatch\'
               GROUP BY meta_value
-              ', ARRAY_A);
+        ',
+        $current_user
+    ), ARRAY_A);
     return $result;
 }
 /**
@@ -81,25 +88,28 @@ function zume_get_coaches_for_groups() {
 function zume_get_groups_for_coach($coach_id, $user_id = null) {
     global $wpdb;
 
-    if(empty($user_id)) {
+    if (empty( $user_id )) {
         $user_id = get_current_user_id();
     }
 
-    $result = $wpdb->get_results("
+    $result = $wpdb->get_results( $wpdb->prepare( "
               SELECT wp_bp_groups_groupmeta.group_id
               FROM wp_bp_groups_members
               INNER JOIN wp_bp_groups_groupmeta ON wp_bp_groups_groupmeta.group_id=wp_bp_groups_members.group_id
-              WHERE wp_bp_groups_members.user_id = '$user_id'
+              WHERE wp_bp_groups_members.user_id = %s
               AND wp_bp_groups_groupmeta.meta_key = 'assigned_to'
-              AND wp_bp_groups_groupmeta.meta_value = '$coach_id'
-              ", ARRAY_A);
+              AND wp_bp_groups_groupmeta.meta_value = %s
+              ",
+        $user_id,
+        $coach_id
+    ), ARRAY_A);
 
     return $result;
 }
 
 $zume_dashboard = Zume_Dashboard::instance();
 $zume_current_user = get_current_user_id();
-$zume_get_userLink = bp_core_get_userlink($zume_current_user, false, true);
+$zume_get_user_link = bp_core_get_userlink( $zume_current_user, false, true );
 
 get_header();
 
@@ -113,7 +123,7 @@ get_header();
 
 
 
-                <article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
+                <article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
 
                     <header class="article-header">
 
@@ -128,15 +138,15 @@ get_header();
                                 <div class="callout" data-equalizer-watch>
                                     <h2 class="center">Your Groups</h2>
 
-                                    <?php if ( bp_has_groups(array('user_id' => get_current_user_id() ) ) ) : ?>
+                                    <?php if ( bp_has_groups( array( 'user_id' => get_current_user_id() ) ) ) : ?>
 
                                         <ul id="groups-list" class="item-list">
                                             <?php while ( bp_groups() ) : bp_the_group(); ?>
                                                 <?php
-                                                if (1 === preg_match('/[0-9]+/', bp_get_group_member_count(), $matches)) {
-                                                    $member_count = $matches[0];
+                                                if (1 === preg_match( '/[0-9]+/', bp_get_group_member_count(), $matches )) {
+                                                    $zume_member_count = $matches[0];
                                                 } else {
-                                                    $member_count = 0;
+                                                    $zume_member_count = 0;
                                                 }
                                                 ?>
 
@@ -151,12 +161,18 @@ get_header();
                                                                     <a href="<?php bp_group_permalink() ?>"><?php bp_group_name() ?></a>
                                                                 </div>
                                                                 <div class="wp-caption-text">
-                                                                    <?php echo bp_get_group_description_excerpt() ?>
+                                                                    <?php /* @codingStandardsIgnoreLine */ ?>
+                                                                    <?php echo bp_get_group_description_excerpt(); ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="medium-3 large-3 columns gutter-medium center dashboard-group-images">
-                                                            <?php if (bp_group_has_members(['group_id' => bp_get_group_id(), 'exclude_admins_mods' => false, 'per_page' => 11, 'max' => 11])): ?>
+                                                            <?php if (bp_group_has_members( [
+                                                                'group_id' => bp_get_group_id(),
+                                                                'exclude_admins_mods' => false,
+                                                                'per_page' => 11,
+                                                                'max' => 11
+                                                            ] )): ?>
                                                                 <?php
                                                                 while (bp_group_members()) {
                                                                     bp_group_the_member();
@@ -169,19 +185,19 @@ get_header();
                                                         <div class="medium-4 large-4 columns gutter-medium center">
                                                             <div class="button-group">
 
-                                                                <a href="<?php echo bp_get_group_permalink(). 'group_invite_by_url/'; ?>" class=" button  ">Invite <?php if($member_count < 4 ) { echo (4 - $member_count) . ' more to start'; } ?></a>
+                                                                <a href="<?php echo esc_attr( bp_get_group_permalink() ). 'group_invite_by_url/'; ?>" class=" button  ">Invite <?php if ($zume_member_count < 4 ) { echo esc_html( 4 - $zume_member_count ) . ' more to start'; } ?></a>
 
                                                                 <span class="hide-for-medium"><br></span>
 
-                                                                <?php if($member_count > 3 ): // check if there are minimum 4 members ?>
+                                                                <?php if ($zume_member_count > 3 ): // check if there are minimum 4 members ?>
 
                                                                     <?php // Next session button
-                                                                    $group_next_session = zume_group_next_session(bp_get_group_id());
+                                                                    $zume_group_next_session = zume_group_next_session( bp_get_group_id() );
 
-                                                                    if (is_null($group_next_session)): ?>
+                                                                    if (is_null( $zume_group_next_session )): ?>
                                                                         <a href="/zume-training/?id=10&group_id=<?php bp_group_id() ?>" class="button   ">See Sessions</a>
-                                                                    <?php else: ?>
-                                                                        <a href="/zume-training/?id=<?php echo $group_next_session; ?>&group_id=<?php bp_group_id() ?>" class="button   ">Start Session <?php echo $group_next_session; ?></a>
+                                                                    <?php else : ?>
+                                                                        <a href="/zume-training/?id=<?php echo esc_attr( $zume_group_next_session ); ?>&group_id=<?php bp_group_id() ?>" class="button   ">Start Session <?php echo esc_html( $zume_group_next_session ); ?></a>
                                                                     <?php endif; ?>
 
 
@@ -198,8 +214,8 @@ get_header();
                                         </ul>
 
 
-                                    <?php else: ?>
-                                      <div style="background: url('<?php echo get_stylesheet_directory_uri() . '/assets/images/noun_attention.png'; ?>') top left no-repeat;
+                                    <?php else : ?>
+                                      <div style="background: url('<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/noun_attention.png'; ?>') top left no-repeat;
                                           padding-left:55px;
                                           background-size:50px">
                                         <p style="padding: 10px"><strong>You are currently not in a group.</strong><br>
@@ -225,13 +241,16 @@ get_header();
 
                                 <div class="callout" data-equalizer-watch>
 
-                                    <?php $result = zume_get_coaches_for_groups(); ?>
+                                    <?php $zume_result = zume_get_coaches_for_groups(); ?>
 
-                                    <?php if ( !empty($result) ) : ?>
+                                    <?php if ( !empty( $zume_result ) ) : ?>
 
-                                    <h2 class="center"><?php echo _n("Your Coach", "Your Coaches", count($result)) ?></h2>
+                                    <h2 class="center"><?php echo esc_html( _n( "Your Coach", "Your Coaches", count( $zume_result ) ) ) ?></h2>
 
-                                        <?php foreach($result as $value) : $coach_id = substr($value['coach_id'], 5); $group_ids = array(); $group_ids[] = $value['group_id']; if($value['count'] > 1) { $group_ids = zume_get_groups_for_coach($value['coach_id'], get_current_user_id()); } ?>
+                                        <?php foreach ($zume_result as $value) : $zume_coach_id = substr( $value['coach_id'], 5 );
+                                            $zume_group_ids = array();
+                                            $zume_group_ids[] = $value['group_id'];
+                                            if ($value['count'] > 1) { $zume_group_ids = zume_get_groups_for_coach( $value['coach_id'], get_current_user_id() ); } ?>
 
                                             <ul id="groups-list" class="item-list">
 
@@ -239,25 +258,28 @@ get_header();
 
                                                     <div class="coach-item__intro">
 
-                                                        <a href="<?php echo  wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $coach_id ) ); ?>" class="btn button" style="margin-bottom: 0">
+                                                        <a href="<?php echo esc_attr( wp_nonce_url( bp_loggedin_user_domain() . bp_get_messages_slug() . '/compose/?r=' . bp_core_get_username( $zume_coach_id ) ) ); ?>" class="btn button" style="margin-bottom: 0">
                                                             Private Message</a>
-                                                        <a href="<?php echo bp_core_get_userlink($coach_id, false, true) ?>"><?php  echo bp_core_fetch_avatar( array( 'item_id' => $coach_id) ) ?></a>
+                                                        <?php /* @codingStandardsIgnoreLine */ ?>
+                                                        <a href="<?php echo esc_attr( bp_core_get_userlink( $zume_coach_id, false, true ) ) ?>"><?php echo bp_core_fetch_avatar( array( 'item_id' => $zume_coach_id ) ) ?></a>
 
                                                     </div>
 
                                                     <div class="coach-item__text">
 
-                                                        <?php  echo bp_core_get_userlink($coach_id); ?>
+                                                        <?php // @codingStandardsIgnoreLine
+                                                        echo bp_core_get_userlink( $zume_coach_id ); ?>
 
-                                                        <?php _e("for groups:"); ?>
+                                                        <?php esc_html_e( "for groups:" ); ?>
 
-                                                        <?php $i = 0; foreach ($group_ids as $group_id) : $group = groups_get_group($group_id) ?>
+                                                        <?php $zume_i = 0; foreach ($zume_group_ids as $group_id) : $zume_group = groups_get_group( $group_id ) ?>
 
-                                                            <a href="<?php bp_group_permalink($group); ?>">
-                                                                <?php bp_group_name($group); ?>
+                                                            <a href="<?php bp_group_permalink( $zume_group ); ?>">
+                                                                <?php bp_group_name( $zume_group ); ?>
                                                             </a>
 
-                                                            <?php $i++; if(count($group_ids) > 1 && $i < count($group_ids) ) { echo '-'; } ?>
+                                                            <?php $zume_i++;
+                                                            if (count( $zume_group_ids ) > 1 && $zume_i < count( $zume_group_ids ) ) { echo '-'; } ?>
 
                                                         <?php endforeach ?>
 
@@ -268,10 +290,10 @@ get_header();
                                         <?php endforeach; ?>
 
 
-                                    <?php else: ?>
+                                    <?php else : ?>
 
                                         <h2 class="center">Your Coach</h2>
-                                        <div style="background: url('<?php echo get_stylesheet_directory_uri() . '/assets/images/noun_attention.png'; ?>') top left no-repeat;
+                                        <div style="background: url('<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/noun_attention.png'; ?>') top left no-repeat;
                                             padding-left:55px;
                                             background-size:50px">
                                           <p style="padding: 10px">
@@ -292,12 +314,12 @@ get_header();
                                     <h2 class="center">Messages</h2>
 
                                     <p class="center" style="margin-top: 15px">
-                                        <a href="<?php echo bp_core_get_userlink($zume_current_user, false, true) ; ?>/messages/" class="button">View Messages</a>
+                                        <a href="<?php echo esc_attr( bp_core_get_userlink( $zume_current_user, false, true ) ); ?>/messages/" class="button">View Messages</a>
                                     </p>
                                     <p class="center text-gray text-small">
                                         <?php
-                                        $unread_messages_count = bp_get_total_unread_messages_count();
-                                        echo sprintf(_n("You have %s unread message.", "You have %s unread messages.", $unread_messages_count), $unread_messages_count);
+                                        $zume_unread_messages_count = bp_get_total_unread_messages_count();
+                                        echo esc_html( sprintf( _n( "You have %s unread message.", "You have %s unread messages.", $zume_unread_messages_count ), $zume_unread_messages_count ) );
                                         ?>
                                     </p>
                                 </div>

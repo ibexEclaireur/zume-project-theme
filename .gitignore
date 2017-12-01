@@ -7,7 +7,7 @@ npm-debug.log
 .env
 /assets/scss/*.css
 /.sass-cache/
-/vendor/
 
 config.rb
 /config.codekit
+/vendor/
