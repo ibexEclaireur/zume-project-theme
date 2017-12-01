@@ -161,7 +161,8 @@ get_header();
                                                                     <a href="<?php bp_group_permalink() ?>"><?php bp_group_name() ?></a>
                                                                 </div>
                                                                 <div class="wp-caption-text">
-                                                                    <?php echo esc_html( bp_get_group_description_excerpt() ); ?>
+                                                                    <?php /* @codingStandardsIgnoreLine */ ?>
+                                                                    <?php echo bp_get_group_description_excerpt(); ?>
                                                                 </div>
                                                             </div>
                                                         </div>
