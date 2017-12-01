@@ -57,7 +57,7 @@ Template Name: Full Width Home
                 <div class="row">
                     <div class="small-8 medium-4 columns small-centered center">
                         <br>
-                        <h3 style="text-transform: uppercase">It's as easy as 1-2-3</h3>
+                        <h3>It's as easy as 1-2-3</h3>
                     </div>
                 </div>
                 &nbsp;
@@ -65,17 +65,17 @@ Template Name: Full Width Home
                     <div class="medium-10 small-centered columns">
                         <div class="row">
                             <div class="medium-4 columns center">
-                                <h4 class="center" style="text-transform: uppercase"><span style="font-size:2.4rem;">&#10102</span>  Sign up</h4>
+                                <h4 class="center"><span style="font-size:2.4rem;">&#10102</span>  Sign up</h4>
                                 <img class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>signup.jpg" alt="" width="100" height="100" />
 
                             </div>
                             <div class="medium-4 columns center">
-                                <h4 class="center" style="text-transform: uppercase"><span style="font-size:2.4rem;">&#10103</span> Invite some friends</h4>
+                                <h4 class="center"><span style="font-size:2.4rem;">&#10103</span> Invite some friends</h4>
                                 <img class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>invite.jpg" alt="" width="100" height="100" />
 
                             </div>
                             <div class="medium-4 columns center">
-                                <h4 class="center" style="text-transform: uppercase"><span style="font-size:2.4rem;">&#10104</span> Host a training</h4>
+                                <h4 class="center"><span style="font-size:2.4rem;">&#10104</span> Host a training</h4>
                                 <img class="center" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/'; ?>training.jpg" alt="" width="100" height="100" />
 
                             </div>
@@ -91,7 +91,7 @@ Template Name: Full Width Home
 
                         <div style="color: white; text-align: center; padding: 20px;">
 
-                            <h4 class="padding-bottom" style="text-transform: uppercase">What others are saying</h4>
+                            <h4 class="padding-bottom">What others are saying</h4>
 
                             <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
                                 <ul class="orbit-container white">
@@ -101,44 +101,44 @@ Template Name: Full Width Home
                                     <li class="orbit-slide">
                                         <div>
                                             <h4 class="text-center zume-slider-text"><strong>There is a great harvest readied in North America not being reached by the status quo. Zúme is a biblical wake-up call and tool to empower the everyday believer to begin walking in the Lords will to multiply disciples.</strong></h4>
-                                            <h4 class="zume-slider-name" style="text-transform: uppercase">Jake Duke — Indiana</h4>
+                                            <h4 class="zume-slider-name">Jake Duke — Indiana</h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
                                             <h4 class="text-center zume-slider-text"><strong>Do you want to make a difference in your workplace, neighborhood, or circle of friends? The Zúme Project essentially will give you practical rails to run on that follow the example of the Church as seen in the New Testament.</strong></h4>
-                                            <h4 class="zume-slider-name" style="text-transform: uppercase">Gavin Duerson — Kentucky</h4>
+                                            <h4 class="zume-slider-name">Gavin Duerson — Kentucky</h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
                                             <h4 class="text-center zume-slider-text"><strong>I am so excited to use this Zúme tool to help in training all the soldiers to make and multiply disciples in our neighborhood. Jesus can make it a neighborhood again.</strong></h4>
-                                            <h4 class="zume-slider-name" style="text-transform: uppercase">Chad Rehnberg</h4>
+                                            <h4 class="zume-slider-name">Chad Rehnberg</h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
                                             <h4 class="text-center zume-slider-text"><strong>I believe Zúme can be used by the Lord to reach a huge number of people in our society who would never darken the door of a church building.</strong></h4>
-                                            <h4 class="zume-slider-name" style="text-transform: uppercase">Curtis Sergeant — Alabama</h4>
+                                            <h4 class="zume-slider-name">Curtis Sergeant — Alabama</h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
                                             <h4 class="text-center zume-slider-text"><strong>This simple and powerful disciple-making tool - for all laborers - has real potential to accelerate and spark healthy multiplication in every community for every nation.</strong></h4>
-                                            <h4 class="zume-slider-name" style="text-transform: uppercase">Zach Duke — Indiana</h4>
+                                            <h4 class="zume-slider-name">Zach Duke — Indiana</h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
                                             <h4 class="text-center zume-slider-text"><strong>The potential for ZÚME to catalyze a movement of multiplying disciple-makers is unprecedented in our lifetime.</strong></h4>
-                                            <h4 class="zume-slider-name" style="text-transform: uppercase">Forrest Head - Georgia</h4>
+                                            <h4 class="zume-slider-name">Forrest Head - Georgia</h4>
                                         </div>
 
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
                                             <h4 class="text-center zume-slider-text"><strong> In the West, Zúme is at the forefront of reclaiming a foundational biblical witness, the Church that meets from house to house.</strong></h4>
-                                            <h4 class="zume-slider-name" style="text-transform: uppercase">Neal Karsten — Michigan</h4>
+                                            <h4 class="zume-slider-name">Neal Karsten — Michigan</h4>
                                         </div>
                                     </li>
 
@@ -163,7 +163,7 @@ Template Name: Full Width Home
                 <div class="row ">
                     <div class="small-8 medium-3 small-centered columns center vertical-padding">
                         <br>
-                        <a href="/about" class="button large center " style="text-transform: uppercase">Find out more about Zúme</a>
+                        <a href="/about" class="button large center ">Find out more about Zúme</a>
                         <br>
                     </div>
                 </div>
