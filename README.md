@@ -3,3 +3,6 @@
 Zúme Project Theme
 
 version 1.1.1
+
+
+See also: https://github.com/ChasmSolutions/zume-project-plugin
