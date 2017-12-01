@@ -36,9 +36,9 @@ function zume_theme_site_scripts() {
 
     $stats = Zume_Stats::instance();
     $url_path = trim( parse_url( add_query_arg( array() ), PHP_URL_PATH ), '/' );
-    if ("stats" ===  $url_path){
-        wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array(),  false );
-        wp_enqueue_script('stats',   get_template_directory_uri() . '/assets/js/stats.js', array('jquery', 'google-charts'), '', false );
+    if ("stats" === $url_path){
+        wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array(), false );
+        wp_enqueue_script( 'stats', get_template_directory_uri() . '/assets/js/stats.js', array( 'jquery', 'google-charts' ), '', false );
         wp_localize_script(
             "stats", "wpApiSettings", array(
                 "test" => "test1",
