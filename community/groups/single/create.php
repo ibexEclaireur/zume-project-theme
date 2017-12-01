@@ -427,6 +427,10 @@ echo esc_attr( bp_get_current_group_slug() ); ?>/admin/edit-details/">Go to Edit
                                     tracts[i].setMap(map);
                                 }
 
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                console.log(arguments);
+                                alert("Got error '" + textStatus + "': " + errorThrown);
                             });
                     });
 
@@ -472,6 +476,10 @@ echo esc_attr( bp_get_current_group_slug() ); ?>/admin/edit-details/">Go to Edit
                                 jQuery('#lat').val(data.lat);
                                 jQuery('#state').val(data.state);
                                 jQuery('#county').val(data.county);
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                console.log(arguments);
+                                alert("Got error '" + textStatus + "': " + errorThrown);
                             });
                     });
                 });
