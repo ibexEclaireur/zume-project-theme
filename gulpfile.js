@@ -60,8 +60,8 @@ gulp.task('foundation-js', function() {
   return gulp.src([
 
   		  // Foundation core - needed if you want to use any of the components below
-          './vendor/foundation-sites/js/foundation.core.js',
-          './vendor/foundation-sites/js/foundation.util.*.js',
+          './dependencies/foundation-sites/js/foundation.core.js',
+          './dependencies/foundation-sites/js/foundation.util.*.js',
 
           /* We do not want to load foundation.util.timerAndImageLoader.js .
            * This is because it appends a question mark and a timestamp to
@@ -78,28 +78,28 @@ gulp.task('foundation-js', function() {
            *
            * Note the exclamation point, which indicates negation.
            */
-          '!./vendor/foundation-sites/js/foundation.util.timerAndImageLoader.js',
+          '!./dependencies/foundation-sites/js/foundation.util.timerAndImageLoader.js',
 
           // Pick the components you need in your project
-          './vendor/foundation-sites/js/foundation.abide.js',
-          './vendor/foundation-sites/js/foundation.accordion.js',
-          './vendor/foundation-sites/js/foundation.accordionMenu.js',
-          './vendor/foundation-sites/js/foundation.drilldown.js',
-          './vendor/foundation-sites/js/foundation.dropdown.js',
-          './vendor/foundation-sites/js/foundation.dropdownMenu.js',
-          './vendor/foundation-sites/js/foundation.equalizer.js',
-          './vendor/foundation-sites/js/foundation.interchange.js',
-          './vendor/foundation-sites/js/foundation.magellan.js',
-          './vendor/foundation-sites/js/foundation.offcanvas.js',
-          './vendor/foundation-sites/js/foundation.orbit.js',
-          './vendor/foundation-sites/js/foundation.responsiveMenu.js',
-          './vendor/foundation-sites/js/foundation.responsiveToggle.js',
-          './vendor/foundation-sites/js/foundation.reveal.js',
-          './vendor/foundation-sites/js/foundation.slider.js',
-          './vendor/foundation-sites/js/foundation.sticky.js',
-          './vendor/foundation-sites/js/foundation.tabs.js',
-          './vendor/foundation-sites/js/foundation.toggler.js',
-          './vendor/foundation-sites/js/foundation.tooltip.js',
+          './dependencies/foundation-sites/js/foundation.abide.js',
+          './dependencies/foundation-sites/js/foundation.accordion.js',
+          './dependencies/foundation-sites/js/foundation.accordionMenu.js',
+          './dependencies/foundation-sites/js/foundation.drilldown.js',
+          './dependencies/foundation-sites/js/foundation.dropdown.js',
+          './dependencies/foundation-sites/js/foundation.dropdownMenu.js',
+          './dependencies/foundation-sites/js/foundation.equalizer.js',
+          './dependencies/foundation-sites/js/foundation.interchange.js',
+          './dependencies/foundation-sites/js/foundation.magellan.js',
+          './dependencies/foundation-sites/js/foundation.offcanvas.js',
+          './dependencies/foundation-sites/js/foundation.orbit.js',
+          './dependencies/foundation-sites/js/foundation.responsiveMenu.js',
+          './dependencies/foundation-sites/js/foundation.responsiveToggle.js',
+          './dependencies/foundation-sites/js/foundation.reveal.js',
+          './dependencies/foundation-sites/js/foundation.slider.js',
+          './dependencies/foundation-sites/js/foundation.sticky.js',
+          './dependencies/foundation-sites/js/foundation.tabs.js',
+          './dependencies/foundation-sites/js/foundation.toggler.js',
+          './dependencies/foundation-sites/js/foundation.tooltip.js',
   ])
   .pipe(sourcemaps.init())
 	.pipe(babel({
@@ -113,10 +113,10 @@ gulp.task('foundation-js', function() {
     .pipe(gulp.dest('./assets/js'))
 });
 
-// Update Foundation with Bower and save to /vendor
+// Update Foundation with Bower and save to /dependencies
 gulp.task('bower', function() {
   return bower({ cmd: 'update'})
-    .pipe(gulp.dest('vendor/'))
+    .pipe(gulp.dest('dependencies/'))
 });
 
 // Browser-Sync watch files and inject changes
@@ -151,7 +151,7 @@ gulp.task('watch', function() {
   gulp.watch('./assets/js/scripts/*.js', ['site-js']);
 
   // Watch foundation-js files
-  gulp.watch('./vendor/foundation-sites/js/*.js', ['foundation-js']);
+  gulp.watch('./dependencies/foundation-sites/js/*.js', ['foundation-js']);
 
 });
 

@@ -12,7 +12,7 @@ function site_scripts() {
   global $wp_styles; // Call global $wp_styles variable to add conditional wrapper around ie stylesheet the WordPress way
 
     // Load What-Input files in footer
-    zume_theme_enqueue_script( 'what-input', 'vendor/what-input/dist/what-input.min.js', array(), true );
+    zume_theme_enqueue_script( 'what-input', 'dependencies/what-input/dist/what-input.min.js', array(), true );
 
     // Load fitvids script https://github.com/rosszurowski/fitvids
     zume_theme_enqueue_script('fitvids', 'assets/js/fitvids.min.js', array(), false);
