@@ -1,6 +1,6 @@
 <?php
 
-function disable_wp_emoji() {
+function zume_disable_wp_emoji() {
 
   // all actions related to emojis
     remove_action( 'admin_print_styles', 'print_emoji_styles' );
@@ -12,11 +12,11 @@ function disable_wp_emoji() {
     remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 
   // filter to remove TinyMCE emojis
-    add_filter( 'tiny_mce_plugins', 'disable_emoji_tinymce' );
+    add_filter( 'tiny_mce_plugins', 'zume_disable_emoji_tinymce' );
 }
-add_action( 'init', 'disable_wp_emoji' );
+add_action( 'init', 'zume_disable_wp_emoji' );
 
-function disable_emoji_tinymce( $plugins ) {
+function zume_disable_emoji_tinymce( $plugins ) {
     if ( is_array( $plugins ) ) {
         return array_diff( $plugins, array( 'wpemoji' ) );
     } else {

@@ -54,6 +54,7 @@
     <exclude name="WordPress.VIP.SessionFunctionsUsage" />
     <exclude name="WordPress.VIP.SessionVariableUsage" />
     <exclude name="WordPress.VIP.ValidatedSanitizedInput" />
+    <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound" />
 
     <!-- We currently don't want these rules that WordPress imports: -->
 

@@ -41,8 +41,9 @@
         <?php if ( bp_account_was_activated() ) : ?>
 
             <?php if ( isset( $_GET['e'] ) ) : ?>
-          <p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'buddypress' ); ?></p>
+          <p><?php esc_html_e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'buddypress' ); ?></p>
             <?php else : ?>
+            <?php /* @codingStandardsIgnoreLine */ ?>
           <p><?php printf( 'You can now log in below with the username and password you provided when you signed up.', wp_login_url( bp_get_root_domain() ) ); ?></p>
             <?php endif; ?>
 

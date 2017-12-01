@@ -1,7 +1,7 @@
 <?php
 
 
-function bp_remove_group_step_settings($array)
+function zume_bp_remove_group_step_settings($array)
 {
 
     $array = array(
@@ -14,17 +14,18 @@ function bp_remove_group_step_settings($array)
     return $array;
 }
 
-add_filter( 'groups_create_group_steps', 'bp_remove_group_step_settings', 10, 1 );
+add_filter( 'groups_create_group_steps', 'zume_bp_remove_group_step_settings', 10, 1 );
 
 
 if ( !defined( 'BP_INVITE_ANYONE_SLUG' )) {
+    // @codingStandardsIgnoreLine
     define( 'BP_INVITE_ANYONE_SLUG', 'invite-anyone' );
 }
 
 
 if (function_exists( 'bp_is_active' ) && bp_is_active( 'groups' )) :
 
-    function group_urls($group_id)
+    function zume_group_urls($group_id)
     {
         $token = groups_get_groupmeta( $group_id, "group_token" );
         $know_more_url = get_site_url() . "/?group-id=" . $group_id . "&zgt=" . $token;
@@ -36,14 +37,14 @@ if (function_exists( 'bp_is_active' ) && bp_is_active( 'groups' )) :
     }
 
 
-    class Invite_By_URL extends BP_Group_Extension
+    class Zume_Invite_By_URL extends BP_Group_Extension
     {
         /**
          * Your __construct() method will contain configuration options for
          * your extension, and will pass them to parent::init()
          */
 
-        function __construct()
+        public function __construct()
         {
             $args = array(
                 'slug' => 'group_invite_by_url',
@@ -62,17 +63,17 @@ if (function_exists( 'bp_is_active' ) && bp_is_active( 'groups' )) :
             parent::init( $args );
         }
 
-        function get_invite_anyone_email_link($group_id)
+        public function get_invite_anyone_email_link($group_id)
         {
             return bp_loggedin_user_domain() . BP_INVITE_ANYONE_SLUG . '/invite-new-members/group-invites/' . $group_id;
         }
 
-        function display($group_id = null)
+        public function display($group_id = null)
         {
             $this->settings_screen( $group_id );
         }
 
-        function invite_message($group, $sign_up_url, $know_more_url)
+        public function invite_message($group, $sign_up_url, $know_more_url)
         {
             $message = "Hey,
 
@@ -92,7 +93,7 @@ Let's learn how God can use people like us to change the world together,
         }
 
 
-        function create_screen_save($group_id = null)
+        public function create_screen_save($group_id = null)
         {
             $group = groups_get_group( $group_id );
 
@@ -104,7 +105,7 @@ Let's learn how God can use people like us to change the world together,
         }
 
 
-        function invite_options($sign_up_url, $group, $know_more_url)
+        public function invite_options($sign_up_url, $group, $know_more_url)
         {
             ?>
             <h2 id="invite-options" class="group-invite-hearer-with-text-under" style="margin-top:15px">To invite people you have 3
@@ -116,12 +117,12 @@ Let's learn how God can use people like us to change the world together,
         Write your own message.
       </span>
             <p> Simply include this link and send it by email or any method you wish.</p>
-            <textarea readonly rows=1 style="cursor: text"><?php echo $know_more_url ?></textarea>
+            <textarea readonly rows=1 style="cursor: text"><?php echo esc_html( $know_more_url ); ?></textarea>
 
             <h3 class="group-invite-header"><strong>Option 2: </strong></h3>
             <span class="group-invite-header-side-text">Use our email template.</span>
             <?php $invite_message = $this->invite_message( $group, $sign_up_url, $know_more_url ); ?>
-            <textarea readonly rows=15 style="cursor: text"><?php echo $invite_message?></textarea>
+            <textarea readonly rows=15 style="cursor: text"><?php echo esc_html( $invite_message ); ?></textarea>
             <p>
                 <a class="button" href="mailto:?body=<?php echo rawurlencode( $invite_message ); ?>">Create this email in default email app</a>
             </p>
@@ -130,14 +131,14 @@ Let's learn how God can use people like us to change the world together,
             <?php
         }
 
-        function create_screen($group_id = null)
+        public function create_screen($group_id = null)
         {
             global $bp;
             if ($group_id > 0) {
 
 
                 $group = groups_get_group( $group_id );
-                $urls = group_urls( $group_id );
+                $urls = zume_group_urls( $group_id );
                 $know_more_url = $urls["know_more"];
                 $sign_up_url = $urls["sign_up"];
 
@@ -164,13 +165,13 @@ Let's learn how God can use people like us to change the world together,
          * settings_screen() is the catch-all method for displaying the content
          * of the edit, create, and Dashboard admin panels
          */
-        function settings_screen($group_id = null)
+        public function settings_screen($group_id = null)
         {
             global $bp;
             if ($group_id > 0) {
 
                 $group = groups_get_group( $group_id );
-                $urls = group_urls( $group_id );
+                $urls = zume_group_urls( $group_id );
                 $know_more_url = $urls["know_more"];
                 $sign_up_url = $urls["sign_up"];
 
@@ -181,7 +182,7 @@ Let's learn how God can use people like us to change the world together,
                         class="group-invite-header-side-text">Have the email come from Zúme.</span>
                 <p>
                     Click <strong><a style="font-size: 14pt ;"
-                                     href="<?php echo bp_get_group_permalink( $group ) . "group_invite_by_email/" ?>">here</a></strong>
+                                     href="<?php echo esc_attr( bp_get_group_permalink( $group ) ) . "group_invite_by_email/" ?>">here</a></strong>
                     if you would like the invitation email to come from Zúme.
                     You can add your friend's email addresses on the next page.
                 </p>
@@ -193,13 +194,13 @@ Let's learn how God can use people like us to change the world together,
 
     }
 
-    class Invite_By_Email extends BP_Group_Extension
+    class Zume_Invite_By_Email extends BP_Group_Extension
     {
         /**
          * Your __construct() method will contain configuration options for
          * your extension, and will pass them to parent::init()
          */
-        function __construct()
+        public function __construct()
         {
             $args = array(
                 'slug' => 'group_invite_by_email',
@@ -218,13 +219,13 @@ Let's learn how God can use people like us to change the world together,
         }
 
 
-        function display($group_id = null)
+        public function display($group_id = null)
         {
             $this->settings_screen( $group_id );
         }
 
 
-        function settings_screen_save($group_id = null)
+        public function settings_screen_save($group_id = null)
         {
 
             update_option( "save_group_email", $_POST );
@@ -232,13 +233,13 @@ Let's learn how God can use people like us to change the world together,
         }
 
 
-        function settings_screen($group_id = null)
+        public function settings_screen($group_id = null)
         {
             global $bp;
 
 
             $group = groups_get_group( $group_id );
-            $urls = group_urls( $group_id );
+            $urls = zume_group_urls( $group_id );
             $know_more_url = $urls["know_more"];
             $sign_up_url = $urls["sign_up"];
             $current_user = wp_get_current_user();
@@ -248,13 +249,13 @@ Let's learn how God can use people like us to change the world together,
 
             ?>
             <form id="invite_by_email" action="/wp-admin/admin-post.php" method="post">
-                <h4>Invite Friends to <?php echo $group->name ?></h4>
+                <h4>Invite Friends to <?php echo esc_html( $group->name ); ?></h4>
 
                 <ol id="invite-anyone-steps">
                     <li>
                         <div class="manual-email">
                             <p>
-                                <?php _e( 'Enter email addresses below, one per line.', 'zume_project' ) ?>
+                                <?php esc_html_e( 'Enter email addresses below, one per line.', 'zume_project' ) ?>
                                 <textarea name="invite_by_email_addresses" rows="15" cols="10"
                                           class="invite-anyone-email-addresses"
                                           id="invite-by-email-addresses"></textarea>
@@ -264,7 +265,7 @@ Let's learn how God can use people like us to change the world together,
 
                     <!--              <li>-->
                     <!--                    <label for="invite-anyone-custom-subject">-->
-                    <?php //_e( '(optional) Customize the subject line of the invitation email.', 'zume_project' )
+                    <?php //esc_html_e( '(optional) Customize the subject line of the invitation email.', 'zume_project' )
                     ?><!--</label>-->
                     <!--                    <textarea name="invite_anyone_custom_subject" id="invite-anyone-custom-subject" rows="1" cols="10" >-->
                     <?php //echo esc_textarea( invite_anyone_invitation_subject( $subject ) )
@@ -272,10 +273,10 @@ Let's learn how God can use people like us to change the world together,
                     <!--              </li>-->
                     <!--              <li>-->
                     <!--                    <label for="invite-anyone-custom-message">-->
-                    <?php //_e( '(optional) Customize the text of the invitation.', 'zume_project' )
+                    <?php //esc_html_e( '(optional) Customize the text of the invitation.', 'zume_project' )
                     ?><!--</label>-->
                     <!--                    <p class="description">-->
-                    <?php //_e( 'The message will also contain a custom footer containing links to accept the invitation or opt out of further email invitations from this site.', 'invite-anyone' )
+                    <?php //esc_html_e( 'The message will also contain a custom footer containing links to accept the invitation or opt out of further email invitations from this site.', 'invite-anyone' )
                     ?><!--</p>-->
                     <!--                    <textarea name="invite_anyone_custom_message" id="invite-anyone-custom-message" cols="40" rows="15">-->
                     <?php //echo $message
@@ -297,7 +298,7 @@ Let's learn how God can use people like us to change the world together,
 
                 <div class="submit">
                     <input type="submit" name="invite-anyone-submit" id="invite-anyone-submit"
-                           value="<?php _e( 'Send Invites', 'zume-project' ) ?> "/>
+                           value="<?php esc_html_e( 'Send Invites', 'zume-project' ) ?> "/>
                 </div>
 
             </form>
@@ -305,13 +306,13 @@ Let's learn how God can use people like us to change the world together,
         }
     }
 
-    class Map_Tab extends BP_Group_Extension
+    class Zume_Map_Tab extends BP_Group_Extension
     {
         /**
          * Your __construct() method will contain configuration options for
          * your extension, and will pass them to parent::init()
          */
-        function __construct()
+        public function __construct()
         {
             $args = array(
                 'slug' => 'group-map',
@@ -331,30 +332,30 @@ Let's learn how God can use people like us to change the world together,
             parent::init( $args );
         }
 
-        function display($group_id = null)
+        public function display($group_id = null)
         {
             $this->settings_screen( $group_id );
         }
 
 
-        function settings_screen_save($group_id = null)
+        public function settings_screen_save($group_id = null)
         {
             update_option( "group-map", $_POST );
         }
 
 
-        function settings_screen($group_id = null)
+        public function settings_screen($group_id = null)
         {
             if (empty( custom_field( 'tract' ) )) :
-                echo 'You haven\'t yet set your locations. <a href="'.home_url( '/groups/' ) . bp_get_current_group_slug().'/admin/edit-details/">Please set your census location under Manage->Details.</a>';
+                echo 'You haven\'t yet set your locations. <a href="'. esc_attr( home_url( '/groups/' ) . bp_get_current_group_slug() ) .'/admin/edit-details/">Please set your census location under Manage->Details.</a>';
             else :
             ?>
 
-            <input type="hidden" id="tract" name="tract" value="<?php echo custom_field( 'tract' ); ?>" required/>
-            <input type="hidden" id="lng" name="lng" value="<?php echo custom_field( 'lng' ); ?>"  required/>
-            <input type="hidden" id="lat" name="lat" value="<?php echo custom_field( 'lat' ); ?>"  required/>
-            <input type="hidden" id="state" name="state" value="<?php echo custom_field( 'state' ); ?>"  required/>
-            <input type="hidden" id="county" name="county" value="<?php echo custom_field( 'county' ); ?>"  required/>
+            <input type="hidden" id="tract" name="tract" value="<?php echo esc_attr( custom_field( 'tract' ) ); ?>" required/>
+            <input type="hidden" id="lng" name="lng" value="<?php echo esc_attr( custom_field( 'lng' ) ); ?>"  required/>
+            <input type="hidden" id="lat" name="lat" value="<?php echo esc_attr( custom_field( 'lat' ) ); ?>"  required/>
+            <input type="hidden" id="state" name="state" value="<?php echo esc_attr( custom_field( 'state' ) ); ?>"  required/>
+            <input type="hidden" id="county" name="county" value="<?php echo esc_attr( custom_field( 'county' ) ); ?>"  required/>
 
             <style>
                 /* Always set the map height explicitly to define the size of the div
@@ -373,14 +374,14 @@ Let's learn how God can use people like us to change the world together,
 
             </style>
 
-                <div id="search-response">Your current census tract is <strong><?php echo custom_field( 'tract' ); ?></strong> as shown on the map below. <br>
+                <div id="search-response">Your current census tract is <strong><?php echo esc_html( custom_field( 'tract' ) ); ?></strong> as shown on the map below. <br>
                     </div>
 
             <div id="map"></div>
                 <?php if (groups_is_user_admin( get_current_user_id(), $group_id )) : ?>
-                <div style="padding:20px 0;">If this is not correct or you have changed location, please <a  href="<?php echo home_url( 'groups/' );
-                echo bp_get_current_group_slug(); ?>/admin/edit-details/">update your new location in the Manage section.</a><br><a class="button large" href="<?php echo home_url( 'groups/' );
-echo bp_get_current_group_slug(); ?>/admin/edit-details/">Go to Edit</a> </div>
+                <div style="padding:20px 0;">If this is not correct or you have changed location, please <a  href="<?php echo esc_attr( home_url( 'groups/' ) );
+                echo esc_attr( bp_get_current_group_slug() ); ?>/admin/edit-details/">update your new location in the Manage section.</a><br><a class="button large" href="<?php echo esc_attr( home_url( 'groups/' ) );
+echo esc_attr( bp_get_current_group_slug() ); ?>/admin/edit-details/">Go to Edit</a> </div>
                 <?php endif; ?>
 
             <script type="text/javascript">
@@ -388,14 +389,14 @@ echo bp_get_current_group_slug(); ?>/admin/edit-details/">Go to Edit</a> </div>
                 jQuery(document).ready(function() {
 
                     jQuery(window).load(function () {
-                        var geoid = '<?php echo custom_field( 'tract' ); ?>';
-                        var lng = '<?php echo custom_field( 'lng' ); ?>';
-                        var lat = '<?php echo custom_field( 'lat' ); ?>';
-                        var state = '<?php echo custom_field( 'state' ); ?>';
-                        var county = '<?php echo custom_field( 'county' ); ?>';
+                        var geoid = '<?php echo esc_js( custom_field( 'tract' ) ); ?>';
+                        var lng = '<?php echo esc_js( custom_field( 'lng' ) ); ?>';
+                        var lat = '<?php echo esc_js( custom_field( 'lat' ) ); ?>';
+                        var state = '<?php echo esc_js( custom_field( 'state' ) ); ?>';
+                        var county = '<?php echo esc_js( custom_field( 'county' ) ); ?>';
 
 
-                        var restURL = '<?php echo get_rest_url( null, '/lookup/v1/tract/getmapbygeoid' ); ?>';
+                        var restURL = '<?php echo esc_js( get_rest_url( null, '/lookup/v1/tract/getmapbygeoid' ) ); ?>';
 
                         jQuery.post( restURL, { geoid: geoid, lng: lng, lat: lat })
                             .done(function( data ) {
@@ -431,10 +432,10 @@ echo bp_get_current_group_slug(); ?>/admin/edit-details/">Go to Edit</a> </div>
 
 
                     jQuery('button').click( function () {
-                        jQuery('#spinner').prepend('<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/img/spinner.svg" style="height:30px;" />');
+                        jQuery('#spinner').prepend('<img src="<?php echo esc_js( esc_attr( plugin_dir_url( __FILE__ ) ) ); ?>/img/spinner.svg" style="height:30px;" />');
 
                         var address = jQuery('#address').val();
-                        var restURL = '<?php echo get_rest_url( null, '/lookup/v1/tract/gettractmap' ); ?>';
+                        var restURL = '<?php echo esc_js( get_rest_url( null, '/lookup/v1/tract/gettractmap' ) ); ?>';
                         jQuery.post( restURL, { address: address })
                             .done(function( data ) {
                                 jQuery('#spinner').html('');
@@ -488,7 +489,7 @@ echo bp_get_current_group_slug(); ?>/admin/edit-details/">Go to Edit</a> </div>
     }
 
 
-    bp_register_group_extension( 'Map_Tab' );
-    bp_register_group_extension( 'Invite_By_URL' );
-    bp_register_group_extension( 'Invite_By_Email' );
+    bp_register_group_extension( 'Zume_Map_Tab' );
+    bp_register_group_extension( 'Zume_Invite_By_URL' );
+    bp_register_group_extension( 'Zume_Invite_By_Email' );
 endif; // if ( bp_is_active( 'groups' ) )

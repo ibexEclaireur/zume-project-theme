@@ -5,6 +5,8 @@ Template Name: Zúme Overview
 
 get_header();
 
+( function() {
+
 ?>
 
     <div id="content">
@@ -59,5 +61,7 @@ get_header();
         </div> <!-- end #inner-content -->
 
     </div> <!-- end #content -->
+
+<?php } )(); ?>
 
 <?php get_footer(); ?>

@@ -8,7 +8,7 @@ function zume_theme_enqueue_style( $handle, $rel_src, $deps, $media = 'all' ) {
     wp_enqueue_style( $handle, get_template_directory_uri() . "/$rel_src", $deps, filemtime( get_template_directory() . "/$rel_src" ), $media );
 }
 
-function site_scripts() {
+function zume_theme_site_scripts() {
     global $wp_styles; // Call global $wp_styles variable to add conditional wrapper around ie stylesheet the WordPress way
 
     // Load What-Input files in footer
@@ -29,7 +29,7 @@ function site_scripts() {
     zume_theme_enqueue_style( 'site-css', 'assets/css/style.min.css', array(), 'all' );
 
     // Comment reply script for threaded comments
-    if ( is_singular() and comments_open() and ( get_option( 'thread_comments' ) == 1 )) {
+    if ( is_singular() && comments_open() && ( get_option( 'thread_comments' ) == 1 )) {
         zume_theme_enqueue_script( 'comment-reply' );
     }
 
@@ -49,4 +49,4 @@ function site_scripts() {
 
     }
 }
-add_action( 'wp_enqueue_scripts', 'site_scripts', 999 );
+add_action( 'wp_enqueue_scripts', 'zume_theme_site_scripts', 999 );

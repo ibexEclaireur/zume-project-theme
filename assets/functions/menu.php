@@ -8,7 +8,7 @@ register_nav_menus(
 );
 
 // The Top Menu
-function joints_top_nav() {
+function zume_joints_top_nav() {
      wp_nav_menu(array(
          'container' => false,                           // Remove nav container
          'menu_class' => 'vertical medium-horizontal menu float-right',       // Adding custom nav class
@@ -16,20 +16,20 @@ function joints_top_nav() {
          'theme_location' => 'main-nav',                 // Where it's located in the theme
          'depth' => 5,                                   // Limit the depth of the nav
          'fallback_cb' => false,                         // Fallback function (see below)
-         'walker' => new Topbar_Menu_Walker()
+         'walker' => new Zume_Topbar_Menu_Walker()
      ));
 }
 
 // Big thanks to Brett Mason (https://github.com/brettsmason) for the awesome walker
-class Topbar_Menu_Walker extends Walker_Nav_Menu {
-    function start_lvl(&$output, $depth = 0, $args = array() ) {
+class Zume_Topbar_Menu_Walker extends Walker_Nav_Menu {
+    public function start_lvl(&$output, $depth = 0, $args = array() ) {
         $indent = str_repeat( "\t", $depth );
         $output .= "\n$indent<ul class=\"menu\">\n";
     }
 }
 
 // The Off Canvas Menu
-function joints_off_canvas_nav() {
+function zume_joints_off_canvas_nav() {
      wp_nav_menu(array(
          'container' => false,                           // Remove nav container
          'menu_class' => 'vertical menu top-padding',       // Adding custom nav class
@@ -37,19 +37,19 @@ function joints_off_canvas_nav() {
          'theme_location' => 'main-nav',                 // Where it's located in the theme
          'depth' => 5,                                   // Limit the depth of the nav
          'fallback_cb' => false,                         // Fallback function (see below)
-         'walker' => new Off_Canvas_Menu_Walker()
+         'walker' => new Zume_Off_Canvas_Menu_Walker()
      ));
 }
 
-class Off_Canvas_Menu_Walker extends Walker_Nav_Menu {
-    function start_lvl(&$output, $depth = 0, $args = array() ) {
+class Zume_Off_Canvas_Menu_Walker extends Walker_Nav_Menu {
+    public function start_lvl(&$output, $depth = 0, $args = array() ) {
         $indent = str_repeat( "\t", $depth );
         $output .= "\n$indent<ul class=\"vertical menu\">\n";
     }
 }
 
 // The Footer Menu
-function joints_footer_links() {
+function zume_joints_footer_links() {
     wp_nav_menu(array(
         'container' => 'false',                         // Remove nav container
         'menu' => __( 'Footer Links', 'jointswp' ),     // Nav name
@@ -61,7 +61,7 @@ function joints_footer_links() {
 } /* End Footer Menu */
 
 // Header Fallback Menu
-function joints_main_nav_fallback() {
+function zume_joints_main_nav_fallback() {
     wp_page_menu( array(
         'show_home' => true,
         'menu_class' => '',                             // Adding custom nav class
@@ -74,15 +74,15 @@ function joints_main_nav_fallback() {
 }
 
 // Footer Fallback Menu
-function joints_footer_links_fallback() {
+function zume_joints_footer_links_fallback() {
     /* You can put a default here if you like */
 }
 
 // Add Foundation active class to menu
-function required_active_nav_class( $classes, $item ) {
+function zume_required_active_nav_class( $classes, $item ) {
     if ( $item->current == 1 || $item->current_item_ancestor == true ) {
         $classes[] = 'active';
     }
     return $classes;
 }
-add_filter( 'nav_menu_css_class', 'required_active_nav_class', 10, 2 );
+add_filter( 'nav_menu_css_class', 'zume_required_active_nav_class', 10, 2 );

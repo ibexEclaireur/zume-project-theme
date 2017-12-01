@@ -1,6 +1,7 @@
 <?php
 
 // Adding WP Functions & Theme Support
+// @codingStandardsIgnoreLine
 function joints_theme_support() {
 
     // Add WP Thumbnail Support
@@ -40,6 +41,7 @@ function joints_theme_support() {
      );
 
     // Set the maximum allowed width for any content in the theme, like oEmbeds and images added to posts.
+    // @codingStandardsIgnoreLine
     $GLOBALS['content_width'] = apply_filters( 'joints_theme_support', 1200 );
 
 } /* end theme support */

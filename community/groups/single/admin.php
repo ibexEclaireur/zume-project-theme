@@ -13,17 +13,17 @@
 
     <?php do_action( 'bp_before_group_details_admin' ); ?>
 
-    <label for="group-name"><?php _e( 'Group Name (required)', 'buddypress' ); ?></label>
+    <label for="group-name"><?php esc_html_e( 'Group Name (required)', 'buddypress' ); ?></label>
     <input type="text" name="group-name" id="group-name" value="<?php bp_group_name(); ?>" aria-required="true" />
 
-    <label for="group-desc"><?php _e( 'Group Description (required)', 'buddypress' ); ?></label>
+    <label for="group-desc"><?php esc_html_e( 'Group Description (required)', 'buddypress' ); ?></label>
     <textarea name="group-desc" id="group-desc" aria-required="true"><?php bp_group_description_editable(); ?></textarea>
 
     <?php do_action( 'groups_custom_group_fields_editable' ); ?>
 
     <p>
         <label for="group-notifiy-members">
-            <input type="checkbox" name="group-notify-members" value="1" /> <?php _e( 'Notify group members of these changes via email', 'buddypress' ); ?>
+            <input type="checkbox" name="group-notify-members" value="1" /> <?php esc_html_e( 'Notify group members of these changes via email', 'buddypress' ); ?>
         </label>
     </p>
 
@@ -44,7 +44,7 @@
         <?php if ( bp_forums_is_installed_correctly() ) : ?>
 
             <div class="checkbox">
-                <label><input type="checkbox" name="group-show-forum" id="group-show-forum" value="1"<?php bp_group_show_forum_setting(); ?> /> <?php _e( 'Enable discussion forum', 'buddypress' ); ?></label>
+                <label><input type="checkbox" name="group-show-forum" id="group-show-forum" value="1"<?php bp_group_show_forum_setting(); ?> /> <?php esc_html_e( 'Enable discussion forum', 'buddypress' ); ?></label>
             </div>
 
             <hr />
@@ -53,60 +53,60 @@
 
     <?php endif; ?>
 
-    <h4><?php _e( 'Privacy Options', 'buddypress' ); ?></h4>
+    <h4><?php esc_html_e( 'Privacy Options', 'buddypress' ); ?></h4>
 
     <div class="radio">
         <label>
             <input type="radio" name="group-status" value="public"<?php bp_group_show_status_setting( 'public' ); ?> />
-            <strong><?php _e( 'This is a public group', 'buddypress' ); ?></strong>
+            <strong><?php esc_html_e( 'This is a public group', 'buddypress' ); ?></strong>
             <ul>
-                <li><?php _e( 'Any site member can join this group.', 'buddypress' ); ?></li>
-                <li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
-                <li><?php _e( 'Group content and activity will be visible to any site member.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'Any site member can join this group.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'Group content and activity will be visible to any site member.', 'buddypress' ); ?></li>
             </ul>
         </label>
 
         <label>
             <input type="radio" name="group-status" value="private"<?php bp_group_show_status_setting( 'private' ); ?> />
-            <strong><?php _e( 'This is a private group', 'buddypress' ); ?></strong>
+            <strong><?php esc_html_e( 'This is a private group', 'buddypress' ); ?></strong>
             <ul>
-                <li><?php _e( 'Only users who request membership and are accepted can join the group.', 'buddypress' ); ?></li>
-                <li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
-                <li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'Only users who request membership and are accepted can join the group.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
             </ul>
         </label>
 
         <label>
             <input type="radio" name="group-status" value="hidden"<?php bp_group_show_status_setting( 'hidden' ); ?> />
-            <strong><?php _e( 'This is a hidden group', 'buddypress' ); ?></strong>
+            <strong><?php esc_html_e( 'This is a hidden group', 'buddypress' ); ?></strong>
             <ul>
-                <li><?php _e( 'Only users who are invited can join the group.', 'buddypress' ); ?></li>
-                <li><?php _e( 'This group will not be listed in the groups directory or search results.', 'buddypress' ); ?></li>
-                <li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'Only users who are invited can join the group.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'This group will not be listed in the groups directory or search results.', 'buddypress' ); ?></li>
+                <li><?php esc_html_e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
             </ul>
         </label>
     </div>
 
     <hr />
 
-    <h4><?php _e( 'Group Invitations', 'buddypress' ); ?></h4>
+    <h4><?php esc_html_e( 'Group Invitations', 'buddypress' ); ?></h4>
 
-    <p><?php _e( 'Which members of this group are allowed to invite others?', 'buddypress' ); ?></p>
+    <p><?php esc_html_e( 'Which members of this group are allowed to invite others?', 'buddypress' ); ?></p>
 
     <div class="radio">
         <label>
             <input type="radio" name="group-invite-status" value="members"<?php bp_group_show_invite_status_setting( 'members' ); ?> />
-            <strong><?php _e( 'All group members', 'buddypress' ); ?></strong>
+            <strong><?php esc_html_e( 'All group members', 'buddypress' ); ?></strong>
         </label>
 
         <label>
             <input type="radio" name="group-invite-status" value="mods"<?php bp_group_show_invite_status_setting( 'mods' ); ?> />
-            <strong><?php _e( 'Group admins and mods only', 'buddypress' ); ?></strong>
+            <strong><?php esc_html_e( 'Group admins and mods only', 'buddypress' ); ?></strong>
         </label>
 
         <label>
             <input type="radio" name="group-invite-status" value="admins"<?php bp_group_show_invite_status_setting( 'admins' ); ?> />
-            <strong><?php _e( 'Group admins only', 'buddypress' ); ?></strong>
+            <strong><?php esc_html_e( 'Group admins only', 'buddypress' ); ?></strong>
         </label>
     </div>
 
@@ -124,7 +124,7 @@
 
     <?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 
-            <p><?php _e( "Upload an image to use as an avatar for this group. The image will be shown on the main group page, and in search results.", 'buddypress' ); ?></p>
+            <p><?php esc_html_e( "Upload an image to use as an avatar for this group. The image will be shown on the main group page, and in search results.", 'buddypress' ); ?></p>
 
             <p>
                 <input type="file" name="file" id="file" />
@@ -134,7 +134,7 @@
 
             <?php if ( bp_get_group_has_avatar() ) : ?>
 
-                <p><?php _e( "If you'd like to remove the existing avatar but not upload a new one, please use the delete avatar button.", 'buddypress' ); ?></p>
+                <p><?php esc_html_e( "If you'd like to remove the existing avatar but not upload a new one, please use the delete avatar button.", 'buddypress' ); ?></p>
 
                 <?php bp_button( array(
                     'id' => 'delete_group_avatar',
@@ -154,7 +154,7 @@
 
     <?php if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 
-        <h3><?php _e( 'Crop Avatar', 'buddypress' ); ?></h3>
+        <h3><?php esc_html_e( 'Crop Avatar', 'buddypress' ); ?></h3>
 
         <img src="<?php bp_avatar_to_crop(); ?>" id="avatar-to-crop" class="avatar" alt="<?php esc_attr_e( 'Avatar to crop', 'buddypress' ); ?>" />
 
@@ -183,7 +183,7 @@
 
     <div class="bp-widget">
         <p></p>
-        <h4><?php _e( 'Leaders', 'buddypress' ); ?></h4>
+        <h4><?php esc_html_e( 'Leaders', 'buddypress' ); ?></h4>
 
         <?php if ( bp_group_has_members( 'exclude_admin_mods=false&group_role=admin&type=first_joined' ) ) : ?>
 
@@ -191,6 +191,7 @@
 
             <?php while ( bp_members() ) : bp_the_member(); ?>
             <li>
+                <?php /* @codingStandardsIgnoreLine */ ?>
                 <?php echo bp_core_fetch_avatar( array(
                     'item_id' => bp_get_member_user_id(),
                     'type' => 'thumb',
@@ -202,7 +203,7 @@
                     <a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
                     <?php if ( count( bp_group_admin_ids( false, 'array' ) ) > 1 ) : ?>
                     <span class="small">
-                        <a class="button confirm admin-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'buddypress' ); ?></a>
+                        <a class="button confirm admin-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php esc_html_e( 'Demote to Member', 'buddypress' ); ?></a>
                     </span>
                     <?php endif; ?>
                 </h5>
@@ -217,7 +218,7 @@
 
 
     <div class="bp-widget">
-        <h4><?php _e( "Members", "buddypress" ); ?></h4>
+        <h4><?php esc_html_e( "Members", "buddypress" ); ?></h4>
 
 
 
@@ -249,21 +250,21 @@
                         <h5>
                             <?php bp_group_member_link(); ?>
 
-                            <?php if ( bp_get_group_member_is_banned() ) { _e( '(banned)', 'buddypress' );} ?>
+                            <?php if ( bp_get_group_member_is_banned() ) { esc_html_e( '(banned)', 'buddypress' );} ?>
 
                             <span class="small">
 
                             <?php if ( bp_get_group_member_is_banned() ) : ?>
 
-                                <a href="<?php bp_group_member_unban_link(); ?>" class="button confirm member-unban" title="<?php esc_attr_e( 'Unban this member', 'buddypress' ); ?>"><?php _e( 'Remove Ban', 'buddypress' ); ?></a>
+                                <a href="<?php bp_group_member_unban_link(); ?>" class="button confirm member-unban" title="<?php esc_attr_e( 'Unban this member', 'buddypress' ); ?>"><?php esc_html_e( 'Remove Ban', 'buddypress' ); ?></a>
 
                             <?php else : ?>
 
-                                <a href="<?php bp_group_member_promote_admin_link(); ?>" class="button confirm member-promote-to-admin" title="<?php esc_attr_e( 'Promote to Leader', 'buddypress' ); ?>"><?php _e( 'Promote to Leader', 'buddypress' ); ?></a>
+                                <a href="<?php bp_group_member_promote_admin_link(); ?>" class="button confirm member-promote-to-admin" title="<?php esc_attr_e( 'Promote to Leader', 'buddypress' ); ?>"><?php esc_html_e( 'Promote to Leader', 'buddypress' ); ?></a>
 
                             <?php endif; ?>
 
-                                <a href="<?php bp_group_member_remove_link(); ?>" class="button confirm" title="<?php esc_attr_e( 'Remove this member', 'buddypress' ); ?>"><?php _e( 'Remove from group', 'buddypress' ); ?></a>
+                                <a href="<?php bp_group_member_remove_link(); ?>" class="button confirm" title="<?php esc_attr_e( 'Remove this member', 'buddypress' ); ?>"><?php esc_html_e( 'Remove from group', 'buddypress' ); ?></a>
 
                                 <?php do_action( 'bp_group_manage_members_admin_item' ); ?>
 
@@ -277,7 +278,7 @@
         <?php else : ?>
 
             <div id="message" class="info">
-                <p><?php _e( 'This group has no members.', 'buddypress' ); ?></p>
+                <p><?php esc_html_e( 'This group has no members.', 'buddypress' ); ?></p>
             </div>
 
         <?php endif; ?>
@@ -336,7 +337,7 @@
     <?php else : ?>
 
         <div id="message" class="info">
-            <p><?php _e( 'There are no pending membership requests.', 'buddypress' ); ?></p>
+            <p><?php esc_html_e( 'There are no pending membership requests.', 'buddypress' ); ?></p>
         </div>
 
     <?php endif; ?>
@@ -353,10 +354,10 @@
     <?php do_action( 'bp_before_group_delete_admin' ); ?>
 
     <div id="message" class="info">
-        <p><?php _e( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'buddypress' ); ?></p>
+        <p><?php esc_html_e( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'buddypress' ); ?></p>
     </div>
 
-    <label><input type="checkbox" name="delete-group-understand" id="delete-group-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-group-button').disabled = ''; } else { document.getElementById('delete-group-button').disabled = 'disabled'; }" /> <?php _e( 'I understand the consequences of deleting this group.', 'buddypress' ); ?></label>
+    <label><input type="checkbox" name="delete-group-understand" id="delete-group-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-group-button').disabled = ''; } else { document.getElementById('delete-group-button').disabled = 'disabled'; }" /> <?php esc_html_e( 'I understand the consequences of deleting this group.', 'buddypress' ); ?></label>
 
     <?php do_action( 'bp_after_group_delete_admin' ); ?>
 

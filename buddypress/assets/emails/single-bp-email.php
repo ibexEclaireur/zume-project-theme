@@ -42,6 +42,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+// @codingStandardsIgnoreLine
 $settings = bp_email_get_appearance_settings();
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -147,6 +148,7 @@ $settings = bp_email_get_appearance_settings();
                          */
                         do_action( 'bp_before_email_header' );
 
+                        // @codingStandardsIgnoreLine
                         echo bp_get_option( 'blogname' );
 
                         /**
@@ -197,6 +199,7 @@ $settings = bp_email_get_appearance_settings();
                         do_action( 'bp_before_email_footer' );
                         ?>
 
+                        <?php /* @codingStandardsIgnoreLine */ ?>
                         <span class="footer_text"><?php echo nl2br( stripslashes( $settings['footer_text'] ) ); ?></span>
                         <br><br>
                                                 <!-- MODIFIED_SINGLE_MP_EMAIL -->

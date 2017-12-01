@@ -1,5 +1,6 @@
 <?php
 // Related Posts Function, matches posts by tags - call using joints_related_posts(); )
+// @codingStandardsIgnoreLine
 function joints_related_posts() {
     global $post;
     $tag_arr = '';
@@ -15,7 +16,7 @@ function joints_related_posts() {
         );
         $related_posts = get_posts( $args );
         if ($related_posts) {
-            echo __( '<h4>Related Posts</h4>', 'jointswp' );
+            echo '<h4>' . esc_html__( 'Related Posts', 'jointswp' ) . '</h4>';
             echo '<ul id="joints-related-posts">';
             foreach ( $related_posts as $post ) : setup_postdata( $post ); ?>
                 <li class="related_post">
