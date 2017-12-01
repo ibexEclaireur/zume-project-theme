@@ -7,23 +7,23 @@ get_header();
 
 ?>
 
-	<div id="content">
+    <div id="content">
 
-		<div id="inner-content" class="row">
+        <div id="inner-content" class="row">
 
-			<main id="main" class="large-12 medium-12 columns" role="main">
+            <main id="main" class="large-12 medium-12 columns" role="main">
 
 
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
+                    <article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
 
-						<header class="article-header">
+                        <header class="article-header">
 
-						</header> <!-- end article header -->
+                        </header> <!-- end article header -->
 
-						<section class="entry-content" itemprop="articleBody">
+                        <section class="entry-content" itemprop="articleBody">
 
-							<?php
+                            <?php
                             /**
                              * Zúme Course Content Loader
                              *
@@ -35,22 +35,22 @@ get_header();
 
                             ?>
 
-						</section> <!-- end article section -->
+                        </section> <!-- end article section -->
 
-						<footer class="article-footer">
+                        <footer class="article-footer">
 
-						</footer> <!-- end article footer -->
-
-
-
-					</article> <!-- end article -->
+                        </footer> <!-- end article footer -->
 
 
 
-			</main> <!-- end #main -->
+                    </article> <!-- end article -->
 
-		</div> <!-- end #inner-content -->
 
-	</div> <!-- end #content -->
+
+            </main> <!-- end #main -->
+
+        </div> <!-- end #inner-content -->
+
+    </div> <!-- end #content -->
 
 <?php get_footer(); ?>

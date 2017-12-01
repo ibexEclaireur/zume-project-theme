@@ -8,5 +8,5 @@
  */
 
 /** Disable Directory */
-zume_redirect ();
+zume_redirect();
 /** End Disable Directory */

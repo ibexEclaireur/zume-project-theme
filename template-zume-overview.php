@@ -15,7 +15,7 @@ get_header();
 
 
 
-                <article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
+                <article id="post-<?php the_ID(); ?>" <?php post_class( '' ); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
 
                     <header class="article-header">
 
@@ -36,7 +36,7 @@ get_header();
                         $group_id = '';
                         $next_session = '';
                         $session = '';
-                        Zume_Overview::instance()->zume_sessions_overview($group_id, $next_session, $session);
+                        Zume_Overview::instance()->zume_sessions_overview( $group_id, $next_session, $session );
 
 
 

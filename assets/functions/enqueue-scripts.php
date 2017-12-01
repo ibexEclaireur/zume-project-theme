@@ -9,13 +9,13 @@ function zume_theme_enqueue_style( $handle, $rel_src, $deps, $media = 'all' ) {
 }
 
 function site_scripts() {
-  global $wp_styles; // Call global $wp_styles variable to add conditional wrapper around ie stylesheet the WordPress way
+    global $wp_styles; // Call global $wp_styles variable to add conditional wrapper around ie stylesheet the WordPress way
 
     // Load What-Input files in footer
     zume_theme_enqueue_script( 'what-input', 'dependencies/what-input/dist/what-input.min.js', array(), true );
 
     // Load fitvids script https://github.com/rosszurowski/fitvids
-    zume_theme_enqueue_script('fitvids', 'assets/js/fitvids.min.js', array(), false);
+    zume_theme_enqueue_script( 'fitvids', 'assets/js/fitvids.min.js', array(), false );
 
     // Adding Foundation scripts file in the footer
     zume_theme_enqueue_script( 'foundation-js', 'assets/js/foundation.min.js', array( 'jquery' ), true );
@@ -29,8 +29,8 @@ function site_scripts() {
     zume_theme_enqueue_style( 'site-css', 'assets/css/style.min.css', array(), 'all' );
 
     // Comment reply script for threaded comments
-    if ( is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
-      zume_theme_enqueue_script( 'comment-reply' );
+    if ( is_singular() and comments_open() and ( get_option( 'thread_comments' ) == 1 )) {
+        zume_theme_enqueue_script( 'comment-reply' );
     }
 
 
@@ -49,4 +49,4 @@ function site_scripts() {
 
     }
 }
-add_action('wp_enqueue_scripts', 'site_scripts', 999);
+add_action( 'wp_enqueue_scripts', 'site_scripts', 999 );
