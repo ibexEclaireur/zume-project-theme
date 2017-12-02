@@ -2,8 +2,12 @@
 /*
 Template Name: Zúme Stats
 */
+if ( !current_user_can( "administrator" ) ){
+    wp_redirect( "dashboard" );
+}
 
 get_header();
+
 
 ?>
 
