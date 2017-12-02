@@ -1,13 +1,9 @@
 <?php
 /*
-Template Name: Zúme Stats
+Template Name: Zúme Progress
 */
-if ( !current_user_can( "administrator" ) ){
-    wp_redirect( "dashboard" );
-}
 
 get_header();
-
 
 ?>
 
@@ -16,13 +12,11 @@ get_header();
 
             <main id="main" class="large-12 medium-12 columns" role="main">
 
-                <div id="sizes" style="width: 900px; height: 600px;"></div>
-                <div id="sessions" style="width: 900px; height: 600px;"></div>
+                <img class="center" src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>zume-translation-infographic.png" alt="" />
+
 
                 <h3>Groups locations</h3>
                 <div id="group-markers" style="width: 900px; height: 600px;"></div>
             </main>
         </div>
     </div>
-
-

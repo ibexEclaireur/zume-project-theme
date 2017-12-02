@@ -41,10 +41,19 @@ function zume_theme_site_scripts() {
         wp_enqueue_script( 'stats', get_template_directory_uri() . '/assets/js/stats.js', array( 'jquery', 'google-charts' ), '', false );
         wp_localize_script(
             "stats", "wpApiSettings", array(
-                "test" => "test1",
                 "locations" => $stats->get_group_locations(),
                 "sizes" => $stats->get_group_sizes(),
                 "steps" => $stats->get_group_steps()
+            )
+        );
+
+    }
+    if ("progress" === $url_path || "zume-progress" === $url_path){
+        wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array(), false );
+        wp_enqueue_script( 'stats', get_template_directory_uri() . '/assets/js/stats.js', array( 'jquery', 'google-charts' ), '', false );
+        wp_localize_script(
+            "stats", "wpApiSettings", array(
+                "locations" => $stats->get_group_locations(),
             )
         );
 

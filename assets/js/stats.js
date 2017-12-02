@@ -6,16 +6,11 @@ jQuery(document).ready(function($) {
     console.log("map");
     google.charts.load('current', {
        'packages': ['geochart'],
-       // Note: you will need to get a mapsApiKey for your project.
-       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
        'mapsApiKey': 'AIzaSyAUbmUVr7LSMCygtgzz1gIVACvSE-teDgs'
      });
      google.charts.setOnLoadCallback(drawMarkersMap);
 
     function drawMarkersMap() {
-      // var data = google.visualization.arrayToDataTable(
-      //     wpApiSettings.groups
-      // );
       var data = new google.visualization.DataTable();
       data.addColumn('number', 'Latitude');
       data.addColumn('number', 'Longitude')
@@ -25,19 +20,23 @@ jQuery(document).ready(function($) {
 
 
       var options = {
-        sizeAxis: { minValue: 0, maxValue: 1 },
+        tooltip: {trigger:"none"},
         region: 'US',
         title: "Location of each group",
         displayMode: 'markers',
         defaultColor: '#000ef5',
-        backgroundColor: "#caf8ff"
+        backgroundColor: "#caf8ff",
+        magnifyingGlass: {enable:false},
+
       };
 
-      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.GeoChart(document.getElementById('group-markers'));
       chart.draw(data, options);
     }
   }
-  map()
+  if (wpApiSettings.locations){
+    map()
+  }
 
   let group_sizes = function () {
     google.charts.load("current", {packages: ['corechart', 'bar']});
@@ -57,7 +56,9 @@ jQuery(document).ready(function($) {
       chart.draw(view, options)
     }
   }
-  group_sizes()
+  if(wpApiSettings.sizes){
+    group_sizes()
+  }
 
   let group_progress = function () {
     google.charts.load("current", {packages: ['corechart', 'bar']});
@@ -77,5 +78,7 @@ jQuery(document).ready(function($) {
       chart.draw(view, options)
     }
   }
-  group_progress()
+  if(wpApiSettings.steps) {
+    group_progress()
+  }
 })
