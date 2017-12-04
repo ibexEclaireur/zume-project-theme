@@ -90,12 +90,13 @@
 <!--              <h2>--><?php //esc_html_e( 'Profile Details', 'buddypress' ); ?><!--</h2>-->
 
                 <?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-                <?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array(
-                    'profile_group_id' => 1,
-                    'fetch_field_data' => false
-                ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
-
-                                        <?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+                <?php
+                if ( bp_is_active( 'xprofile' ) && bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) :
+                    while ( bp_profile_groups() ) :
+                        bp_the_profile_group();
+                        while ( bp_profile_fields() ) :
+                            bp_the_profile_field();
+                            ?>
 
                     <div<?php bp_field_css_class( 'editfield' ); ?>>
 
@@ -155,15 +156,15 @@
 
                     </div>
 
-                    <?php endwhile; ?>
+                        <?php
+                        endwhile; // end bp_profile_fields()
+                        ?>
 
-                                      <input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+                        <input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
 
-                                    <?php endwhile;
-endif;
-endif; ?>
-
-                <?php
+                    <?php
+                    endwhile; // end bp_profile_groups
+                endif;
 
                 /**
                  * Fires and displays any extra member registration xprofile fields.
