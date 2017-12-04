@@ -6,7 +6,26 @@
  * @subpackage bp-legacy
  */
 
+
+function zume_add_required_attribute_for_register_fields( $elements ) {
+    if ($elements['aria-required']) {
+        $elements['required'] = 'required'; // Use HTML5 required attribute
+    }
+    return $elements;
+}
+add_action( 'bp_xprofile_field_edit_html_elements', 'zume_add_required_attribute_for_register_fields' );
+
+
+/* The BuddyPress CSS by default doesn't style input tags of type email and
+ * password, so we need to add these styles manually: */
 ?>
+<style>
+#buddypress #commentform input[type="email"],    #buddypress .standard-form#signup_form input[type="email"],
+#buddypress #commentform input[type="password"], #buddypress .standard-form#signup_form input[type="password"]
+{
+    width: 90%;
+}
+</style>
 
 <div id="buddypress">
 
@@ -90,18 +109,23 @@
 <!--              <h2>--><?php //esc_html_e( 'Profile Details', 'buddypress' ); ?><!--</h2>-->
 
                 <?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-                <?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array(
-                    'profile_group_id' => 1,
-                    'fetch_field_data' => false
-                ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
-
-                                        <?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+                <?php
+                if ( bp_is_active( 'xprofile' ) && bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) :
+                    while ( bp_profile_groups() ) :
+                        bp_the_profile_group();
+                        while ( bp_profile_fields() ) :
+                            bp_the_profile_field();
+                            ?>
 
                     <div<?php bp_field_css_class( 'editfield' ); ?>>
 
                         <?php
                         $zume_field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
                         $zume_field_type->edit_field_html();
+
+                        if (strtolower( bp_get_the_profile_field_name() ) == 'display name' || strtolower( bp_get_the_profile_field_name() ) == strtolower( __( 'Display Name' ) ) ): ?>
+                            <p><?php esc_html_e( 'Your display name is the name that other people in your group will see. For example, it could be: "Chris Smith".' ); ?></p>
+                        <?php endif;
 
                         /**
                          * Fires before the display of the visibility options for xprofile fields.
@@ -155,15 +179,15 @@
 
                     </div>
 
-                    <?php endwhile; ?>
+                        <?php
+                        endwhile; // end bp_profile_fields()
+                        ?>
 
-                                      <input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+                        <input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
 
-                                    <?php endwhile;
-endif;
-endif; ?>
-
-                <?php
+                    <?php
+                    endwhile; // end bp_profile_groups
+                endif;
 
                 /**
                  * Fires and displays any extra member registration xprofile fields.
@@ -208,7 +232,8 @@ endif; ?>
          * @since 1.1.0
          */
         do_action( 'bp_signup_username_errors' ); ?>
-        <input type="text" name="signup_username" id="signup_username" required minlength=4 pattern="^[a-z0-9]+" title="<?php esc_html_e( "Username must be at least four letters long and can only contain lowercase letters (a-z) and numbers." ) ?>" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
+        <input type="text" name="signup_username" id="signup_username" required minlength="4" pattern="[a-z0-9][a-z0-9][a-z0-9][a-z0-9]+" title="<?php esc_html_e( "Username must be at least four letters long and can only contain lowercase letters (a-z) and numbers" ) ?>" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
+        <p><?php esc_html_e( "Your username must be at least four letters long and it can only contain lowercase letters (a-z) and numbers. For example, it could be: chrissmith ." ) ?></p>
 
                 <label for="signup_email"><?php esc_html_e( 'Email Address', 'buddypress' ); ?> <?php esc_html_e( '(required)', 'buddypress' ); ?></label>
                 <?php
@@ -444,3 +469,15 @@ endif; ?>
     do_action( 'bp_after_register_page' ); ?>
 
 </div><!-- #buddypress -->
+
+<?php /* Automatically generate a username based on typed display name */ ?>
+<script>
+(function($) {
+    $("#field_1").on('input', function() {
+        var new_username = $(this).val().toLowerCase().replace(/[^a-z0-9]/g, "");
+        if (new_username) {
+            $("#signup_username").val(new_username);
+        }
+    });
+})(window.jQuery);
+</script>

@@ -52,11 +52,11 @@ function zume_custom_login_footer() {
             box-shadow: none;
         }
     </style>
-    <div style="width: 550px; max-width: 90%; padding: 20px 0; margin: auto">
+    <div class="zume_after_login_message"><p>
         If you experience any issues with logging in,
         <?php /* @codingStandardsIgnoreLine */ ?>
         contact us at <a href="mailto:<?php echo antispambot( "info@zumeproject.com" ); ?>"><?php echo antispambot( "info@zumeproject.com" ); ?></a>.
-    </div>
+    </p></div>
 
     <?php
 }

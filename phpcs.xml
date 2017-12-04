@@ -55,6 +55,7 @@
     <exclude name="WordPress.VIP.SessionVariableUsage" />
     <exclude name="WordPress.VIP.ValidatedSanitizedInput" />
     <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound" />
+    <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound" />
 
     <!-- We currently don't want these rules that WordPress imports: -->
 
@@ -134,7 +135,7 @@
     <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
     <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile" />
     <!-- <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EndLine" /> -->
-    <!-- <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.ArrayItemNoNewLine" /> -->
+    <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.ArrayItemNoNewLine" />
     <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeKeyFound" />
     <!-- <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.CloseBraceNewLine" /> -->
     <!-- <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.NoSpaceAfterArrayOpener" /> -->

@@ -21,13 +21,23 @@ body.login {
 }
 
 
-#login {
+#login, .zume_after_login_message {
   width: 550px;
   max-width: 90%;
   form {
     border: 1px solid $primary-color;
   }
 }
+
+.zume_after_login_message {
+  padding: 20px 0;
+  margin: 0 auto;
+
+  p {
+    padding: 0 24px;
+  }
+}
+
 
 p {
 
@@ -96,4 +106,6 @@ p {
 
 }
 
-
+#backtoblog {
+  display: none;
+}
