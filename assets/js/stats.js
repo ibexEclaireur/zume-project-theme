@@ -81,4 +81,11 @@ jQuery(document).ready(function($) {
   if(wpApiSettings.steps) {
     group_progress()
   }
+  if(wpApiSettings.analytics){
+    $('#analytics').text(wpApiSettings.analytics)
+  }
+  if(wpApiSettings.intro_views){
+    $("#intro_views").text(wpApiSettings.intro_views)
+  }
+
 })

@@ -21,6 +21,12 @@ get_header();
 
                 <h3>Groups locations</h3>
                 <div id="group-markers" style="width: 900px; height: 600px;"></div>
+
+                <br>
+                <br>
+                <h3>Other stats</h3>
+                <div>Homepage page views: <span id="analytics"></span></div>
+                <div>Intro video views: <span id="intro_views"></span></div>
             </main>
         </div>
     </div>

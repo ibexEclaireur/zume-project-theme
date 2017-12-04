@@ -43,7 +43,9 @@ function zume_theme_site_scripts() {
             "stats", "wpApiSettings", array(
                 "locations" => $stats->get_group_locations(),
                 "sizes" => $stats->get_group_sizes(),
-                "steps" => $stats->get_group_steps()
+                "steps" => $stats->get_group_steps(),
+                "analytics" => $stats->analytics(),
+                "intro_views" => $stats->get_intro_video_views()
             )
         );
 
