@@ -24,8 +24,8 @@ jQuery(document).ready(function($) {
         region: 'US',
         title: "Location of each group",
         displayMode: 'markers',
-        defaultColor: '#000ef5',
-        backgroundColor: "#caf8ff",
+        defaultColor: '#21336A',
+        backgroundColor: "#2cace2",
         magnifyingGlass: {enable:false},
 
       };

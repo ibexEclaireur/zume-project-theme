@@ -10,29 +10,30 @@ get_header();
     <div id="content">
         <div id="inner-content" class="row">
 
-            <main id="main" class="large-12 medium-12 columns" role="main" style="text-align: center">
+            <main id="main" class="large-12 medium-12 columns" role="main">
 
-                <h3>Groups locations in the US</h3>
+                <div class="blue-ribbon">
+                    <h3>Zúme Groups Started in the United States</h3>
+                </div>
                 <div id="group-markers" style="width: 100%; height: 600px;"></div>
+
+
+                <div class="blue-ribbon">
+                    <h3>Are there Zúme Groups in your state?</h3>
+                </div>
+
+                <div style="width:100%; height: 600px; background-color:#2cace2;
+                            text-align:center; display: flex; flex-direction: column; justify-content: center;">
+                    <h2 style="color:white">Coming soon</h2>
+                </div>
+
 
                 <a href="https://support.chasm.solutions/zumeproject" target="_blank">
                 <img class="center" src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>zume-translation-infographic.png" alt="" />
                 </a>
 
 
-                <br>
-                <br>
-                <h3>Translation Progress</h3>
-                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS3rJ_shcus0nIrYWHzFpWY5F5UfiYWb4ql8kaNTtWDf5htAA8-KmiVwV49RYWIxZumfI6zVH5fY4ZG/pubhtml?gid=2023643321&amp;single=true&amp;widget=true&amp;headers=false"
-                width="60%" height="400px"
-                ></iframe>
-                <br>
-                <br><br>
-                <h3>Progress for each language</h3>
-                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS3rJ_shcus0nIrYWHzFpWY5F5UfiYWb4ql8kaNTtWDf5htAA8-KmiVwV49RYWIxZumfI6zVH5fY4ZG/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"
-                width="60%"
-                height="1000px"
-                ></iframe>
+
 
             </main>
         </div>
