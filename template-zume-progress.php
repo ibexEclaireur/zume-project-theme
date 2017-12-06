@@ -28,6 +28,11 @@ get_header();
                 </div>
 
 
+                <div class="blue-ribbon" style="text-align: center">
+                    <img class="center" src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>zume-logo-clear.png"
+                         alt="" style="margin-left:35px"/>
+                    <h1 style="color:#2cace2">is going global</h1>
+                </div>
                 <a href="https://support.chasm.solutions/zumeproject" target="_blank">
                 <img class="center" src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>zume-translation-infographic.png" alt="" />
                 </a>
