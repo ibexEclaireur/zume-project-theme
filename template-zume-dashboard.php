@@ -16,29 +16,6 @@ function zume_get_coach_ids() {
     return $coaches;
 }
 
-/**
- * Gets all coaches in a particular group, returns an array of integers
- * @return array
- */
-function zume_get_coach_ids_in_group($group_id) {
-    global $wpdb;
-    if (is_numeric( $group_id )) {
-        $group_id = (int) $group_id;
-    } else {
-        throw new Exception( "group_id argument should be an integer or pass the is_numeric test." );
-    }
-    $results = $wpdb->get_results( $wpdb->prepare(
-        "SELECT $wpdb->usermeta.user_id FROM $wpdb->bp_groups_members INNER JOIN $wpdb->usermeta ON $wpdb->usermeta.user_id=$wpdb->bp_groups_members.user_id WHERE group_id = %s AND meta_key = %s AND meta_value LIKE %s",
-        $group_id,
-        $wpdb->capabilities,
-        '%coach%'
-    ), ARRAY_A );
-    $rv = [];
-    foreach ($results as $result) {
-        $rv[] = (int) $result["user_id"];
-    }
-    return $rv;
-}
 
 
 /**
@@ -72,6 +49,7 @@ function zume_get_coaches_for_groups() {
               SELECT wp_bp_groups_groupmeta.meta_value as coach_id, wp_bp_groups_groupmeta.group_id, count(meta_value) as count
               FROM wp_bp_groups_members
               INNER JOIN wp_bp_groups_groupmeta ON wp_bp_groups_groupmeta.group_id=wp_bp_groups_members.group_id
+              INNER JOIN wp_bp_groups b ON wp_bp_groups_members.group_id = b.id
               WHERE wp_bp_groups_members.user_id = %s
               AND wp_bp_groups_groupmeta.meta_key = \'assigned_to\'
               AND wp_bp_groups_groupmeta.meta_value != \'dispatch\'
