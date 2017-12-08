@@ -54,8 +54,8 @@ $dropdownmenu-border-width: nth($dropdownmenu-border, 1);
     > li.opens-left {
       > .is-dropdown-submenu {
         top: 100%;
-        right: 0;
-        left: auto;
+        right: auto;  //changed the direction here because the menu would not let me.
+        left: 0;
       }
     }
 
