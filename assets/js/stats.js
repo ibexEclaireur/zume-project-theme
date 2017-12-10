@@ -88,4 +88,35 @@ jQuery(document).ready(function($) {
     $("#intro_views").text(wpApiSettings.intro_views)
   }
 
+
+  let table = $("#coaches-table > tbody:last-child");
+  let filterCoachesTable = function (groups) {
+    $("#coaches-table tbody").empty()
+    groups.forEach(group=>{
+      table.append(`
+        <tr>
+          <td>${group.name || ""}</td>
+          <td>${group.email}</td>
+          <td>${group.address || ""}</td>
+          <td>${group.state || ""}</td>
+          <td>${group.member_count || ""}</td>
+        </tr>
+      `)
+    })
+
+  }
+  if(wpApiSettings.coach_groups){
+    filterCoachesTable(wpApiSettings.coach_groups)
+  }
+
+  $("#state-select").on("change", function () {
+    let selected = this.value
+    let groups = [];
+    if (selected && selected != "all"){
+      groups = wpApiSettings.coach_groups.filter(group=>group.state==selected)
+    } else {
+      groups = wpApiSettings.coach_groups
+    }
+    filterCoachesTable(groups)
+  })
 })

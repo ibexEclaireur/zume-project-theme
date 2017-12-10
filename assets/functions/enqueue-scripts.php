@@ -50,6 +50,15 @@ function zume_theme_site_scripts() {
         );
 
     }
+    if ("coaches" === $url_path){
+        wp_enqueue_script( 'stats', get_template_directory_uri() . '/assets/js/stats.js', array( 'jquery' ), '', false );
+        wp_localize_script(
+            "stats", "wpApiSettings", array(
+                "coach_groups" => $stats->get_coach_groups()
+            )
+        );
+
+    }
     if ("progress" === $url_path || "zume-progress" === $url_path){
         wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array(), false );
         wp_enqueue_script( 'stats', get_template_directory_uri() . '/assets/js/stats.js', array( 'jquery', 'google-charts' ), '', false );
