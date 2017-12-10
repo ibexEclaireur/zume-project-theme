@@ -80,9 +80,9 @@ $zume_states = array(
             <table id="coaches-table">
                 <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Email</td>
-                        <td>Address</td>
+                        <td>Leader Name</td>
+                        <td>Leader Email</td>
+                        <td>Group Address</td>
                         <td>State</td>
                         <td>Member Count</td>
                     </tr>
