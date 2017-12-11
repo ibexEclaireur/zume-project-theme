@@ -85,6 +85,7 @@ $zume_states = array(
                         <td>Group Address</td>
                         <td>State</td>
                         <td>Member Count</td>
+                        <td>Session</td>
                     </tr>
                 </thead>
                 <tbody>

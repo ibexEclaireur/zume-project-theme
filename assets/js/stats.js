@@ -100,6 +100,7 @@ jQuery(document).ready(function($) {
           <td>${group.address || ""}</td>
           <td>${group.state || ""}</td>
           <td>${group.member_count || ""}</td>
+          <td>${group.session || ""}</td>
         </tr>
       `)
     })
