@@ -60,8 +60,8 @@ gulp.task('foundation-js', function() {
   return gulp.src([
 
   		  // Foundation core - needed if you want to use any of the components below
-          './dependencies/foundation-sites/js/foundation.core.js',
-          './dependencies/foundation-sites/js/foundation.util.*.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.core.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.util.*.js',
 
           /* We do not want to load foundation.util.timerAndImageLoader.js .
            * This is because it appends a question mark and a timestamp to
@@ -78,28 +78,28 @@ gulp.task('foundation-js', function() {
            *
            * Note the exclamation point, which indicates negation.
            */
-          '!./dependencies/foundation-sites/js/foundation.util.timerAndImageLoader.js',
+          // '!./dependencies/foundation-sites/js/foundation.util.timerAndImageLoader.js',
 
           // Pick the components you need in your project
-          './dependencies/foundation-sites/js/foundation.abide.js',
-          './dependencies/foundation-sites/js/foundation.accordion.js',
-          './dependencies/foundation-sites/js/foundation.accordionMenu.js',
-          './dependencies/foundation-sites/js/foundation.drilldown.js',
-          './dependencies/foundation-sites/js/foundation.dropdown.js',
-          './dependencies/foundation-sites/js/foundation.dropdownMenu.js',
-          './dependencies/foundation-sites/js/foundation.equalizer.js',
-          './dependencies/foundation-sites/js/foundation.interchange.js',
-          './dependencies/foundation-sites/js/foundation.magellan.js',
-          './dependencies/foundation-sites/js/foundation.offcanvas.js',
-          './dependencies/foundation-sites/js/foundation.orbit.js',
-          './dependencies/foundation-sites/js/foundation.responsiveMenu.js',
-          './dependencies/foundation-sites/js/foundation.responsiveToggle.js',
-          './dependencies/foundation-sites/js/foundation.reveal.js',
-          './dependencies/foundation-sites/js/foundation.slider.js',
-          './dependencies/foundation-sites/js/foundation.sticky.js',
-          './dependencies/foundation-sites/js/foundation.tabs.js',
-          './dependencies/foundation-sites/js/foundation.toggler.js',
-          './dependencies/foundation-sites/js/foundation.tooltip.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.abide.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.accordion.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.accordionMenu.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.drilldown.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.dropdown.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.dropdownMenu.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.equalizer.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.interchange.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.magellan.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.offcanvas.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.orbit.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.responsiveMenu.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.responsiveToggle.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.reveal.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.slider.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.sticky.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.tabs.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.toggler.js',
+          './dependencies/foundation-sites/dist/js/plugins/foundation.tooltip.js',
   ])
   .pipe(sourcemaps.init())
 	.pipe(babel({
