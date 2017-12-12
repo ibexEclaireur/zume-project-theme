@@ -100,48 +100,35 @@ Template Name: Full Width Home
 
                                     <li class="orbit-slide">
                                         <div>
-                                            <h4 class="text-center zume-slider-text"><strong>There is a great harvest readied in North America not being reached by the status quo. Zúme is a biblical wake-up call and tool to empower the everyday believer to begin walking in the Lords will to multiply disciples.</strong></h4>
-                                            <h4 class="zume-slider-name">Jake Duke — Indiana</h4>
+                                            <h4 class="text-center zume-slider-text"><img src="https://zumeproject.com/wp-content/themes/zume-project-theme/assets/images/1body.png" alt="1 Body Global" width="150" style="PADDING-BOTTOM: 10px">
+                                                <br><strong>Zúme will help us accelerate our training into more countries and languages.</strong></h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
-                                            <h4 class="text-center zume-slider-text"><strong>Do you want to make a difference in your workplace, neighborhood, or circle of friends? The Zúme Project essentially will give you practical rails to run on that follow the example of the Church as seen in the New Testament.</strong></h4>
-                                            <h4 class="zume-slider-name">Gavin Duerson — Kentucky</h4>
+                                            <h4 class="text-center zume-slider-text"><img src="https://zumeproject.com/wp-content/themes/zume-project-theme/assets/images/noplaceleft.png" alt="#NoPlaceLeft" width="150"  style="PADDING-BOTTOM: 10px">
+                                                <br><strong>Zúme is a helpful way to filter for faithful people that can spread quickly and conserve training bandwidth.</strong></h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
-                                            <h4 class="text-center zume-slider-text"><strong>I am so excited to use this Zúme tool to help in training all the soldiers to make and multiply disciples in our neighborhood. Jesus can make it a neighborhood again.</strong></h4>
-                                            <h4 class="zume-slider-name">Chad Rehnberg</h4>
+                                            <h4 class="text-center zume-slider-text"><img src="https://zumeproject.com/wp-content/themes/zume-project-theme/assets/images/2414.png" alt="24:14" width="200"  style="PADDING-BOTTOM: 10px">
+                                                <br><strong>Zúme is a wonderful on-ramp for our coalition.</strong></h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
-                                            <h4 class="text-center zume-slider-text"><strong>I believe Zúme can be used by the Lord to reach a huge number of people in our society who would never darken the door of a church building.</strong></h4>
-                                            <h4 class="zume-slider-name">Curtis Sergeant — Alabama</h4>
+                                            <h4 class="text-center zume-slider-text"><img src="https://zumeproject.com/wp-content/themes/zume-project-theme/assets/images/biglife.png" alt="Big.Life" width="300"  style="PADDING-BOTTOM: 10px">
+                                                <br><strong>Zúme brilliantly encapsulates the principles in our introductory training.</strong></h4>
                                         </div>
                                     </li>
                                     <li class="orbit-slide">
                                         <div>
-                                            <h4 class="text-center zume-slider-text"><strong>This simple and powerful disciple-making tool - for all laborers - has real potential to accelerate and spark healthy multiplication in every community for every nation.</strong></h4>
-                                            <h4 class="zume-slider-name">Zach Duke — Indiana</h4>
+                                            <h4 class="text-center zume-slider-text"><img src="https://zumeproject.com/wp-content/themes/zume-project-theme/assets/images/finishingthetask.png" alt="Finishing the Task" width="400"  style="PADDING-BOTTOM: 10px">
+                                                <br><strong>Zúme is a valuable tool for many of our member organizations to use in engaging new people groups.</strong></h4>
                                         </div>
                                     </li>
-                                    <li class="orbit-slide">
-                                        <div>
-                                            <h4 class="text-center zume-slider-text"><strong>The potential for ZÚME to catalyze a movement of multiplying disciple-makers is unprecedented in our lifetime.</strong></h4>
-                                            <h4 class="zume-slider-name">Forrest Head - Georgia</h4>
-                                        </div>
-
-                                    </li>
-                                    <li class="orbit-slide">
-                                        <div>
-                                            <h4 class="text-center zume-slider-text"><strong> In the West, Zúme is at the forefront of reclaiming a foundational biblical witness, the Church that meets from house to house.</strong></h4>
-                                            <h4 class="zume-slider-name">Neal Karsten — Michigan</h4>
-                                        </div>
-                                    </li>
-
+                                    
                                 </ul>
                                 <nav class="orbit-bullets">
                                     <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
@@ -149,8 +136,6 @@ Template Name: Full Width Home
                                     <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
                                     <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
                                     <button data-slide="4"><span class="show-for-sr">Fifth slide details.</span></button>
-                                    <button data-slide="5"><span class="show-for-sr">Sixth slide details.</span></button>
-                                    <button data-slide="6"><span class="show-for-sr">Seventh slide details.</span></button>
                                 </nav>
                             </div>
                         </div>
