@@ -9,6 +9,10 @@
                             <p class="source-org copyright">
                                 &copy; <?php echo esc_html( date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>.
                                 <?php if ( user_can( get_current_user_id(), 'manage_options' ) || current_user_can( 'coach' ) ) { echo '| <a href="/wp-admin" > Admin Panel</a>'; } ?>
+                                <span style="float: right">
+                                    <a href="https://www.facebook.com/zumeproject" target="_blank" rel="noopener"><img src="<?php echo esc_attr( get_template_directory_uri() ); ?>/assets/images/facebook-square.svg" style="height: 23px" title="Facebook"></a>
+                                    <a href="https://twitter.com/zumeproject" target="_blank" rel="noopener"><img src="<?php echo esc_attr( get_template_directory_uri() ); ?>/assets/images/twitter-square.svg" style="height: 23px" title="Twitter"></a>
+                                </span>
                             </p>
                         </div>
                     </div> <!-- end #inner-footer -->
