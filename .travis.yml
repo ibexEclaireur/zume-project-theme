@@ -18,6 +18,7 @@ script:
   - ./test/test_phpcs.sh
   - gulp
   - git diff --exit-code assets/
+  - node -v
   # If the previous command returns a non-zero exit code, that means gulp has
   # modified some files in version control. This shouldn't happen, developers
   # should remember to run gulp before committing.
