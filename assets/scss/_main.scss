@@ -1015,3 +1015,13 @@ ul.orbit-container {
     color: #250;
     padding: 10px;
 }
+
+
+#menu-top-menu-1 a:hover {
+    background: #323a68;
+    color: white;
+}
+#menu-top-menu-1.dropdown.menu .is-active>a{
+    background: #323a68;
+    color: white;
+}
