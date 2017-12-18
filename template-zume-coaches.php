@@ -78,6 +78,9 @@ $zume_states = array(
                 <?php } ?>
 
             </select>
+            <select id="county-select" style="display: none">
+
+            </select>
             <div>
             <label for="members" style="display: inline-block">Ony show groups with 4 or more members?</label>
             <input type="checkbox" id="members">

@@ -117,24 +117,38 @@ jQuery(document).ready(function($) {
     filterCoachesTable(wpApiSettings.coach_groups)
   }
 
+  let countySelect = $('#county-select')
   $("#filter-table").click(function () {
     let state = $('#state-select').val()
     let members = $('#members').is(':checked')
     let session = $('#session').val()
-    console.log("test");
-
-    console.log(state);
-    console.log(members);
-    console.log(session);
-    let groups = [];
-    groups = wpApiSettings.coach_groups.filter(group=>{
-      console.log(group);
+    let county = countySelect.val()
+    let groups = wpApiSettings.coach_groups.filter(group=>{
       return (
         (state!=="all" ? group.state==state : true ) &&
-        (members ? parseInt(group.member_count) > 4 : true) &&
-        (session!=="any" ? parseInt(group.session || 0) >= 4 : true)
+        (members ? (parseInt(group.member_count) > 4) : true) &&
+        (session!=="any" ? (parseInt(group.session || 0) >= session) : true) &&
+        (county && (county!=='all' ? group.county===county : true ))
       )
     })
+
     filterCoachesTable(groups)
+  })
+
+  $('#state-select').on("change", function () {
+    countySelect.hide()
+    countySelect.empty()
+    let state = this.value
+    let countyOptions = `<option value="all">All</option>`
+    if (state !== "all"){
+      wpApiSettings.coach_groups
+        .filter(group=>group.state==state)
+        .map(group=>group.county)
+        .forEach(county=>{
+          countyOptions += `<option value="${county}">${county}</option>`
+        })
+      countySelect.show()
+    }
+    countySelect.append(countyOptions)
   })
 })
