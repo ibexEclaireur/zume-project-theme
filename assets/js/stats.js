@@ -92,32 +92,49 @@ jQuery(document).ready(function($) {
   let table = $("#coaches-table > tbody:last-child");
   let filterCoachesTable = function (groups) {
     $("#coaches-table tbody").empty()
+    let emails = [];
     groups.forEach(group=>{
       table.append(`
         <tr>
+          <td>${group.member_count || ""}</td>
+          <td>${group.session || ""}</td>
           <td>${group.name || ""}</td>
           <td>${group.email}</td>
           <td>${group.address || ""}</td>
           <td>${group.state || ""}</td>
-          <td>${group.member_count || ""}</td>
-          <td>${group.session || ""}</td>
+          <td>${group.county || ""}</td>
+          <td>${group.tract || ""}</td>
+          <td>${group.created || ""}</td>
         </tr>
       `)
+      emails.push(group.email)
     })
+    let emailString = emails.join(', ');
+    $('#emails').html(emailString)
 
   }
   if(wpApiSettings.coach_groups){
     filterCoachesTable(wpApiSettings.coach_groups)
   }
 
-  $("#state-select").on("change", function () {
-    let selected = this.value
+  $("#filter-table").click(function () {
+    let state = $('#state-select').val()
+    let members = $('#members').is(':checked')
+    let session = $('#session').val()
+    console.log("test");
+
+    console.log(state);
+    console.log(members);
+    console.log(session);
     let groups = [];
-    if (selected && selected != "all"){
-      groups = wpApiSettings.coach_groups.filter(group=>group.state==selected)
-    } else {
-      groups = wpApiSettings.coach_groups
-    }
+    groups = wpApiSettings.coach_groups.filter(group=>{
+      console.log(group);
+      return (
+        (state!=="all" ? group.state==state : true ) &&
+        (members ? parseInt(group.member_count) > 4 : true) &&
+        (session!=="any" ? parseInt(group.session || 0) >= 4 : true)
+      )
+    })
     filterCoachesTable(groups)
   })
 })
