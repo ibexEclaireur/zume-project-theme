@@ -126,7 +126,7 @@ jQuery(document).ready(function($) {
     let groups = wpApiSettings.coach_groups.filter(group=>{
       return (
         (state!=="all" ? group.state==state : true ) &&
-        (members ? (parseInt(group.member_count) > 4) : true) &&
+        (members ? (parseInt(group.member_count) >= 4) : true) &&
         (session!=="any" ? (parseInt(group.session || 0) >= session) : true) &&
         (county && (county!=='all' ? group.county===county : true ))
       )
