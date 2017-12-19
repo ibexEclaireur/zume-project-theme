@@ -7,7 +7,7 @@ Template Name: Full Width Home
 
 <div id="content">
 
-    <div id="inner-content">
+    <div id="inner-content" style="padding-top:0px">
 
         <div id="main" role="main" >
 
