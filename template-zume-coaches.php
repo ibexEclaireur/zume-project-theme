@@ -126,4 +126,4 @@ $zume_states = array(
     </div>
 </div>
 
-
+<?php get_footer(); ?>
