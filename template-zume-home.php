@@ -120,67 +120,55 @@ Template Name: Full Width Home
                         <div class="large-4 medium-6 small-12 columns centered">
                             <div style="padding: 30px 20px">
                                 <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>1body.png" class="center front-page-social-image">
-                                <h4 class="text-center">
-                                    <p style="color:#21336A">
+                                <p class="text-center" style="color:#21336A">
                                         "Zúme will help us accelerate our training into more countries and languages."
-                                    </p>
-                                </h4>
+                                </p>
                             </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
                             <div style="padding: 30px 20px">
                                 <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>noplaceleft.png" class="center front-page-social-image">
-                                <h4 class="text-center">
-                                    <p style="color:#21336A">
-                                        "Zúme is a helpful way to filter for faithful people that can spread quickly and conserve training bandwidth."
-                                    </p>
-                                </h4>
+                                <p class="text-center" style="color:#21336A">
+                                    "Zúme is a helpful way to filter for faithful people that can spread quickly and conserve training bandwidth."
+                                </p>
                             </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
                             <div style="padding: 30px 20px">
                                 <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>2414.png" class="center front-page-social-image">
-                                <h4 class="text-center">
-                                    <p style="color:#21336A">
-                                        "Zúme is a wonderful on-ramp for our coalition."
-                                    </p>
-                                </h4>
+                                <p class="text-center" style="color:#21336A">
+                                    "Zúme is a wonderful on-ramp for our coalition."
+                                </p>
                             </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
                             <div style="padding: 30px 20px">
-                                <div style="height: 100px" class="center">
-                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>biglife.png" class="center" style="height:80px">
-                                </div>
-                                <h4 class="text-center">
-                                    <p style="color:#21336A">
-                                        "Zúme brilliantly encapsulates the principles in our introductory training."
-                                    </p>
-                                </h4>
+<!--                                <div class="center">-->
+                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>biglife.png" class="center front-page-social-image" style="max-height: 60px">
+<!--                                </div>-->
+                                <p class="text-center" style="color:#21336A">
+                                    "Zúme brilliantly encapsulates the principles in our introductory training."
+                                </p>
                             </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered">
                             <div style="padding: 30px 20px">
-                                <div style="height: 100px" class="center">
-                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>teamexpansion.png" class="center">
-                                </div>
-                                <h4 class="text-center">
-                                    <p style="color:#21336A">
-                                        "The principles and life practices packed into the Zume disciple-multiplication training course have enormous potential to impact not only the USA but also, as the course is translated into 34 other languages, the world as well."
-                                    </p>
-                                </h4>
+<!--                                <div style="height: 60px" class="center">-->
+                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>teamexpansion.png" class="center front-page-social-image" style="max-height: 60px">
+<!--                                </div>-->
+                                <p class="text-center" style="color:#21336A">
+                                    "The principles and life practices packed into the Zume disciple-multiplication training course have enormous potential to impact not only the USA but also, as the course is translated into 34 other languages, the world as well."
+                                </p>
                             </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
                             <div style="padding: 30px 20px">
-                                <div style="height: 100px" class="center">
-                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>finishingthetask-logo.png" class="center">
+                                <div style="height: 75px" class="center">
+                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>finishingthetask-logo.png" class="center front-page-social-image" style="max-height: 60px; width:280px">
                                 </div>
-                                <h4 class="text-center">
-                                    <p style="color:#21336A">
-                                        "Zúme is a valuable tool for many of our member organizations to use in engaging new people groups."
-                                    </p>
-                                </h4>
+                                <p class="text-center" style="color:#21336A">
+                                    "Zúme is a valuable tool for many of our member organizations to use in engaging new people groups."
+                                </p>
                             </div>
                         </div>
                     </div>
