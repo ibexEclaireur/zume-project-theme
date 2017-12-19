@@ -113,63 +113,50 @@ Template Name: Full Width Home
             <h3 class="center"><strong>What others are saying</strong></h3>
             <br/>
 
-            <div class="row vertical-padding">
+            <div class="row vertical-padding" style="max-width: 900px">
 
-                <div class="small-12 columns">
-                    <div class="row" data-equalizer style="color:#21336A">
-                        <div class="large-4 medium-6 small-12 columns centered">
-                            <div style="padding: 30px 20px">
+                <div class="small-12 columns" >
+                    <div class="row front-page-social" data-equalizer style="color:#21336A;" >
+                        <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
                                 <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>1body.png" class="center front-page-social-image">
                                 <p class="text-center" style="color:#21336A">
                                         "Zúme will help us accelerate our training into more countries and languages."
-                                </p>
-                            </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
-                            <div style="padding: 30px 20px">
                                 <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>noplaceleft.png" class="center front-page-social-image">
                                 <p class="text-center" style="color:#21336A">
                                     "Zúme is a helpful way to filter for faithful people that can spread quickly and conserve training bandwidth."
                                 </p>
-                            </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
-                            <div style="padding: 30px 20px">
                                 <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>2414.png" class="center front-page-social-image">
                                 <p class="text-center" style="color:#21336A">
                                     "Zúme is a wonderful on-ramp for our coalition."
                                 </p>
-                            </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
-                            <div style="padding: 30px 20px">
 <!--                                <div class="center">-->
                                     <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>biglife.png" class="center front-page-social-image" style="max-height: 60px">
 <!--                                </div>-->
                                 <p class="text-center" style="color:#21336A">
                                     "Zúme brilliantly encapsulates the principles in our introductory training."
                                 </p>
-                            </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered">
-                            <div style="padding: 30px 20px">
 <!--                                <div style="height: 60px" class="center">-->
                                     <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>teamexpansion.png" class="center front-page-social-image" style="max-height: 60px">
 <!--                                </div>-->
                                 <p class="text-center" style="color:#21336A">
                                     "The principles and life practices packed into the Zume disciple-multiplication training course have enormous potential to impact not only the USA but also, as the course is translated into 34 other languages, the world as well."
                                 </p>
-                            </div>
                         </div>
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
-                            <div style="padding: 30px 20px">
-                                <div style="height: 75px" class="center">
-                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>finishingthetask-logo.png" class="center front-page-social-image" style="max-height: 60px; width:280px">
-                                </div>
-                                <p class="text-center" style="color:#21336A">
-                                    "Zúme is a valuable tool for many of our member organizations to use in engaging new people groups."
-                                </p>
+                            <div style="height: 75px" class="center">
+                                <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>finishingthetask-logo.png" class="center front-page-social-image" style="max-height: 60px; width:280px">
                             </div>
+                            <p class="text-center" style="color:#21336A">
+                                "Zúme is a valuable tool for many of our member organizations to use in engaging new people groups."
+                            </p>
                         </div>
                     </div>
 
