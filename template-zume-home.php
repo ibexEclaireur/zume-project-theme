@@ -174,7 +174,7 @@ Template Name: Full Width Home
                         <div class="large-4 medium-6 small-12 columns centered" data-equalizer-watch>
                             <div style="padding: 30px 20px">
                                 <div style="height: 100px" class="center">
-                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>finishingthetask.png" class="center">
+                                    <img src="<?php echo esc_attr( get_stylesheet_directory_uri() ) . '/assets/images/'; ?>finishingthetask-logo.png" class="center">
                                 </div>
                                 <h4 class="text-center">
                                     <p style="color:#21336A">
