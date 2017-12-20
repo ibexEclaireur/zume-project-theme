@@ -1,7 +1,9 @@
 				<footer class="footer" role="contentinfo">
 					<div id="inner-footer" class="row" style="width:300px; float:left">
 						<div class="large-12 medium-12 columns">
-							<nav role="navigation"></nav>
+-							<nav role="navigation">
+-	    						<?php zume_joints_footer_links(); ?>
+-                            </nav>
                         </div>
                         <div class="small-12 medium-8 columns">
                             <?php if ( user_can( get_current_user_id(), 'manage_options' ) || current_user_can( 'coach' ) ) { echo '| <a href="/wp-admin" > Admin Panel</a>'; } ?>
